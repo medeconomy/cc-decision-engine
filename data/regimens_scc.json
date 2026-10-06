@@ -1,0 +1,2275 @@
+{
+ "_meta": {
+  "histology": "scc",
+  "label": "Squamous cell carcinoma",
+  "source_note": "CXCA_SquamousCell_Algorithm_v1.1",
+  "built": "2026-10-06",
+  "settings": [
+   {
+    "key": "adjuvant",
+    "label": "Adjuvant after radical hysterectomy (FIGO 2009 IA2–IIA): intermediate risk (Sedlis) or high risk (Peters)"
+   },
+   {
+    "key": "definitive",
+    "label": "Definitive chemoradiation for locally advanced disease (FIGO 2009 IB2–IVA / 2018 IB3–IVA), including induction and immunotherapy"
+   },
+   {
+    "key": "first_line",
+    "label": "First-line systemic therapy for recurrent, persistent or metastatic disease (radiosensitising cisplatin allowed)"
+   },
+   {
+    "key": "second_line",
+    "label": "Second line and beyond (after platinum ± bevacizumab ± PD-(L)1)"
+   },
+   {
+    "key": "neoadjuvant",
+    "label": "Neoadjuvant chemotherapy before surgery (bulky IB–IIB) vs chemoradiation"
+   }
+  ],
+  "tiers": {
+   "1": "OS benefit, replicated (≥2 randomised trials or a class effect confirmed by meta-analysis / non-inferiority)",
+   "2": "OS benefit, single phase 3 (CI excludes 1 as printed), or non-inferior to a regimen that has one",
+   "3": "OS benefit borderline: disease-specific survival only, interim, randomised phase II, or printed without HR / CI",
+   "4": "PFS / DFS / recurrence benefit only; no OS benefit shown",
+   "5": "No efficacy difference vs the comparator, or the comparator that lost: chosen on toxicity, or when the better option cannot be given",
+   "6": "No phase 3: single-arm, non-randomised comparison, retrospective, design-only or extrapolated",
+   "7": "Do not use: OS or PFS/DFS significantly worse than the alternative, negative trial, or histotype excluded from the trial"
+  },
+  "tier_reading": "Squamous cell carcinoma is 72–94% of every cervical trial, so the trial-wide result sets the tier; SCC subgroups (KEYNOTE-826, COMPASSION-16, BEATcc, EMPOWER-Cervical 1, innovaTV 301, STARS, JCOG0505) are printed as qualifiers and fits. SCC-only trials (NCIC CTG, GOG-169, Bonomi, CheckMate 358, GOG-227C, irinotecan, docetaxel, gemcitabine, GOG 76-U, JCOG 0102, Gupta) apply directly. PD-L1 CPS ≥1 is the only treatment-selecting biomarker (91% of SCC).",
+  "scope": "Efficacy figures copied from data/trials_*.json (vault notes v1.1, full-text checked 2026-09-25); toxicity resolved from data/tox.json via tox_ref {trial, arm}; label rules from data/labels.json and data/drug_rules.json. 'base' inherits every field the record does not set from the named SCC record."
+ },
+ "regimens": [
+  {
+   "id": "adj_obs",
+   "setting": "adjuvant",
+   "name": "Observation (no adjuvant therapy)",
+   "short": "Observation",
+   "drugs": [],
+   "drug_classes": [],
+   "gate": {
+    "risk_group": [
+     "low",
+     "intermediate",
+     "unknown"
+    ]
+   },
+   "trials": [
+    "GOG-92"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "no_difference",
+    "hr": "0.70",
+    "ci90": [
+     "0.46",
+     "1.05"
+    ],
+    "median": "GOG-92 (intermediate risk): deaths 40 (observation) vs 27 (RT); OS HR 0.70 (90% CI 0.46–1.05), P = 0.074, NS — HR is RT vs observation",
+    "evidence_strength": "single_phase3",
+    "trial": "GOG-92"
+   },
+   "pfs": {
+    "text": "GOG-92: recurrence HR 0.54 (90% CI 0.35–0.81) favouring RT; 2-yr recurrence-free 79% vs 88%"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "Low-risk disease (no Sedlis criterion) was outside GOG-92 and GOG-263; no adjuvant trial enrolled it"
+   ],
+   "prefer_when": [
+    {
+     "flag": "risk_group",
+     "in": [
+      "low"
+     ],
+     "reason": "Low risk (node-negative, <2 Sedlis criteria): no adjuvant trial enrolled this group; observation is the untested default"
+    }
+   ],
+   "risk_rules": [
+    {
+     "flag": "risk_group",
+     "in": [
+      "intermediate"
+     ],
+     "effect": "caution",
+     "reason": "Intermediate risk: RT cut recurrence (HR 0.54) without an OS gain (GOG-92); squamous recurrence 20.4% with RT vs 27.8% without"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "adj_rt",
+   "setting": "adjuvant",
+   "name": "Pelvic RT alone (46–50.4 Gy)",
+   "short": "Pelvic RT",
+   "drugs": [],
+   "drug_classes": [
+    "radiotherapy"
+   ],
+   "gate": {
+    "risk_group": [
+     "low",
+     "intermediate",
+     "high",
+     "unknown"
+    ]
+   },
+   "trials": [
+    "GOG-92",
+    "GOG-109 / SWOG 8797 / RTOG intergroup",
+    "STARS"
+   ],
+   "tox_ref": {
+    "trial": "GOG-92 (",
+    "arm": "pelvic RT"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "hr": "0.70",
+    "ci90": [
+     "0.46",
+     "1.05"
+    ],
+    "median": "GOG-92: OS 0.70 (90% CI 0.46–1.05), P = 0.074, NS",
+    "evidence_strength": "single_phase3",
+    "trial": "GOG-92"
+   },
+   "pfs": {
+    "text": "GOG-92: recurrence 0.54 (90% CI 0.35–0.81), progression or death 0.58 (90% CI 0.40–0.85)"
+   },
+   "tier": 4,
+   "evidence_basis": "itt_all_histology",
+   "tier_rules": [
+    {
+     "when": {
+      "risk_group": [
+       "high"
+      ]
+     },
+     "tier": 5,
+     "reason": "High risk: RT alone was the GOG-109 control arm that lost OS to cisplatin–5-FU chemoradiation (4-yr OS 71% vs 81%, P = .007) — for patients who cannot receive cisplatin"
+    },
+    {
+     "when": {
+      "risk_group": [
+       "low"
+      ]
+     },
+     "tier": 6,
+     "reason": "Low risk: outside GOG-92 (≥2 Sedlis criteria required)"
+    }
+   ],
+   "qualifiers": [
+    "GOG-92 SCC 78.7%; no SCC-specific HR printed; RT-by-histology interaction favoured adeno/adenosquamous (HR 0.23, 90% CI 0.07–0.74)"
+   ],
+   "risk_rules": [
+    {
+     "flag": "gi_fistula_or_obstruction_risk",
+     "effect": "caution",
+     "reason": "GOG-92: grade 3–4 adverse events 6% vs 2.1%, one death from grade 4 GI toxicity"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "adj_ccrt_weekly",
+   "setting": "adjuvant",
+   "name": "Pelvic RT + weekly cisplatin 40 mg/m² ×6",
+   "short": "CCRT weekly cisplatin (GOG-263 / STARS)",
+   "drugs": [
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum"
+   ],
+   "gate": {
+    "risk_group": [
+     "intermediate",
+     "high",
+     "unknown"
+    ]
+   },
+   "trials": [
+    "NRG/GOG-263 / KGOG 1008",
+    "STARS",
+    "NOGGO-AGO"
+   ],
+   "tox_ref": {
+    "trial": "NRG/GOG-263",
+    "arm": "CRT (RT + weekly cisplatin)"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "hr": "0.586",
+    "ci95": [
+     "0.286",
+     "1.199"
+    ],
+    "median": "GOG-263 (intermediate risk): 3-yr OS 90.3% vs 97.2% (RT alone), P = 0.07, NS; STARS CCRT vs RT cancer-death HR 0.78 (0.49–1.23), NS",
+    "evidence_strength": "single_phase3",
+    "trial": "NRG/GOG-263 / KGOG 1008"
+   },
+   "pfs": {
+    "text": "GOG-263 RFS 0.698 (0.408–1.192), P = 0.09; STARS CCRT vs RT DFS 0.79 (0.56–1.12), NS; SCC recurrence 0.931 (0.635–1.365)"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "GOG-263: grade 3–4 adverse events 43% vs 15% with RT alone — tripled toxicity for no RFS or OS gain"
+   },
+   "qualifiers": [
+    "High risk: the OS-positive GOG-109 regimen was cisplatin 70 + 5-FU ×4, not weekly cisplatin; weekly-cisplatin CCRT did not beat RT alone in STARS (SCC recurrence 0.931)",
+    "NOGGO-AGO used this arm as control vs sequential paclitaxel–carboplatin → RT (NS)"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "adj_ccrt_cis5fu",
+   "setting": "adjuvant",
+   "name": "Pelvic RT 49.3 Gy + cisplatin 70 mg/m² + 5-FU 1000 mg/m²/day ×4, q3w ×4 (2 concurrent, 2 after)",
+   "short": "CCRT cisplatin–5-FU (GOG-109)",
+   "drugs": [
+    "cisplatin",
+    "fluorouracil"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "antimetabolite"
+   ],
+   "gate": {
+    "risk_group": [
+     "high"
+    ]
+   },
+   "trials": [
+    "GOG-109 / SWOG 8797 / RTOG intergroup",
+    "↳ GOG-109 clinical–pathological reanalysis"
+   ],
+   "tox_ref": {
+    "trial": "GOG-109",
+    "arm": "RT + cisplatin/5-FU"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "1.96",
+    "median": "4-yr OS 81% vs 71% (RT alone); printed RT vs CT + RT OS 1.96, P = .007 — CI not printed",
+    "evidence_strength": "single_phase3",
+    "trial": "GOG-109 / SWOG 8797 / RTOG intergroup"
+   },
+   "pfs": {
+    "text": "4-yr PFS 80% vs 63%; printed RT vs CT + RT PFS 2.01, P = .003"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "The only adjuvant regimen with an OS benefit; CIs were not printed (P = .007)",
+    "SCC 76–83%; non-squamous tumours did worse with RT alone, a difference that disappeared with chemotherapy (interaction P = .12 PFS, .19 OS)",
+    "Monk 2005 reanalysis: smaller absolute benefit with one positive node or tumour ≤2 cm (hypothesis-generating)"
+   ],
+   "risk_rules": [
+    {
+     "flag": "cytopenia_baseline",
+     "effect": "caution",
+     "reason": "GOG-109: grade 4 toxicity 27 episodes in 21 CT + RT patients vs 4 on RT alone"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "adj_scrt",
+   "setting": "adjuvant",
+   "name": "Sequential chemoradiation: cisplatin 60–75 + paclitaxel 135–175 q21d, 2 cycles before and 2 after RT 45–50 Gy",
+   "short": "Sequential chemoRT (STARS)",
+   "drugs": [
+    "cisplatin",
+    "paclitaxel"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "taxane"
+   ],
+   "gate": {
+    "risk_group": [
+     "intermediate",
+     "high",
+     "unknown"
+    ]
+   },
+   "trials": [
+    "STARS"
+   ],
+   "tox_ref": {
+    "trial": "STARS (",
+    "arm": "sequential chemoradiation (SCRT)"
+   },
+   "os": {
+    "benefit": "dss_positive",
+    "hr": "0.58",
+    "ci95": [
+     "0.35",
+     "0.95"
+    ],
+    "median": "Cancer death SCRT vs RT 0.58 (0.35–0.95); 5-yr OS 92% (88–96) vs 88% (84–92) — OS HR not printed",
+    "evidence_strength": "single_phase3_dss",
+    "trial": "STARS"
+   },
+   "pfs": {
+    "text": "DFS SCRT vs RT 0.52 (0.35–0.76) nodal-adjusted; SCRT vs CCRT 0.65 (0.44–0.96); 3-yr DFS 90% vs 85% vs 82%. SCC recurrence SCRT vs RT 0.547 (0.357–0.839)"
+   },
+   "tier": 3,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "Tier 3: disease-specific survival, not OS; single-country trial mixing intermediate- and high-risk patients (nodal involvement 18.3% in the RT arm)",
+    "SCC subgroup reported: SCRT recurrence HR 0.547 vs RT; concurrent weekly cisplatin gave essentially no benefit over RT in SCC (0.931)"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "adj_tc_seq",
+   "setting": "adjuvant",
+   "name": "Paclitaxel 175 + carboplatin AUC5 → pelvic RT 50.4 Gy",
+   "short": "Sequential TC → RT (NOGGO-AGO)",
+   "drugs": [
+    "paclitaxel",
+    "carboplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "taxane"
+   ],
+   "gate": {
+    "risk_group": [
+     "high"
+    ]
+   },
+   "trials": [
+    "NOGGO-AGO"
+   ],
+   "tox_ref": {
+    "trial": "NOGGO-AGO (",
+    "arm": "sequential paclitaxel-carboplatin -> RT (PC-R)"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "median": "5-yr survival 85.8% vs 78.9% (vs RT + weekly cisplatin), P = 0.25; exploratory multivariate OS 0.59 (0.30–1.18), model called unreliable by the authors",
+    "evidence_strength": "single_phase3",
+    "trial": "NOGGO-AGO"
+   },
+   "pfs": {
+    "text": "2-yr PFS 87.2% vs 81.8%, P = 0.235; exploratory PFS 0.483 (0.25–0.92)"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "Early termination 12.9% vs 32.1% with CCRT; alopecia 87.9% vs 4.1%, neurotoxicity 65.9% vs 15.6%; more grade 3–4 haematological toxicity with CCRT"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "adj_chemo_only",
+   "setting": "adjuvant",
+   "name": "Paclitaxel 175 + cisplatin 50 (or carboplatin AUC6) q3w ×6 without RT",
+   "short": "Chemotherapy alone (JGOG1082, ongoing)",
+   "drugs": [
+    "paclitaxel",
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "platinum",
+    "taxane"
+   ],
+   "gate": {
+    "risk_group": [
+     "high"
+    ]
+   },
+   "trials": [
+    "JGOG1082"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "pending",
+    "median": "Ongoing (accrual from November 2019); primary endpoint OS non-inferiority vs CCRT, margin HR 1.33",
+    "evidence_strength": "design_only",
+    "trial": "JGOG1082"
+   },
+   "pfs": {
+    "text": "No results"
+   },
+   "tier": 6,
+   "evidence_basis": "design_only",
+   "caution_default": {
+    "reason": "Design-only: no results published (2026-09-15); not an evidence-based option yet"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "def_ccrt_weekly",
+   "settings": [
+    "definitive"
+   ],
+   "name": "Pelvic RT + brachytherapy + weekly cisplatin 40 mg/m² ×5–6",
+   "short": "CCRT weekly cisplatin",
+   "drugs": [
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG-120",
+    "GOG-123",
+    "NCIC CTG",
+    "TACO, (Ryu 2026)",
+    "GOG chemoradiation trials pooled by histology"
+   ],
+   "tox_ref": {
+    "trial": "GOG-120 (",
+    "arm": "RT + weekly cisplatin"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.61",
+    "ci95": [
+     "0.44",
+     "0.85"
+    ],
+    "median": "GOG-120: OS 0.61 (0.44–0.85) vs RT + hydroxyurea; 10-yr OS 53% vs 34%. GOG-123 (bulky IB → hysterectomy): death 0.54 (0.34–0.86), adjusted 0.63 (0.43–0.91) at 101 mo",
+    "evidence_strength": "replicated",
+    "trial": "GOG-120"
+   },
+   "pfs": {
+    "text": "GOG-120 PFS 0.57 (0.42–0.78); GOG-123 progression 0.51 (0.34–0.75)"
+   },
+   "tier": 1,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "Replicated: GOG-120, GOG-123 (and the cisplatin–5-FU trials RTOG 90-01, GOG-85); meta-analysis HR 0.81, 6% absolute 5-yr gain",
+    "The SCC-only NCIC CTG trial was negative (OS 1.13, 0.77–1.67); authors stress RT quality (median 49–51 days)",
+    "Controls were hydroxyurea RT (GOG-120, GOG-85) or RT → hysterectomy (GOG-123); SCC 80–92%, no SCC HR printed"
+   ],
+   "risk_rules": [
+    {
+     "flag": "renal_crcl",
+     "lt": 60,
+     "effect": "caution",
+     "reason": "Cisplatin label: impaired creatinine clearance → consider alternative; carboplatin substitution has no randomised support (Nam 2013)"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "def_ccrt_triweekly",
+   "settings": [
+    "definitive"
+   ],
+   "name": "RT + cisplatin 75 mg/m² q3w ×3",
+   "short": "CCRT triweekly cisplatin (TACO)",
+   "drugs": [
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum"
+   ],
+   "gate": {},
+   "trials": [
+    "TACO, (Ryu 2026)",
+    "Weekly vs triweekly cisplatin"
+   ],
+   "tox_ref": {
+    "trial": "TACO",
+    "arm": "triweekly cisplatin 75"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "hr": "1.10",
+    "ci95": [
+     "0.65",
+     "1.86"
+    ],
+    "median": "TACO: 5-yr OS 72.7% vs 73.9% (weekly), OS 1.10 (0.65–1.86), NS. Ryu 2011 (n = 104) had shown 5-yr OS 88.7% vs 66.5% (0.375, 0.154–0.914) — not confirmed",
+    "evidence_strength": "single_phase3",
+    "trial": "TACO, (Ryu 2026)"
+   },
+   "pfs": {
+    "text": "TACO 3-yr RFS 84.1% vs 78.7%, HR 0.71 (0.39–1.32), NS"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "prefer_when": [
+    {
+     "flag": "cytopenia_baseline",
+     "reason": "TACO: fewer grade 3–4 haematological toxicities, fewer chemotherapy delays and better QoL with triweekly"
+    }
+   ],
+   "qualifiers": [
+    "Non-squamous imbalance against the triweekly arm (18.6% vs 9.9%)"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "def_ccrt_cis5fu",
+   "settings": [
+    "definitive"
+   ],
+   "name": "Pelvic RT 45 Gy + cisplatin 75 mg/m² + 5-FU 4 g/m² 96-h ×3",
+   "short": "CCRT cisplatin–5-FU (RTOG 90-01)",
+   "drugs": [
+    "cisplatin",
+    "fluorouracil"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "antimetabolite"
+   ],
+   "gate": {},
+   "trials": [
+    "RTOG 90-01",
+    "GOG-85 / SWOG"
+   ],
+   "tox_ref": {
+    "trial": "RTOG 90-01 (",
+    "arm": "pelvic RT + cisplatin/5-FU"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.48",
+    "ci95": [
+     "0.35",
+     "0.67"
+    ],
+    "median": "RTOG 90-01 (2004 update): 8-yr OS 67% vs 41% vs extended-field RT; OS relative risk 0.48 (0.35–0.67). GOG-85 vs hydroxyurea RT: death 0.74 (90% CI 0.58–0.95)",
+    "evidence_strength": "replicated",
+    "trial": "RTOG 90-01"
+   },
+   "pfs": {
+    "text": "RTOG 90-01 DFS 0.49 (0.36–0.66); 8-yr DFS 61% vs 36%"
+   },
+   "tier": 1,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "RTOG 90-01 changed two variables (chemotherapy added, para-aortic field removed); stage III–IVA subgroup RR 0.63 (0.39–1.04), P = .07 (116 patients)",
+    "Acute grade 3–4 44% in the chemotherapy arm; GOG-120 showed weekly cisplatin alone matches cisplatin–5-FU–hydroxyurea with less leukopenia (~23% vs ~46%)"
+   ],
+   "caution_default": {
+    "reason": "More toxic than weekly cisplatin alone for no shown gain (GOG-120: cisplatin arm vs CFH arm equivalent; leukopenia ~23% vs ~46%)"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "def_induction_tc",
+   "settings": [
+    "definitive",
+    "neoadjuvant"
+   ],
+   "name": "Induction weekly carboplatin AUC2 + paclitaxel 80 mg/m² ×6 → CCRT (weekly cisplatin + EBRT + brachytherapy)",
+   "short": "Induction TC → CCRT (INTERLACE)",
+   "drugs": [
+    "carboplatin",
+    "paclitaxel",
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "taxane"
+   ],
+   "gate": {
+    "stage": [
+     "IB1",
+     "IB2",
+     "IIA1",
+     "IIA2",
+     "IIB",
+     "IIIB",
+     "IVA"
+    ]
+   },
+   "trials": [
+    "GCIG INTERLACE"
+   ],
+   "tox_ref": {
+    "trial": "GCIG INTERLACE (",
+    "arm": "induction carboplatin-paclitaxel -> CRT"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.60",
+    "ci95": [
+     "0.40",
+     "0.91"
+    ],
+    "median": "5-yr OS 80% vs 72% (CCRT alone), P = 0.015",
+    "evidence_strength": "single_phase3",
+    "trial": "GCIG INTERLACE"
+   },
+   "pfs": {
+    "text": "5-yr PFS 72% vs 64%; HR 0.65 (0.46–0.91)"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "FIGO 2008 IB1 node-positive, IB2, IIA, IIB, IIIB, IVA (IIB 70%); IIIA not listed",
+    "SCC 82%; randomisation minimised on squamous vs non-squamous but no histology HR printed",
+    "Grade ≥3 adverse events 59% vs 48%; median 7 days from induction to CCRT; ≥5 induction cycles in 92%",
+    "The one positive neoadjuvant strategy — chemotherapy before chemoradiation, not before surgery"
+   ],
+   "risk_rules": [
+    {
+     "flag": "all",
+     "all": [
+      {
+       "flag": "stage",
+       "in": [
+        "IB1"
+       ]
+      },
+      {
+       "flag": "nodes",
+       "in": [
+        "negative",
+        "unknown"
+       ]
+      }
+     ],
+     "effect": "exclude",
+     "reason": "INTERLACE admitted IB1 only if node-positive"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "def_pembro_ccrt",
+   "settings": [
+    "definitive"
+   ],
+   "name": "Pembrolizumab 200 mg q3w ×5 with cisplatin CCRT → pembrolizumab 400 mg q6w ×15",
+   "short": "CCRT + pembrolizumab (KEYNOTE-A18)",
+   "drugs": [
+    "pembrolizumab",
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "io"
+   ],
+   "gate": {
+    "stage": [
+     "IB2",
+     "IIA1",
+     "IIA2",
+     "IIB",
+     "IIIA",
+     "IIIB",
+     "IVA"
+    ]
+   },
+   "trials": [
+    "KEYNOTE-A18 / ENGOT-cx11 / GOG-3047"
+   ],
+   "tox_ref": {
+    "trial": "KEYNOTE-A18",
+    "arm": "pembrolizumab + CRT -> pembrolizumab"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.67",
+    "ci95": [
+     "0.50",
+     "0.90"
+    ],
+    "median": "36-mo OS 82.6% vs 74.8% (second interim), P = 0.0040",
+    "evidence_strength": "single_phase3",
+    "trial": "KEYNOTE-A18 / ENGOT-cx11 / GOG-3047"
+   },
+   "pfs": {
+    "text": "24-mo PFS 68% vs 57%; HR 0.70 (0.55–0.89). FIGO 2014 III–IVA 0.58 (0.42–0.80) vs node-positive IB2–IIB 0.91 (0.63–1.31)"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "FIGO 2014 IB2–IIB node-positive or III–IVA; PD-L1 not required; cisplatin only",
+    "SCC 83.4%; histology not a protocol subgroup — no SCC HR exists",
+    "Grade ≥3 adverse events 78% vs 70%; potentially immune-mediated 39% vs 17%"
+   ],
+   "risk_rules": [
+    {
+     "flag": "all",
+     "all": [
+      {
+       "flag": "stage_group",
+       "in": [
+        "I",
+        "II"
+       ]
+      },
+      {
+       "flag": "nodes",
+       "in": [
+        "negative",
+        "unknown"
+       ]
+      }
+     ],
+     "effect": "exclude",
+     "reason": "KEYNOTE-A18 admitted IB2–IIB only if node-positive; node-negative IB2–IIB was outside the trial"
+    },
+    {
+     "flag": "all",
+     "all": [
+      {
+       "flag": "stage_group",
+       "in": [
+        "I",
+        "II"
+       ]
+      },
+      {
+       "flag": "nodes",
+       "in": [
+        "positive"
+       ]
+      }
+     ],
+     "effect": "caution",
+     "reason": "Node-positive IB2–IIB: PFS HR 0.91 (0.63–1.31); the benefit was concentrated in FIGO 2014 III–IVA (0.58)"
+    },
+    {
+     "flag": "renal_crcl",
+     "lt": 60,
+     "effect": "caution",
+     "reason": "KEYNOTE-A18 used cisplatin only; carboplatin + pembrolizumab CCRT has no trial support (carboplatin allowed in CALLA, negative)"
+    }
+   ],
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "def_durva_ccrt",
+   "settings": [
+    "definitive"
+   ],
+   "name": "Durvalumab 1500 mg q4w with and after CCRT (weekly cisplatin or carboplatin AUC2)",
+   "short": "CCRT + durvalumab (CALLA)",
+   "drugs": [
+    "durvalumab",
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "io"
+   ],
+   "gate": {},
+   "trials": [
+    "CALLA"
+   ],
+   "tox_ref": {
+    "trial": "CALLA (",
+    "arm": "durvalumab + CRT -> durvalumab"
+   },
+   "os": {
+    "benefit": "negative",
+    "hr": "0.78",
+    "ci95": [
+     "0.55",
+     "1.10"
+    ],
+    "median": "Deaths 15% vs 19%; OS not formally interpretable (hierarchy not met)",
+    "evidence_strength": "single_phase3",
+    "trial": "CALLA"
+   },
+   "pfs": {
+    "text": "PFS 0.84 (0.65–1.08), P = 0.17 — NS; 12-mo PFS 76.0% vs 73.3%"
+   },
+   "tier": 7,
+   "evidence_basis": "itt_all_histology",
+   "exclude_default": {
+    "reason": "Negative trial (PFS 0.84, NS); treatment-related deaths 5 vs 1"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "def_cis_gem",
+   "settings": [
+    "definitive"
+   ],
+   "name": "Weekly cisplatin 40 + gemcitabine 125 mg/m² ×6 with EBRT → brachytherapy → cisplatin 50 + gemcitabine 1000 D1, 8 ×2",
+   "short": "CCRT cisplatin–gemcitabine + adjuvant (Dueñas-González)",
+   "drugs": [
+    "cisplatin",
+    "gemcitabine"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "antimetabolite"
+   ],
+   "gate": {
+    "stage": [
+     "IIB",
+     "IIIA",
+     "IIIB",
+     "IVA"
+    ]
+   },
+   "trials": [
+    "Dueñas-González 2011"
+   ],
+   "tox_ref": {
+    "trial": "Dueñas-González",
+    "arm": "gemcitabine-cisplatin CRT -> adjuvant gemcitabine-cisplatin"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.68",
+    "ci95": [
+     "0.49",
+     "0.95"
+    ],
+    "median": "OS improved (log-rank P = .0224); distant failure 8.1% vs 16.4%",
+    "evidence_strength": "single_phase3",
+    "trial": "Dueñas-González 2011"
+   },
+   "pfs": {
+    "text": "3-yr PFS 74.4% vs 65.0%, P = .029; PFS 0.68 (0.49–0.95)"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "Grade 3–4 toxicity 86.5% vs 46.3% (P < .001), two deaths possibly treatment-related; two changes at once (concurrent gemcitabine + adjuvant chemotherapy)"
+   },
+   "qualifiers": [
+    "Stage IIB–IVA, KPS ≥70; 'non-adenocarcinoma' 93.8% pooled, no SCC HR"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "def_outback",
+   "settings": [
+    "definitive"
+   ],
+   "name": "CCRT → adjuvant carboplatin AUC5 + paclitaxel 155 mg/m² q21d ×4",
+   "short": "CCRT + adjuvant TC (OUTBACK)",
+   "drugs": [
+    "cisplatin",
+    "carboplatin",
+    "paclitaxel"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "taxane"
+   ],
+   "gate": {},
+   "trials": [
+    "OUTBACK"
+   ],
+   "tox_ref": {
+    "trial": "OUTBACK (",
+    "arm": "CCRT -> adjuvant carboplatin-paclitaxel"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "hr": "0.90",
+    "ci95": [
+     "0.70",
+     "1.17"
+    ],
+    "median": "5-yr OS 72% vs 71% (CCRT alone), P = 0.81",
+    "evidence_strength": "single_phase3",
+    "trial": "OUTBACK"
+   },
+   "pfs": {
+    "text": "5-yr PFS 63% vs 62%; HR 0.86 (0.69–1.07), NS"
+   },
+   "tier": 7,
+   "evidence_basis": "itt_all_histology",
+   "exclude_default": {
+    "reason": "Negative: no OS or PFS gain; grade 3–4 neutropenia 20% vs 8%, anaemia 18% vs 8%; 22% never started the adjuvant chemotherapy"
+   },
+   "qualifiers": [
+    "Squamous / adenosquamous post hoc OS 0.90 (0.68–1.20), interaction P = 0.98 — no differential effect by histology"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "def_carbo_ccrt",
+   "settings": [
+    "definitive"
+   ],
+   "name": "RT + weekly carboplatin 100 mg/m² (cisplatin-ineligible)",
+   "short": "CCRT weekly carboplatin (Nam 2013)",
+   "drugs": [
+    "carboplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum"
+   ],
+   "gate": {},
+   "trials": [
+    "Carboplatin CCRT"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "non_randomised",
+    "hr": "1.80",
+    "ci95": [
+     "0.49",
+     "6.54"
+    ],
+    "median": "3-yr OS 88% vs 94% (historical weekly cisplatin), P = 0.38; non-randomised",
+    "evidence_strength": "non_randomised",
+    "trial": "Carboplatin CCRT"
+   },
+   "pfs": {
+    "text": "3-yr PFS 78% vs 80%; recurrence HR 1.21 (0.52–2.81)"
+   },
+   "tier": 6,
+   "evidence_basis": "non_randomised",
+   "caution_default": {
+    "reason": "The only carboplatin-substitution comparison retrieved; prospective vs historical, 51 patients with morbidity risks / poor general condition"
+   },
+   "prefer_when": [
+    {
+     "flag": "renal_crcl",
+     "lt": 60,
+     "reason": "Cisplatin-ineligible (renal): the population Nam 2013 treated"
+    }
+   ],
+   "histology": "scc",
+   "qualifiers": [
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ]
+  },
+  {
+   "id": "def_rt_alone",
+   "settings": [
+    "definitive"
+   ],
+   "name": "Radiotherapy alone (EBRT + brachytherapy)",
+   "short": "RT alone",
+   "drugs": [],
+   "drug_classes": [
+    "radiotherapy"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG-123",
+    "RTOG 90-01",
+    "NCIC CTG"
+   ],
+   "tox_ref": {
+    "trial": "GOG-123 (",
+    "arm": "RT -> hysterectomy"
+   },
+   "os": {
+    "benefit": "negative",
+    "hr": "0.54",
+    "ci95": [
+     "0.34",
+     "0.86"
+    ],
+    "median": "Lost OS to cisplatin CCRT: GOG-123 death 0.54 (0.34–0.86) favouring CCRT; RTOG 90-01 extended-field RT 8-yr OS 41% vs 67%. NCIC CTG (SCC-only): no difference (OS 1.13, 0.77–1.67)",
+    "evidence_strength": "replicated",
+    "trial": "GOG-123"
+   },
+   "pfs": {
+    "text": "GOG-123 progression 0.51 (0.34–0.75) favouring CCRT"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "OS worse than cisplatin chemoradiation in GOG-123 and RTOG 90-01: for patients who cannot receive any platinum"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "def_ipi_after_ccrt",
+   "settings": [
+    "definitive"
+   ],
+   "name": "Weekly cisplatin CCRT → ipilimumab 3 or 10 mg/kg q21d ×4",
+   "short": "CCRT → ipilimumab (GOG-9929, phase 1)",
+   "drugs": [
+    "cisplatin",
+    "ipilimumab"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "io"
+   ],
+   "gate": {
+    "nodes": [
+     "positive"
+    ]
+   },
+   "trials": [
+    "GOG-9929"
+   ],
+   "tox_ref": {
+    "trial": "GOG-9929"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "12-mo OS 90% (phase 1, 21 received ipilimumab)",
+    "evidence_strength": "phase1",
+    "trial": "GOG-9929"
+   },
+   "pfs": {
+    "text": "12-mo PFS 81%"
+   },
+   "tier": 6,
+   "evidence_basis": "single_arm",
+   "caution_default": {
+    "reason": "Phase 1, 34 enrolled; node-positive IB2–IVA; no comparison"
+   },
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "fl_pembro_chemo",
+   "setting": "first_line",
+   "name": "Pembrolizumab 200 mg q3w (≤35 cycles) + paclitaxel 175 + cisplatin 50 or carboplatin AUC5 ± bevacizumab 15 mg/kg",
+   "short": "Pembrolizumab + chemotherapy ± bev (KEYNOTE-826)",
+   "drugs": [
+    "pembrolizumab",
+    "paclitaxel",
+    "cisplatin",
+    "carboplatin",
+    "bevacizumab"
+   ],
+   "drug_classes": [
+    "io",
+    "taxane",
+    "platinum",
+    "anti_vegf"
+   ],
+   "gate": {},
+   "trials": [
+    "KEYNOTE-826"
+   ],
+   "tox_ref": {
+    "trial": "KEYNOTE-826 (",
+    "arm": "pembrolizumab + chemotherapy +/- bevacizumab"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.63",
+    "ci95": [
+     "0.52",
+     "0.77"
+    ],
+    "median": "Final ITT 26.4 vs 16.8 mo; CPS ≥1 28.6 vs 16.5 mo, HR 0.60 (0.49–0.74); 5-yr ITT OS 0.64 (0.53–0.78)",
+    "evidence_strength": "single_phase3",
+    "trial": "KEYNOTE-826"
+   },
+   "pfs": {
+    "text": "ITT 10.4 vs 8.2 mo; HR 0.65 (0.53–0.79)"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "SCC subgroup OS 0.61 (0.47–0.80); CPS ≥1 SCC 0.60 (0.46–0.79)",
+    "Benefit with and without bevacizumab (ITT OS 0.63 and 0.74)",
+    "Grade ≥3 AE 81.8% vs 75.1%; immune-mediated grade 3–5 11.4% vs 2.9%",
+    "Trial dose: flat 200 mg q3w; cisplatin 50 mg/m² (NTUH templates use 75)"
+   ],
+   "prefer_when": [
+    {
+     "flag": "pdl1_cps",
+     "gte": 1,
+     "reason": "CPS ≥1: the FDA-labelled population (OS 0.60, 0.49–0.74); SCC is CPS ≥1 in ~91%"
+    }
+   ],
+   "risk_rules": [
+    {
+     "flag": "pdl1_cps_known_lt1",
+     "effect": "caution",
+     "reason": "CPS <1 (11.2% of KEYNOTE-826): outside the label indication; the note prints no CPS <1 HR for this trial"
+    },
+    {
+     "flag": "pdl1_cps_unknown",
+     "effect": "caution",
+     "reason": "Record PD-L1 22C3 CPS before first line: the pembrolizumab indication is CPS ≥1"
+    }
+   ],
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "fl_cadonilimab_chemo",
+   "setting": "first_line",
+   "name": "Cadonilimab (PD-1/CTLA-4) 10 mg/kg + platinum chemotherapy ± bevacizumab q3w ×6 → maintenance ≤2 yr",
+   "short": "Cadonilimab + chemotherapy (COMPASSION-16)",
+   "drugs": [
+    "cadonilimab",
+    "paclitaxel",
+    "cisplatin",
+    "carboplatin",
+    "bevacizumab"
+   ],
+   "drug_classes": [
+    "io",
+    "taxane",
+    "platinum",
+    "anti_vegf"
+   ],
+   "gate": {},
+   "trials": [
+    "COMPASSION-16"
+   ],
+   "tox_ref": {
+    "trial": "COMPASSION-16 (",
+    "arm": "cadonilimab + chemotherapy +/- bevacizumab"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.64",
+    "ci95": [
+     "0.48",
+     "0.86"
+    ],
+    "median": "Median not reached vs 22.8 mo",
+    "evidence_strength": "single_phase3",
+    "trial": "COMPASSION-16"
+   },
+   "pfs": {
+    "text": "12.7 vs 8.1 mo (BICR); HR 0.62 (0.49–0.80); CPS <1 0.65 (0.42–1.03), CPS ≥1 0.62 (0.47–0.83)"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "No FDA label (China approval); single-country trial"
+   },
+   "qualifiers": [
+    "SCC subgroup PFS 0.58 (0.44–0.76), OS 0.64 (0.47–0.88); PD-L1 not required"
+   ],
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "fl_atezo_chemo_bev",
+   "setting": "first_line",
+   "name": "Atezolizumab 1200 mg + cisplatin 50 or carboplatin AUC5 + paclitaxel 175 + bevacizumab 15 mg/kg q3w",
+   "short": "Atezolizumab + chemotherapy + bev (BEATcc)",
+   "drugs": [
+    "atezolizumab",
+    "paclitaxel",
+    "cisplatin",
+    "carboplatin",
+    "bevacizumab"
+   ],
+   "drug_classes": [
+    "io",
+    "taxane",
+    "platinum",
+    "anti_vegf"
+   ],
+   "gate": {},
+   "trials": [
+    "BEATcc / ENGOT-Cx10"
+   ],
+   "tox_ref": {
+    "trial": "BEATcc",
+    "arm": "atezolizumab + bevacizumab + chemotherapy"
+   },
+   "os": {
+    "benefit": "interim_positive",
+    "hr": "0.68",
+    "ci95": [
+     "0.52",
+     "0.88"
+    ],
+    "median": "INTERIM: 32.1 vs 22.8 mo — counted as an OS benefit, held at tier 3 until the final analysis",
+    "evidence_strength": "single_phase3_interim",
+    "trial": "BEATcc / ENGOT-Cx10"
+   },
+   "pfs": {
+    "text": "13.7 vs 10.4 mo; HR 0.62 (0.49–0.78); ORR 84% vs 72%"
+   },
+   "tier": 3,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "Interim OS (tier 3 pending the final analysis); bevacizumab in both arms, so bevacizumab eligibility is required",
+    "SCC subgroup OS 0.72 (0.54–0.97); adenocarcinoma capped at 20% of enrolment",
+    "PD-L1 not required"
+   ],
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "fl_bev_chemo",
+   "setting": "first_line",
+   "name": "Bevacizumab 15 mg/kg + cisplatin 50 + paclitaxel 135–175 q21d (GOG-240)",
+   "short": "Bevacizumab + cisplatin–paclitaxel (GOG-240)",
+   "drugs": [
+    "bevacizumab",
+    "cisplatin",
+    "paclitaxel"
+   ],
+   "drug_classes": [
+    "anti_vegf",
+    "platinum",
+    "taxane"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG-240"
+   ],
+   "tox_ref": {
+    "trial": "GOG-240 (",
+    "arm": "cisplatin + paclitaxel + bevacizumab"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.77",
+    "ci95": [
+     "0.62",
+     "0.95"
+    ],
+    "median": "Final 16.8 vs 13.3 mo, P = 0.007",
+    "evidence_strength": "single_phase3",
+    "trial": "GOG-240"
+   },
+   "pfs": {
+    "text": "8.2 vs 5.9 mo; HR 0.67 (0.54–0.82); ORR 48% vs 36%"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "tier_rules": [
+    {
+     "when": {
+      "io_eligible": [
+       "yes"
+      ]
+     },
+     "tier": 5,
+     "reason": "Checkpoint-inhibitor-eligible: chemotherapy ± bevacizumab is the comparator that lost OS to the same backbone + pembrolizumab (KEYNOTE-826 ITT OS 0.63) — kept for patients who cannot receive a checkpoint inhibitor"
+    }
+   ],
+   "qualifiers": [
+    "SCC 67.6–69.6%; histology interaction P 0.07 in the OS forest plot but no SCC-specific bevacizumab HR printed",
+    "Hypertension ≥G2 25% vs 2%; thromboembolism ≥G3 8% vs 1%; fistula any grade 15% vs 1% — all previously irradiated"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "fl_cis_pac",
+   "setting": "first_line",
+   "name": "Cisplatin 50 mg/m² + paclitaxel 135 (24-h) or 175 mg/m² q21d",
+   "short": "Cisplatin–paclitaxel (GOG-204 reference)",
+   "drugs": [
+    "cisplatin",
+    "paclitaxel"
+   ],
+   "drug_classes": [
+    "platinum",
+    "taxane"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG-204",
+    "GOG-169",
+    "↳ GOG-240 backbone, final"
+   ],
+   "tox_ref": {
+    "trial": "GOG-204 (",
+    "arm": "cisplatin + paclitaxel (PC)"
+   },
+   "os": {
+    "benefit": "reference",
+    "median": "GOG-204: median OS 12.87 mo vs 9.99–10.28 mo with cisplatin + vinorelbine / gemcitabine / topotecan (NS, closed for futility). GOG-169 (SCC-only): 9.7 vs 8.8 mo vs cisplatin alone, NS",
+    "evidence_strength": "single_phase3",
+    "trial": "GOG-204"
+   },
+   "pfs": {
+    "text": "GOG-169 PFS 4.8 vs 2.8 mo vs cisplatin alone (P < .001); ORR 36% vs 19%. GOG-240 backbone: better PFS than topotecan–paclitaxel (HR 1.24 for topotecan)"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "The chemotherapy backbone alone: OS worse than backbone + bevacizumab (GOG-240 0.77) and than backbone + pembrolizumab (KEYNOTE-826 0.63) — for patients who can receive neither"
+   },
+   "qualifiers": [
+    "Trial dose cisplatin 50 mg/m² (NTUH templates 75)",
+    "Established as the reference doublet by GOG-204 (all histologies) and GOG-169 (SCC-only, PFS and ORR gain, no OS gain)"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "fl_carbo_pac",
+   "setting": "first_line",
+   "name": "Paclitaxel 175 mg/m² + carboplatin AUC5 q3w",
+   "short": "Carboplatin–paclitaxel (JCOG0505)",
+   "drugs": [
+    "carboplatin",
+    "paclitaxel"
+   ],
+   "drug_classes": [
+    "platinum",
+    "taxane"
+   ],
+   "gate": {},
+   "trials": [
+    "JCOG0505"
+   ],
+   "tox_ref": {
+    "trial": "JCOG0505 (",
+    "arm": "paclitaxel + carboplatin (TC)"
+   },
+   "os": {
+    "benefit": "non_inferior",
+    "hr": "0.994",
+    "ci90": [
+     "0.789",
+     "1.253"
+    ],
+    "median": "17.5 vs 18.3 mo vs cisplatin–paclitaxel; non-inferiority P = .032",
+    "evidence_strength": "non_inferior",
+    "trial": "JCOG0505"
+   },
+   "pfs": {
+    "text": "6.2 vs 6.9 mo; HR 1.041 (0.803–1.351); ORR 62.6% vs 58.8%"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "SCC stratum OS 0.96 (0.71–1.29); longer non-hospitalisation with carboplatin",
+    "Chemotherapy backbone alone — see cisplatin–paclitaxel for the add-on trials"
+   ],
+   "risk_rules": [
+    {
+     "flag": "prior_cisplatin",
+     "in": [
+      "no"
+     ],
+     "effect": "exclude",
+     "reason": "JCOG0505 cisplatin-naive subgroup: OS 13.0 vs 23.2 mo, HR 1.571 (1.062–2.324) — carboplatin worse; prefer cisplatin when cisplatin-naive"
+    },
+    {
+     "flag": "prior_cisplatin",
+     "in": [
+      "unknown"
+     ],
+     "effect": "caution",
+     "reason": "Record prior radiosensitising cisplatin: carboplatin was inferior in cisplatin-naive patients (JCOG0505 OS 1.571)"
+    }
+   ],
+   "prefer_when": [
+    {
+     "flag": "renal_crcl",
+     "lt": 60,
+     "reason": "Cisplatin-ineligible: carboplatin non-inferior overall in JCOG0505"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "fl_topo_cis",
+   "setting": "first_line",
+   "name": "Topotecan 0.75 mg/m² D1–3 + cisplatin 50 mg/m² D1 q21d",
+   "short": "Topotecan–cisplatin (GOG-179)",
+   "drugs": [
+    "topotecan",
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "topoisomerase_i",
+    "platinum"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG-179",
+    "GOG-204"
+   ],
+   "tox_ref": {
+    "trial": "GOG-179 (",
+    "arm": "cisplatin + topotecan"
+   },
+   "os": {
+    "benefit": "positive_vs_single_agent",
+    "hr": "0.76",
+    "ci95": [
+     "0.593",
+     "0.979"
+    ],
+    "median": "9.4 vs 6.5 mo vs cisplatin alone (GOG-179); vs cisplatin–paclitaxel in GOG-204: OS 1.26 (0.86–1.82), NS",
+    "evidence_strength": "single_phase3",
+    "trial": "GOG-179"
+   },
+   "pfs": {
+    "text": "GOG-179 PFS 0.76 (0.597–0.969); ORR 27% vs 13%"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "Grade 3–4 neutropenia 70% vs 1.4%, febrile neutropenia 17.7% vs 7.5% (GOG-179); not better than cisplatin–paclitaxel (GOG-204)"
+   },
+   "qualifiers": [
+    "Treatment-by-prior-cisplatin interaction P = 0.03 (PFS); no prior cisplatin: OS 15.4 vs 8.8 mo",
+    "NTUH templates give cisplatin on D3, not D1"
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "fl_cis_other",
+   "setting": "first_line",
+   "name": "Cisplatin 50 mg/m² + vinorelbine, gemcitabine or topotecan (GOG-204 experimental arms)",
+   "short": "Cisplatin + vinorelbine / gemcitabine (GOG-204)",
+   "drugs": [
+    "cisplatin",
+    "vinorelbine",
+    "gemcitabine"
+   ],
+   "drug_classes": [
+    "platinum",
+    "vinca",
+    "antimetabolite"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG-204"
+   ],
+   "tox_ref": {
+    "trial": "GOG-204 (",
+    "arm": "cisplatin + vinorelbine (VC)"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "median": "vs cisplatin–paclitaxel: vinorelbine 1.15 (0.79–1.67), gemcitabine 1.32 (0.91–1.92), topotecan 1.26 (0.86–1.82); medians 9.99–10.28 vs 12.87 mo; closed for futility",
+    "evidence_strength": "single_phase3",
+    "trial": "GOG-204"
+   },
+   "pfs": {
+    "text": "Experimental-arm PFS HRs 1.27–1.39 vs cisplatin–paclitaxel; ORR 22.3–25.9% vs 29.1%"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "Trend worse than cisplatin–paclitaxel on every endpoint; 11 treatment-related deaths across GOG-204 arms — for taxane-ineligible patients"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "fl_topo_pac",
+   "setting": "first_line",
+   "name": "Topotecan 0.75 mg/m² D1–3 + paclitaxel 175 mg/m² ± bevacizumab (non-platinum)",
+   "short": "Topotecan–paclitaxel ± bev (GOG-240 backbone)",
+   "drugs": [
+    "topotecan",
+    "paclitaxel",
+    "bevacizumab"
+   ],
+   "drug_classes": [
+    "topoisomerase_i",
+    "taxane",
+    "anti_vegf"
+   ],
+   "gate": {},
+   "trials": [
+    "↳ GOG-240 backbone, final",
+    "GOG-240"
+   ],
+   "tox_ref": {
+    "trial": "GOG-240 (",
+    "arm": "topotecan + paclitaxel"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "hr": "1.12",
+    "ci95": [
+     "0.91",
+     "1.38"
+    ],
+    "median": "13.8 vs 16.3 mo vs cisplatin–paclitaxel, P = 0.28; platinum-exposed 1.09 (0.86–1.38); SCC alone 1.12 (0.87–1.44)",
+    "evidence_strength": "single_phase3",
+    "trial": "↳ GOG-240 backbone, final"
+   },
+   "pfs": {
+    "text": "6.0 vs 7.8 mo; HR 1.24 (1.02–1.50), P = 0.03 — worse with topotecan"
+   },
+   "tier": 7,
+   "evidence_basis": "itt_all_histology",
+   "exclude_default": {
+    "reason": "PFS significantly worse than cisplatin–paclitaxel (1.24, 1.02–1.50) and no OS gain even after prior platinum"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "fl_cis_mono",
+   "setting": "first_line",
+   "name": "Cisplatin 50 mg/m² q21d single agent",
+   "short": "Cisplatin alone",
+   "drugs": [
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "platinum"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG-169",
+    "GOG-179",
+    "GOG cisplatin schedules"
+   ],
+   "tox_ref": {
+    "trial": "GOG-179 (",
+    "arm": "cisplatin alone"
+   },
+   "os": {
+    "benefit": "negative",
+    "hr": "0.76",
+    "ci95": [
+     "0.593",
+     "0.979"
+    ],
+    "median": "Lost OS to topotecan–cisplatin (GOG-179 0.76; 6.5 vs 9.4 mo); GOG-169: PFS 2.8 vs 4.8 mo and ORR 19% vs 36% vs cisplatin–paclitaxel, OS NS",
+    "evidence_strength": "single_phase3",
+    "trial": "GOG-179"
+   },
+   "pfs": {
+    "text": "Bonomi 1985 (SCC-only): 50 vs 100 mg/m² vs 20 ×5 — OS 7.1 vs 7.0 vs 6.1 mo NS; 100 mg/m² more myelosuppression and nephrotoxicity"
+   },
+   "tier": 7,
+   "evidence_basis": "itt_all_histology",
+   "exclude_default": {
+    "reason": "OS worse than topotecan–cisplatin (GOG-179) and PFS worse than cisplatin–paclitaxel (GOG-169); 50 mg/m² is the dose standard (Bonomi)"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "fl_topotecan_mono",
+   "setting": "first_line",
+   "name": "Topotecan 1.5 mg/m² D1–5 q4w",
+   "short": "Topotecan single agent (GOG 76-U)",
+   "drugs": [
+    "topotecan"
+   ],
+   "drug_classes": [
+    "topoisomerase_i"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG 76-U"
+   ],
+   "tox_ref": {
+    "trial": "GOG 76-U"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "6.4 mo (range 0.4–42.3+)",
+    "evidence_strength": "phase2",
+    "trial": "GOG 76-U"
+   },
+   "pfs": {
+    "text": "2.4 mo; ORR 18.6% (8.4–33.4)"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "caution_default": {
+    "reason": "Grade 4 neutropenia 68%, grade 4 thrombocytopenia 18%"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "sl_cemiplimab",
+   "setting": "second_line",
+   "name": "Cemiplimab 350 mg q3w (≤96 weeks)",
+   "short": "Cemiplimab (EMPOWER-Cervical 1)",
+   "drugs": [
+    "cemiplimab"
+   ],
+   "drug_classes": [
+    "io"
+   ],
+   "gate": {
+    "prior_platinum": true
+   },
+   "trials": [
+    "EMPOWER-Cervical 1 / GOG-3016 / ENGOT-cx9"
+   ],
+   "tox_ref": {
+    "trial": "EMPOWER-Cervical 1",
+    "arm": "cemiplimab"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.67",
+    "ci95": [
+     "0.56",
+     "0.80"
+    ],
+    "median": "Final 11.7 vs 8.5 mo (vs investigator's-choice chemotherapy); SCC (primary population) 10.9 vs 8.8 mo, HR 0.70 (0.57–0.86)",
+    "evidence_strength": "single_phase3",
+    "trial": "EMPOWER-Cervical 1 / GOG-3016 / ENGOT-cx9"
+   },
+   "pfs": {
+    "text": "2.8 vs 2.9 mo; HR 0.75 (0.63–0.89); ORR 16.4% vs 6.3% (SCC 17.6% vs 6.7%)"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "PD-L1 not required; final OS by PD-L1 TC ≥1% 0.72 (0.50–1.0), <1% 0.86 (0.54–1.37)",
+    "Prior bevacizumab ~50%; >1 prior line ~40%; grade ≥3 AE 45.0% vs 53.4%"
+   ],
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    },
+    {
+     "class": "io",
+     "outcome": [
+      "progressed_on",
+      "progressed_after",
+      "completed_maintenance",
+      "ongoing"
+     ],
+     "effect": "exclude",
+     "reason": "EMPOWER-Cervical 1 excluded prior PD-(L)1 therapy; no data after first-line pembrolizumab"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "sl_tisotumab",
+   "setting": "second_line",
+   "name": "Tisotumab vedotin 2.0 mg/kg q3w",
+   "short": "Tisotumab vedotin (innovaTV 301)",
+   "drugs": [
+    "tisotumab_vedotin"
+   ],
+   "drug_classes": [
+    "adc_tf"
+   ],
+   "gate": {
+    "prior_platinum": true
+   },
+   "trials": [
+    "innovaTV 301 / ENGOT-cx12 / GOG-3057",
+    "innovaTV 204 / GOG-3023 / ENGOT-cx6"
+   ],
+   "tox_ref": {
+    "trial": "innovaTV 301",
+    "arm": "tisotumab vedotin"
+   },
+   "os": {
+    "benefit": "positive",
+    "hr": "0.70",
+    "ci95": [
+     "0.54",
+     "0.89"
+    ],
+    "median": "11.5 vs 9.5 mo (vs investigator's-choice chemotherapy), P = 0.0226; 12-mo 48.7% vs 35.3%",
+    "evidence_strength": "single_phase3",
+    "trial": "innovaTV 301 / ENGOT-cx12 / GOG-3057"
+   },
+   "pfs": {
+    "text": "4.2 vs 2.9 mo; HR 0.67 (0.54–0.82); ORR 17.8% vs 5.2%"
+   },
+   "tier": 2,
+   "evidence_basis": "itt_all_histology",
+   "qualifiers": [
+    "SCC subgroup OS 0.69 (0.50–0.94), PFS 0.71 (0.55–0.93)",
+    "Prior anti-PD-(L)1 27.5%: OS HR 0.72 (0.46–1.14) with, 0.67 (0.50–0.90) without — the only randomised post-IO evidence",
+    "Tissue factor expression not required (≥1% in 93.3%)",
+    "Conjunctivitis 31.2%, keratitis 15.6%, peripheral sensory neuropathy 28.4%; discontinuation for AE 14.8%"
+   ],
+   "prefer_when": [
+    {
+     "flag": "prior_io",
+     "in": [
+      "yes"
+     ],
+     "reason": "After a checkpoint inhibitor: innovaTV 301 prior-PD-(L)1 subgroup OS 0.72 (0.46–1.14) — the only randomised data in this position"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "sl_chemo_ic",
+   "setting": "second_line",
+   "name": "Single-agent chemotherapy: pemetrexed, topotecan, irinotecan, gemcitabine or vinorelbine (investigator's choice)",
+   "short": "Single-agent chemotherapy (EMPOWER / innovaTV 301 control)",
+   "drugs": [
+    "pemetrexed",
+    "topotecan",
+    "irinotecan",
+    "gemcitabine",
+    "vinorelbine"
+   ],
+   "drug_classes": [
+    "antimetabolite",
+    "topoisomerase_i",
+    "vinca"
+   ],
+   "gate": {
+    "prior_platinum": true
+   },
+   "trials": [
+    "EMPOWER-Cervical 1 / GOG-3016 / ENGOT-cx9",
+    "innovaTV 301 / ENGOT-cx12 / GOG-3057",
+    "Pemetrexed, GOG",
+    "Irinotecan",
+    "Gemcitabine, GOG, (Schilder 2000)"
+   ],
+   "tox_ref": {
+    "trial": "EMPOWER-Cervical 1",
+    "arm": "single-agent chemotherapy"
+   },
+   "os": {
+    "benefit": "negative",
+    "median": "The control arm: 8.5 mo (EMPOWER-Cervical 1, vs 11.7 with cemiplimab) and 9.5 mo (innovaTV 301, vs 11.5 with tisotumab vedotin)",
+    "evidence_strength": "single_phase3",
+    "trial": "EMPOWER-Cervical 1 / GOG-3016 / ENGOT-cx9"
+   },
+   "pfs": {
+    "text": "Single-agent ORRs in SCC: irinotecan 21%, pemetrexed 15%, docetaxel 8.7%, gemcitabine 8.4%"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "OS worse than cemiplimab (0.67) and tisotumab vedotin (0.70): for patients who can receive neither"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "sl_tdxd",
+   "setting": "second_line",
+   "name": "Trastuzumab deruxtecan 5.4 mg/kg q3w",
+   "short": "T-DXd (DESTINY-PanTumor02, cervical)",
+   "drugs": [
+    "trastuzumab_deruxtecan"
+   ],
+   "drug_classes": [
+    "adc_her2"
+   ],
+   "gate": {
+    "her2": [
+     "3+",
+     "2+amp",
+     "2+"
+    ]
+   },
+   "trials": [
+    "DESTINY-PanTumor02, cervical cohort"
+   ],
+   "tox_ref": {
+    "trial": "DESTINY-PanTumor02"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "13.6 mo (11.1–NR); IHC 2+ 11.5",
+    "evidence_strength": "phase2",
+    "trial": "DESTINY-PanTumor02, cervical cohort"
+   },
+   "pfs": {
+    "text": "7.0 mo (4.2–11.1); ORR 50.0% (33.8–66.2); IHC 3+ 75.0% (n = 8), IHC 2+ 40.0% (n = 20)"
+   },
+   "tier": 6,
+   "evidence_basis": "single_arm",
+   "qualifiers": [
+    "HER2 IHC 3+ is 2.7% of SCC (2+ 14.1%); histology not reported in the cohort; test the most recent sample (biopsy–hysterectomy discordance 48.3%)"
+   ],
+   "prefer_when": [
+    {
+     "flag": "her2",
+     "in": [
+      "3+"
+     ],
+     "reason": "IHC 3+: ORR 75.0% (n = 8)"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "sl_pembro_mono",
+   "setting": "second_line",
+   "name": "Pembrolizumab 200 mg q3w (≤2 years)",
+   "short": "Pembrolizumab (KEYNOTE-158)",
+   "drugs": [
+    "pembrolizumab"
+   ],
+   "drug_classes": [
+    "io"
+   ],
+   "gate": {},
+   "trials": [
+    "KEYNOTE-158, cervical cohort"
+   ],
+   "tox_ref": {
+    "trial": "KEYNOTE-158"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "9.4 mo; CPS ≥1 11.0 mo",
+    "evidence_strength": "phase2",
+    "trial": "KEYNOTE-158, cervical cohort"
+   },
+   "pfs": {
+    "text": "2.1 mo; ORR 12.2% (6.5–20.4); CPS ≥1 14.6%; CPS <1 0/15"
+   },
+   "tier": 6,
+   "evidence_basis": "single_arm",
+   "qualifiers": [
+    "SCC 93.9%; basis for the CPS ≥1 selection; ≥2 prior lines in 65%, prior bevacizumab 42%"
+   ],
+   "risk_rules": [
+    {
+     "flag": "pdl1_cps_known_lt1",
+     "effect": "exclude",
+     "reason": "KEYNOTE-158: no response in CPS <1 (0/15); the indication is CPS ≥1"
+    },
+    {
+     "flag": "pdl1_cps_unknown",
+     "effect": "caution",
+     "reason": "CPS ≥1 required for the indication — record it"
+    }
+   ],
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    },
+    {
+     "class": "io",
+     "outcome": [
+      "progressed_on",
+      "progressed_after",
+      "completed_maintenance",
+      "ongoing"
+     ],
+     "effect": "exclude",
+     "reason": "KEYNOTE-158 patients were checkpoint-inhibitor naive; cemiplimab and tisotumab vedotin are the randomised second-line options"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "sl_nivo_ipi",
+   "setting": "second_line",
+   "name": "Nivolumab 240 mg q2w, or nivolumab 1 mg/kg + ipilimumab 3 mg/kg q3w ×4 → nivolumab",
+   "short": "Nivolumab ± ipilimumab (CheckMate 358)",
+   "drugs": [
+    "nivolumab",
+    "ipilimumab"
+   ],
+   "drug_classes": [
+    "io"
+   ],
+   "gate": {
+    "hpv": [
+     "positive",
+     "unknown"
+    ]
+   },
+   "trials": [
+    "CheckMate 358, cervical cohort"
+   ],
+   "tox_ref": {
+    "trial": "CheckMate 358"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "Nivolumab 21.9 mo (2019) / 21.6 mo (2024); NIVO3 + IPI1 15.2 mo; randomised NIVO1 + IPI3 24.7 mo",
+    "evidence_strength": "phase2",
+    "trial": "CheckMate 358, cervical cohort"
+   },
+   "pfs": {
+    "text": "Nivolumab 5.1 mo, ORR 26%; NIVO1 + IPI3 7.2 mo, ORR 40%"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "qualifiers": [
+    "SCC-only cohort; known HPV-negative tumours ineligible; PD-(L)1-naive",
+    "Serious treatment-related AE 16% / 27% / 42%; one death (immune-mediated colitis)"
+   ],
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    },
+    {
+     "class": "io",
+     "outcome": [
+      "progressed_on",
+      "progressed_after",
+      "completed_maintenance",
+      "ongoing"
+     ],
+     "effect": "exclude",
+     "reason": "CheckMate 358 enrolled PD-(L)1-naive patients"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "sl_balsti",
+   "setting": "second_line",
+   "name": "Balstilimab 3 mg/kg q2w ± zalifrelimab 1 mg/kg q6w",
+   "short": "Balstilimab ± zalifrelimab",
+   "drugs": [
+    "balstilimab",
+    "zalifrelimab"
+   ],
+   "drug_classes": [
+    "io"
+   ],
+   "gate": {},
+   "trials": [
+    "Balstilimab",
+    "Balstilimab + zalifrelimab"
+   ],
+   "tox_ref": {
+    "trial": "Balstilimab + zalifrelimab"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "Combination 12.8 mo (8.8–17.6); monotherapy not reported in the abstract",
+    "evidence_strength": "phase2",
+    "trial": "Balstilimab + zalifrelimab"
+   },
+   "pfs": {
+    "text": "Combination 2.7 mo; ORR 25.6% (SCC 32.6%); monotherapy ORR 15% (SCC 17.6%); PD-L1+ 32.8% vs PD-L1− 9.1%"
+   },
+   "tier": 6,
+   "evidence_basis": "single_arm",
+   "caution_default": {
+    "reason": "Investigational agents without an FDA label"
+   },
+   "ledger_rules": [
+    {
+     "class": "io",
+     "outcome": [
+      "stopped_toxicity"
+     ],
+     "effect": "exclude",
+     "reason": "Prior checkpoint inhibitor stopped for toxicity"
+    }
+   ],
+   "histology": "scc"
+  },
+  {
+   "id": "sl_bev_mono",
+   "setting": "second_line",
+   "name": "Bevacizumab 15 mg/kg q21d",
+   "short": "Bevacizumab (GOG-227C)",
+   "drugs": [
+    "bevacizumab"
+   ],
+   "drug_classes": [
+    "anti_vegf"
+   ],
+   "gate": {},
+   "trials": [
+    "GOG-227C"
+   ],
+   "tox_ref": {
+    "trial": "GOG-227C"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "7.29 mo",
+    "evidence_strength": "phase2",
+    "trial": "GOG-227C"
+   },
+   "pfs": {
+    "text": "3.40 mo; PFS ≥6 mo 23.9%; ORR 10.9%"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "caution_default": {
+    "reason": "Thrombosis led to 4 discontinuations; the signal behind GOG-240, now superseded"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "sl_docetaxel",
+   "setting": "second_line",
+   "name": "Docetaxel 100 mg/m² q21d",
+   "short": "Docetaxel (GOG)",
+   "drugs": [
+    "docetaxel"
+   ],
+   "drug_classes": [
+    "taxane"
+   ],
+   "gate": {},
+   "trials": [
+    "Docetaxel, GOG"
+   ],
+   "tox_ref": {
+    "trial": "Docetaxel, GOG"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "7.0 mo",
+    "evidence_strength": "phase2",
+    "trial": "Docetaxel, GOG"
+   },
+   "pfs": {
+    "text": "TTP 3.8 mo; ORR 8.7% (2 PR); closed after the first stage"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "caution_default": {
+    "reason": "Grade 3–4 neutropenia 65%; ORR 8.7%"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "nact_surgery",
+   "setting": "neoadjuvant",
+   "name": "Cisplatin-based neoadjuvant chemotherapy → radical surgery (vs chemoradiation)",
+   "short": "NACT → surgery (EORTC 55994)",
+   "drugs": [
+    "cisplatin",
+    "paclitaxel"
+   ],
+   "drug_classes": [
+    "platinum",
+    "taxane"
+   ],
+   "gate": {
+    "stage": [
+     "IB2",
+     "IIA1",
+     "IIA2",
+     "IIB"
+    ]
+   },
+   "trials": [
+    "EORTC 55994",
+    "Gupta 2018"
+   ],
+   "tox_ref": {
+    "trial": "EORTC 55994 (",
+    "arm": "NACT -> radical surgery (NACT-S)"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "hr": "0.84",
+    "ci95": [
+     "0.64",
+     "1.12"
+    ],
+    "median": "5-yr OS 71.7% vs 75.5% (CCRT), P = 0.240 — HR printed CCRT vs NACT-S",
+    "evidence_strength": "single_phase3",
+    "trial": "EORTC 55994"
+   },
+   "pfs": {
+    "text": "5-yr PFS 57.0% vs 65.6%; PFS 0.72 (0.57–0.93) favouring CCRT, P = 0.010. Gupta 2018 (SCC-only): DFS 1.38 (1.02–1.87) worse with NACT-surgery"
+   },
+   "tier": 7,
+   "evidence_basis": "itt_all_histology",
+   "exclude_default": {
+    "reason": "PFS significantly worse than chemoradiation (EORTC 55994) and DFS worse in the SCC-only trial (Gupta); 48% of NACT-S patients still needed RT"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "nact_bomp",
+   "setting": "neoadjuvant",
+   "name": "BOMP (bleomycin, vincristine, mitomycin, cisplatin 14 mg/m² D1–5) q3w ×2–4 → radical surgery (vs surgery alone)",
+   "short": "BOMP → surgery (JCOG 0102)",
+   "drugs": [
+    "bleomycin",
+    "vincristine",
+    "mitomycin",
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "bleomycin",
+    "vinca",
+    "alkylator",
+    "platinum"
+   ],
+   "gate": {
+    "stage": [
+     "IB2",
+     "IIA2",
+     "IIB"
+    ]
+   },
+   "trials": [
+    "JCOG 0102"
+   ],
+   "tox_ref": {
+    "trial": "JCOG 0102 (",
+    "arm": "NACT BOMP -> radical surgery"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "hr": "1.07",
+    "ci95": [
+     "0.54",
+     "2.12"
+    ],
+    "median": "5-yr OS 70.0% vs 74.4% (surgery alone), P = 0.85; stopped at the first interim analysis",
+    "evidence_strength": "single_phase3",
+    "trial": "JCOG 0102"
+   },
+   "pfs": {
+    "text": "5-yr PFS 59.9% vs 62.7%; HR 1.06 (0.60–1.88)"
+   },
+   "tier": 7,
+   "evidence_basis": "histotype_rct",
+   "exclude_default": {
+    "reason": "Did not beat surgery alone and was stopped early (interim OS HR 2.11); the control was not chemoradiation"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "nact_pvb_surgery",
+   "setting": "neoadjuvant",
+   "name": "Cisplatin 50 + vincristine 1 + bleomycin 25 mg/m² D1–3 ×3 → radical hysterectomy (vs RT alone)",
+   "short": "PVB → surgery (Chang 2000)",
+   "drugs": [
+    "cisplatin",
+    "vincristine",
+    "bleomycin"
+   ],
+   "drug_classes": [
+    "platinum",
+    "vinca",
+    "bleomycin"
+   ],
+   "gate": {
+    "stage": [
+     "IB2",
+     "IIA1",
+     "IIA2"
+    ]
+   },
+   "trials": [
+    "Chang 2000"
+   ],
+   "tox_ref": {
+    "trial": "Chang 2000",
+    "arm": "NACT (cisplatin/vincristine/bleomycin) -> radical hysterectomy"
+   },
+   "os": {
+    "benefit": "no_difference",
+    "median": "5-yr 70% (56–83) vs 62% (43–80) vs pelvic RT alone, P = .77",
+    "evidence_strength": "single_phase3",
+    "trial": "Chang 2000"
+   },
+   "pfs": {
+    "text": "Relapse or persistence 31% vs 27%; DFS P = .76; pathological CR 4.6%"
+   },
+   "tier": 5,
+   "evidence_basis": "itt_all_histology",
+   "caution_default": {
+    "reason": "Comparator was RT alone, the pre-chemoradiation standard; 120 patients. NTUH POB template gives bleomycin 15 vs 25 mg/m²/day"
+   },
+   "histology": "scc"
+  },
+  {
+   "id": "nact_csem006",
+   "setting": "neoadjuvant",
+   "name": "Paclitaxel + cisplatin ×3 → type C radical hysterectomy (vs CCRT)",
+   "short": "NACT → surgery (CSEM 006, ongoing)",
+   "drugs": [
+    "paclitaxel",
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "taxane",
+    "platinum"
+   ],
+   "gate": {
+    "stage": [
+     "IIB"
+    ]
+   },
+   "trials": [
+    "CSEM 006"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "pending",
+    "median": "Design paper only; primary endpoint 2-yr DFS; no results (2026-09-15)",
+    "evidence_strength": "design_only",
+    "trial": "CSEM 006"
+   },
+   "pfs": {
+    "text": "No results"
+   },
+   "tier": 6,
+   "evidence_basis": "design_only",
+   "caution_default": {
+    "reason": "Design-only: not an evidence-based option yet"
+   },
+   "histology": "scc"
+  }
+ ]
+}

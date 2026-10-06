@@ -1,0 +1,1642 @@
+{
+ "_meta": {
+  "spec": "CC Decision Engine tox.json - built on the OVCA_Decision_Engine_Spec_v0.1 §6 task 1 conventions (data/tox.json of the OVCA repo), format and field conventions copied from the EMCA engine's data/tox.json",
+  "built": "2026-10-06",
+  "source_folder": "20_Area/Medicine/GO_MCP/GO_summaries/",
+  "algorithm_notes": [
+   "GO_Algorithm/CXCA_SquamousCell_Algorithm_v1.1.md",
+   "GO_Algorithm/CXCA_AdenoCa_Algorithm_v1.1.md"
+  ],
+  "hard_rule_3": "Unreported fields are the literal string \"not_reported\". No estimation, no inference, no carry-over from model knowledge of the trial. Every number is copied from the structured extract; no PDF was needed (every extract used has a toxicity section).",
+  "field_conventions": {
+   "grade3plus_any_pct": "ANY-CAUSE grade >=3 rate. Where a source reports only TREATMENT-RELATED grade >=3 (Dueñas-González, GOG-9929, the single-arm IO and ADC phase II trials, CheckMate 358), the any-cause field is \"not_reported\" and the figure is carried in treatment_related_grade3plus_pct. Where G3, G4 (and G5) are worst-grade-per-patient categories their sum is exact and is stored with \"derived_sum\": true (RTOG 90-01 acute). Per-category grade counts (GOG-109, GOG-120, GOG-85, GOG-179, GOG-240, GOG-169, Bonomi, GOG-204, JCOG0505, the old GOG phase IIs, Chang, JCOG 0102, Gupta) are NOT summed. Event-count tables (TACO) and category totals not stated to be per patient (NCIC CTG) are not_reported. A printed per-patient 'grade 3-4' rate is carried as G>=3 where the source states no treatment-related deaths (GOG-263, STARS, GOG-123, INTERLACE) and, with the deaths named in notes, where deaths are listed separately (GOG-92, CALLA, EORTC 55994); KEYNOTE-826 and EMPOWER-Cervical 1 print grade 3-5. RT-related grade >=3 (acute/late GI-GU) is carried in notes as the extract gives it.",
+   "treatment_related_grade3plus_pct": "Grade >=3 AEs attributed to treatment (TRAE / 'related to study drug'), a lower bound for any-cause. Immune-related-only G>=3 rates are not used here (notes only).",
+   "dose_reduction_pct": "A true dose-reduction rate. 'Dose interruption' (balstilimab trials) is \"not_reported\" with the figure in notes. Only innovaTV 204, DESTINY-PanTumor02 and irinotecan print one.",
+   "discontinuation_pct": "Discontinuation due to adverse events / toxicity. Where the source mixes toxicity and other reasons (NOGGO-AGO early termination), prints counts without a denominator (STARS, GOG-85, GOG-227C, JCOG 0102) or uses a non-safety denominator, the value is a string saying so. TRAE-only discontinuation (KEYNOTE-A18, CALLA, CheckMate 358, IO phase IIs) is labelled in notes. Discontinuation of 'any component / any agent' (KEYNOTE-A18, KEYNOTE-826, COMPASSION-16, BEATcc) is labelled in notes.",
+   "arms": "Randomised trials carry every arm under 'arms', keyed by a short arm label (GOG-240 four arms of the 2x2, GOG-204 four, GOG-120 / STARS / Bonomi / GOG-179 three); top-level fields describe the experimental arm (a string listing each arm where there are several). CheckMate 358 (three cohorts, two randomised) also carries them under 'arms'. Arm 'n' is the safety denominator given by the extract.",
+   "evidence_quote": "Verbatim text from the source extract; several fragments are joined by ' || ', each fragment verbatim (checked programmatically against the file by the build script). Figures from additional_sources are quoted in notes only.",
+   "label": "'<name as in the note> (<first author> <year>)'; other files match on the part before ' ('. One entry per trial, however many notes/tables list it; extra extracts of the same trial are in additional_sources. Where the two notes name a trial differently (GOG-109 'RTOG intergroup' vs 'RTOG 91-12'; 'Gemcitabine, GOG (non-SCC)' vs 'Gemcitabine, GOG non-squamous'; 'GOG 76-U' vs 'GOG 76-U topotecan'; 'GOG-227C' vs 'GOG-227C bevacizumab') the squamous note's label is used, except Schilder 2005 which takes the adenocarcinoma note's label (its main row). Prefix collisions for tox_ref: use 'Balstilimab (' (not 'Balstilimab', which also matches 'Balstilimab + zalifrelimab'), 'Gemcitabine, GOG (SCC)' vs 'Gemcitabine, GOG non-squamous', 'GOG-240 (' is unique."
+  },
+  "coverage": "All randomised and single-arm prospective trial rows with a structured extract (📝) in the two CXCA v1.1 algorithm notes (squamous cell, adenocarcinoma), all settings. Each trial placed once, in the table of its main setting (INTERLACE sits in Table 2A although both notes also list it in Table 4; KEYNOTE-826 and the other 3A trials once although both notes carry them). Rows the adenocarcinoma note marks ❌ excluded (SCC-only trials) are still included because the trial itself is relevant to the squamous pool.",
+  "skipped": {
+   "ongoing_or_design_only": [
+    "JGOG1082 (Furusawa 2021, protocol)",
+    "CSEM 006 (Tu 2021, protocol)"
+   ],
+   "press_release_only": [],
+   "retrospective_or_pooled_series": [
+    "Carboplatin CCRT (Nam 2013, retrospective)",
+    "GOG chemoradiation trials pooled by histology (Rose 2014)",
+    "PUMCH IMRT + brachytherapy (Hu 2018)",
+    "KROG 13-10 (Noh 2014)",
+    "Samsung IB-IIA series (Lee 2011)",
+    "MD Anderson stage IB (Eifel 1995) and adenocarcinoma series (Eifel 1990)",
+    "Gastric-type adjuvant therapy (Nishio 2022)",
+    "Vajira matched cohort (Katanyoo 2012)",
+    "Korea national registry (Lee 2015)",
+    "ADCs in gastric-type (Ang 2025, case series)",
+    "Tang 2012 Hunan (single centre, no extract)"
+   ],
+   "non_trial_rows": [
+    "GOG-109 clinical-pathological reanalysis (Monk 2005) - folded into GOG-109 as additional_sources; no toxicity",
+    "GOG-240 backbone final (Tewari 2023) - folded into GOG-240 as additional_sources",
+    "KEYNOTE-826 final OS / 5-year / subgroup extracts - folded into KEYNOTE-826 as additional_sources",
+    "COMPASSION-16 subgroups (Sun 2026) - no safety data; additional_sources",
+    "molecular-profile and biomarker table rows"
+   ]
+  },
+  "missing_extracts": [
+   "Rows with a PDF (📄) but no structured extract, so no entry: Docetaxel-carboplatin non-squamous (Shimada 2021), Topotecan-cisplatin squamous and non-squamous (Fiorica 2002), Paclitaxel GOG non-squamous (Curtin 2001), Ifosfamide GOG non-squamous (Sutton 1993), Oral etoposide GOG non-squamous (Rose 2003), Gallium nitrate GOG non-squamous (Malfetano 1995), Pemetrexed MITO CERVIX 1 (Lorusso 2010), Nab-paclitaxel GOG (Alberts 2012), SGSG005 non-squamous (Shimada 2016; Kojima 2018), Tang 2012 Hunan",
+   "Extracts without toxicity data: 2005_Monk_GOG-109 Exploratory Analysis, 2024_Tewari_KEYNOTE-826 Subgroups, 2026_Sun_COMPASSION-16 Subgroups, 2021_Furusawa_JGOG1082 (protocol), 2021_Tu_CSEM 006 (protocol)",
+   "Included trials whose extract gives no per-patient grade >=3 rate of either kind (any-cause or treatment-related): GOG-109 / SWOG 8797 / RTOG intergroup (Peters 2000), NOGGO-AGO (Sehouli 2012), Weekly vs triweekly cisplatin (Ryu 2011), GOG-120 (Rose 1999), GOG-85 / SWOG (Whitney 1999), NCIC CTG (Pearcey 2002), TACO (GCIG/KGOG 1027/THAI 2012) (Ryu 2026), GOG-179 (Long 2005), GOG-240 (Tewari 2014), GOG-169 (Moore 2004), GOG cisplatin schedules (Bonomi 1985), GOG-204 (Monk 2009), JCOG0505 (Kitagawa 2015), GOG 76-U (Muderspach 2001), Irinotecan (Verschraegen 1997), Pemetrexed, GOG (Miller 2008), GOG-227C (Monk 2009), Docetaxel, GOG (Garcia 2007), Gemcitabine, GOG (SCC) (Schilder 2000), Gemcitabine, GOG non-squamous (Schilder 2005), Chang 2000 (Chang 2000), JCOG 0102 (Katsumata 2013), Gupta 2018 (Gupta 2018)"
+  ],
+  "counts": {
+   "trials": 46,
+   "trials_with_arms": 33,
+   "trials_with_any_cause_g3plus": 15,
+   "top_level_fields": 184,
+   "top_level_not_reported": 136,
+   "arm_fields": 300,
+   "arm_not_reported": 233,
+   "by_table": {
+    "table_1_adjuvant": {
+     "trials": 5,
+     "fields": 20,
+     "not_reported": 15
+    },
+    "table_2a_definitive_ccrt": {
+     "trials": 10,
+     "fields": 40,
+     "not_reported": 34
+    },
+    "table_2b_io_ccrt": {
+     "trials": 3,
+     "fields": 12,
+     "not_reported": 6
+    },
+    "table_3a_first_line_rm": {
+     "trials": 10,
+     "fields": 40,
+     "not_reported": 32
+    },
+    "table_3b_second_line": {
+     "trials": 14,
+     "fields": 56,
+     "not_reported": 35
+    },
+    "table_4_neoadjuvant": {
+     "trials": 4,
+     "fields": 16,
+     "not_reported": 14
+    }
+   },
+   "top_level_not_reported_pct": "73.9% of top-level fields",
+   "note": "Counted programmatically over the four numeric fields (grade3plus_any_pct, treatment_related_grade3plus_pct, discontinuation_pct, dose_reduction_pct); string values with caveats count as reported."
+  }
+ },
+ "table_1_adjuvant": [
+  {
+   "trial": "GOG-92 (Sedlis 1999)",
+   "regimen": "adjuvant pelvic RT 46-50.4 Gy vs no further treatment (node-negative intermediate risk)",
+   "grade3plus_any_pct": 7.0,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "pelvic RT": {
+     "grade3plus_any_pct": 7.0,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 128,
+     "evidence_quote": "GOG grade 3–4 adverse effects (RT denominator = 128 who actually received RT; 9 refusers excluded). 9 patients (7.0%) in RT arm had 11 grade 3–4 episodes vs 3 (2.1%) NFT. Abstract summarises as 6% vs 2.1%."
+    },
+    "observation": {
+     "grade3plus_any_pct": 2.1,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 140,
+     "evidence_quote": "GOG grade 3–4 adverse effects (RT denominator = 128 who actually received RT; 9 refusers excluded). 9 patients (7.0%) in RT arm had 11 grade 3–4 episodes vs 3 (2.1%) NFT. Abstract summarises as 6% vs 2.1%."
+    }
+   },
+   "signature_ae": [
+    "genitourinary (fistula, contracted bladder, ureteric obstruction)",
+    "gastrointestinal (enteric fistula)",
+    "haematologic",
+    "transient paraplegia"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/1999_Sedlis_GOG-92.md",
+   "additional_sources": [
+    "GO_summaries/2006_Rotman_GOG-92 Follow-up.md"
+   ],
+   "evidence_quote": "GOG grade 3–4 adverse effects (RT denominator = 128 who actually received RT; 9 refusers excluded). 9 patients (7.0%) in RT arm had 11 grade 3–4 episodes vs 3 (2.1%) NFT. Abstract summarises as 6% vs 2.1%.",
+   "notes": "Printed as per-patient grade 3-4 (GOG criteria); one treatment-attributed death in the RT arm (vesico-vaginal fistula -> bacteraemia/DIC), counted among the grade 3-4 patients, so the figure is carried as G>=3. RT denominator 128 treated (7.0%); Rotman 2006 re-prints 9/137 ITT (6.6%) and the abstract says 6%; the notes' row uses 6%. Discussion counts 5 (4%) major life-threatening events among 128 irradiated women. Discontinuation not reported (9 refusers excluded from the safety denominator). Lymphedema not assessed."
+  },
+  {
+   "trial": "NRG/GOG-263 / KGOG 1008 (Ryu 2025)",
+   "regimen": "adjuvant pelvic RT 50.4 Gy + weekly cisplatin 40 mg/m2 x6 vs RT alone (intermediate risk)",
+   "grade3plus_any_pct": 42.9,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "CRT (RT + weekly cisplatin)": {
+     "grade3plus_any_pct": 42.9,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 161,
+     "evidence_quote": "Safety population: all randomised patients who received any protocol therapy (RT 170, CRT 161). CTCAE v4.0. No grade 5 AEs. || | **Grade 3 or 4 AE (any)** | **42.9%** | **15.3%** | **<0.01 (Fisher)** |"
+    },
+    "RT alone": {
+     "grade3plus_any_pct": 15.3,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 170,
+     "evidence_quote": "Safety population: all randomised patients who received any protocol therapy (RT 170, CRT 161). CTCAE v4.0. No grade 5 AEs. || | **Grade 3 or 4 AE (any)** | **42.9%** | **15.3%** | **<0.01 (Fisher)** |"
+    }
+   },
+   "signature_ae": [
+    "neutropenia",
+    "leukopenia",
+    "anaemia",
+    "thrombocytopenia"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2025_Ryu_GOG-263.md",
+   "evidence_quote": "Safety population: all randomised patients who received any protocol therapy (RT 170, CRT 161). CTCAE v4.0. No grade 5 AEs. || | **Grade 3 or 4 AE (any)** | **42.9%** | **15.3%** | **<0.01 (Fisher)** |",
+   "notes": "No grade 5 AEs, so G3-4 = G>=3. Safety denominators 161 (CRT) / 170 (RT). Excess toxicity mainly haematologic. Treatment completion 84.8% (CRT) vs 99.4% (RT) is not an AE-specific discontinuation rate; RT compliance similar. Per-AE grade 3-4 values are in a supplement not held."
+  },
+  {
+   "trial": "GOG-109 / SWOG 8797 / RTOG intergroup (Peters 2000)",
+   "regimen": "adjuvant pelvic RT 49.3 Gy + cisplatin 70 mg/m2 D1 + 5-FU 1000 mg/m2/day x4 q3w x4 (2 concurrent, 2 after RT) vs RT alone (high risk)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "RT + cisplatin/5-FU": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 122,
+     "evidence_quote": "- 27 episodes of G4 toxicity in 21 Arm 2 patients vs 4 G4 events in Arm 1. || | Leukopenia | 1 | 0 | 40 | 3 | || | Granulocytopenia | 2 | 1 | 24 | 11 |"
+    },
+    "RT alone": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 112,
+     "evidence_quote": "- 27 episodes of G4 toxicity in 21 Arm 2 patients vs 4 G4 events in Arm 1. || | Leukopenia | 1 | 0 | 40 | 3 | || | Granulocytopenia | 2 | 1 | 24 | 11 |"
+    }
+   },
+   "signature_ae": [
+    "leukopenia",
+    "granulocytopenia",
+    "nausea/vomiting",
+    "diarrhoea"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2000_Peters_Journal of Clinical Oncology.md",
+   "additional_sources": [
+    "GO_summaries/2005_Monk_GOG-109 Exploratory Analysis.md"
+   ],
+   "evidence_quote": "- 27 episodes of G4 toxicity in 21 Arm 2 patients vs 4 G4 events in Arm 1. || | Leukopenia | 1 | 0 | 40 | 3 | || | Granulocytopenia | 2 | 1 | 24 | 11 |",
+   "notes": "Per-category G3/G4 patient counts only (Arm 1 n = 112, Arm 2 n = 122 evaluable); no per-patient G>=3 total, so not summed. G4: 27 episodes in 21 CT+RT patients vs 4 events on RT alone. One possibly treatment-related late death (RT-alone recipient in Arm 2). The adenocarcinoma note labels the trial 'GOG-109 / SWOG 8797 / RTOG 91-12'. Monk 2005 reanalysis carries no toxicity."
+  },
+  {
+   "trial": "STARS (Huang 2021)",
+   "regimen": "sequential chemoradiation (cisplatin 60-75 + paclitaxel 135-175 q21d, 2 cycles before and 2 after RT) vs concurrent weekly cisplatin 30-40 mg/m2 + RT vs RT alone 45-50 Gy, after radical hysterectomy",
+   "grade3plus_any_pct": "25.3 (SCRT) / 28.5 (CCRT)",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "sequential chemoradiation (SCRT)": {
+     "grade3plus_any_pct": 25.3,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "72 (chemotherapy) + 9 (RT) discontinuations for grade 3/4 toxicity; denominator not stated",
+     "dose_reduction_pct": "not_reported",
+     "n": 320,
+     "evidence_quote": "921 patients assessable (RT 303, CCRT 298, SCRT 320); no treatment-related deaths. || | **Grade 3–4 AE, any** | **12.9%** | **28.5%** | **25.3%** | < .001 | || - Discontinuation for grade 3/4 toxicity: CCRT 84 (chemo) + 1 (RT); SCRT 72 (chemo) + 9 (RT); RT alone 4 (grade 4). Grade 1–2 fatigue higher with CCRT (text)."
+    },
+    "concurrent chemoradiation (CCRT)": {
+     "grade3plus_any_pct": 28.5,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "84 (chemotherapy) + 1 (RT) discontinuations for grade 3/4 toxicity; denominator not stated",
+     "dose_reduction_pct": "not_reported",
+     "n": 298,
+     "evidence_quote": "921 patients assessable (RT 303, CCRT 298, SCRT 320); no treatment-related deaths. || | **Grade 3–4 AE, any** | **12.9%** | **28.5%** | **25.3%** | < .001 | || - Discontinuation for grade 3/4 toxicity: CCRT 84 (chemo) + 1 (RT); SCRT 72 (chemo) + 9 (RT); RT alone 4 (grade 4). Grade 1–2 fatigue higher with CCRT (text)."
+    },
+    "RT alone": {
+     "grade3plus_any_pct": 12.9,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "4 discontinuations for grade 4 toxicity; denominator not stated",
+     "dose_reduction_pct": "not_reported",
+     "n": 303,
+     "evidence_quote": "921 patients assessable (RT 303, CCRT 298, SCRT 320); no treatment-related deaths. || | **Grade 3–4 AE, any** | **12.9%** | **28.5%** | **25.3%** | < .001 | || - Discontinuation for grade 3/4 toxicity: CCRT 84 (chemo) + 1 (RT); SCRT 72 (chemo) + 9 (RT); RT alone 4 (grade 4). Grade 1–2 fatigue higher with CCRT (text)."
+    }
+   },
+   "signature_ae": [
+    "haematologic (18.8% CCRT / 19.1% SCRT)",
+    "nausea/vomiting (CCRT)",
+    "peripheral sensory neuropathy (SCRT)",
+    "lymphocele (SCRT)"
+   ],
+   "discontinuation_pct": "SCRT 72 (chemotherapy) + 9 (RT) and CCRT 84 (chemotherapy) + 1 (RT) discontinuations for grade 3/4 toxicity; denominator not stated",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2021_Huang_STARS.md",
+   "evidence_quote": "921 patients assessable (RT 303, CCRT 298, SCRT 320); no treatment-related deaths. || | **Grade 3–4 AE, any** | **12.9%** | **28.5%** | **25.3%** | < .001 | || - Discontinuation for grade 3/4 toxicity: CCRT 84 (chemo) + 1 (RT); SCRT 72 (chemo) + 9 (RT); RT alone 4 (grade 4). Grade 1–2 fatigue higher with CCRT (text).",
+   "notes": "No treatment-related deaths, so G3-4 = G>=3. Assessable 303 / 298 / 320. Discontinuation for grade 3/4 toxicity is printed as counts whose denominator is not stated (chemotherapy vs RT component separately), so carried as strings. RT-alone grade 3-4 haematologic not printed."
+  },
+  {
+   "trial": "NOGGO-AGO (Sehouli 2012)",
+   "regimen": "sequential paclitaxel 175 mg/m2 + carboplatin AUC5 -> pelvic RT 50.4 Gy (PC-R) vs concurrent RT + weekly cisplatin 40 mg/m2 (S-RC), after radical hysterectomy (high risk)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "sequential paclitaxel-carboplatin -> RT (PC-R)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "12.9 early treatment termination for all reasons (patient wish 5 of 17)",
+     "dose_reduction_pct": "not_reported",
+     "evidence_quote": "251 patients assessable. Values as printed (arm A sequential vs arm B simultaneous; P by log-rank as printed). || | Haematological toxicity grade 3/4 (overall) | 34% | 48% | 0.028 | || | Early treatment termination | 17 (12.9%) | 42 (32.1%) | 0.001 |"
+    },
+    "concurrent cisplatin chemoradiation (S-RC)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "32.1 early treatment termination for all reasons (patient wish 13 of 42; fever/myelosuppression 15)",
+     "dose_reduction_pct": "not_reported",
+     "evidence_quote": "251 patients assessable. Values as printed (arm A sequential vs arm B simultaneous; P by log-rank as printed). || | Haematological toxicity grade 3/4 (overall) | 34% | 48% | 0.028 | || | Early treatment termination | 17 (12.9%) | 42 (32.1%) | 0.001 |"
+    }
+   },
+   "signature_ae": [
+    "haematological G3/4 (48% S-RC)",
+    "severe neutropenia (25.9% PC-R)",
+    "alopecia (PC-R)",
+    "neurotoxicity (PC-R)",
+    "deep venous thrombosis (6.5% S-RC)",
+    "vomiting / abdominal cramping (S-RC)"
+   ],
+   "discontinuation_pct": "12.9 (PC-R) / 32.1 (S-RC) early treatment termination for all reasons (patient wish 5/17 and 13/42 respectively)",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2012_Sehouli_NOGGO-AGO Sequential vs Concurrent Adjuvant.md",
+   "evidence_quote": "251 patients assessable. Values as printed (arm A sequential vs arm B simultaneous; P by log-rank as printed). || | Haematological toxicity grade 3/4 (overall) | 34% | 48% | 0.028 | || | Early treatment termination | 17 (12.9%) | 42 (32.1%) | 0.001 |",
+   "notes": "No per-patient any-cause G>=3 total; only haematological G3/4 (34% vs 48%) is printed, so G>=3 is not_reported. 'Early treatment termination' (12.9% vs 32.1%) mixes patient wish (5/17 and 13/42), toxicity, progression and physician decision, so it is carried as a string, not as AE discontinuation. Cisplatin was infused over 40 min, which the authors link to the excess vomiting/thrombosis in arm B."
+  }
+ ],
+ "table_2a_definitive_ccrt": [
+  {
+   "trial": "Weekly vs triweekly cisplatin (Ryu 2011)",
+   "regimen": "RT + cisplatin 75 mg/m2 q3w x3 vs RT + weekly cisplatin 40 mg/m2 x6, stage IIB-IVA",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "triweekly cisplatin 75": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 53,
+     "evidence_quote": "| Neutropenia | 20 (39.2%) | **20 (39.2%)** | 23 (43.4%) | **12 (22.6%)** | **0.033** | || - Only 3 patients had RT delay from toxicity (2 weekly, 1 triweekly). Adverse effects \"well tolerated and manageable\" in both arms."
+    },
+    "weekly cisplatin 40": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 51,
+     "evidence_quote": "| Neutropenia | 20 (39.2%) | **20 (39.2%)** | 23 (43.4%) | **12 (22.6%)** | **0.033** | || - Only 3 patients had RT delay from toxicity (2 weekly, 1 triweekly). Adverse effects \"well tolerated and manageable\" in both arms."
+    }
+   },
+   "signature_ae": [
+    "neutropenia (39.2% weekly vs 22.6% triweekly)",
+    "thrombocytopenia",
+    "nausea"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2011_Ryu_Weekly vs Triweekly Cisplatin CCRT.md",
+   "evidence_quote": "| Neutropenia | 20 (39.2%) | **20 (39.2%)** | 23 (43.4%) | **12 (22.6%)** | **0.033** | || - Only 3 patients had RT delay from toxicity (2 weekly, 1 triweekly). Adverse effects \"well tolerated and manageable\" in both arms.",
+   "notes": "Per-category CTCAE v3.0 grade 3-4 counts only (weekly n = 51, triweekly n = 53); no per-patient total. The note prints P = 0.03 for neutropenia; the extract prints 0.033. RT delay from toxicity in 3 patients. Note row lists triweekly first (experimental)."
+  },
+  {
+   "trial": "GCIG INTERLACE (McCormack 2024)",
+   "regimen": "induction weekly carboplatin AUC2 + paclitaxel 80 mg/m2 x6 -> cisplatin CCRT vs CCRT alone (weekly cisplatin 40 mg/m2 x5 + 45-50.4 Gy + brachytherapy)",
+   "grade3plus_any_pct": 59,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "induction carboplatin-paclitaxel -> CRT": {
+     "grade3plus_any_pct": 59,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 250,
+     "evidence_quote": "| Any grade 3–4 event | 147 (59%) | 131 (52%) | 120 (48%) | || | Any grade 3–4 event during induction chemotherapy | 54 (22%) | NA | NA | || **Deaths within 30 days of completing treatment**: three — one (respiratory failure) in the induction chemotherapy group and two in the chemoradiotherapy alone group (sepsis and pulmonary embolism); **none were considered treatment-related.**"
+    },
+    "CRT alone": {
+     "grade3plus_any_pct": 48,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 250,
+     "evidence_quote": "| Any grade 3–4 event | 147 (59%) | 131 (52%) | 120 (48%) | || | Any grade 3–4 event during induction chemotherapy | 54 (22%) | NA | NA | || **Deaths within 30 days of completing treatment**: three — one (respiratory failure) in the induction chemotherapy group and two in the chemoradiotherapy alone group (sepsis and pulmonary embolism); **none were considered treatment-related.**"
+    }
+   },
+   "signature_ae": [
+    "neutropenia (19% vs 5%)",
+    "haematological G3-4 (30% vs 13%)",
+    "diarrhoea",
+    "fatigue",
+    "anaemia >= G2 (28% vs 17%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2024_McCormack_INTERLACE.md",
+   "evidence_quote": "| Any grade 3–4 event | 147 (59%) | 131 (52%) | 120 (48%) | || | Any grade 3–4 event during induction chemotherapy | 54 (22%) | NA | NA | || **Deaths within 30 days of completing treatment**: three — one (respiratory failure) in the induction chemotherapy group and two in the chemoradiotherapy alone group (sepsis and pulmonary embolism); **none were considered treatment-related.**",
+   "notes": "Printed as any grade 3-4 event at any time (safety 250 per arm); no treatment-related deaths, so carried as G>=3. Induction phase alone: 22% grade 3-4. Non-haematological grade 3-4 similar (44% vs 43%). Listed in Table 2A and Table 4 of both notes; placed in 2A. Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "GOG-120 (Rose 1999)",
+   "regimen": "RT + weekly cisplatin 40 mg/m2 x6 vs RT + cisplatin 50 D1/D29 + 5-FU 4 g/m2 96-h + hydroxyurea (CFH) vs RT + hydroxyurea 3 g/m2 twice weekly, stage IIB-IVA",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "RT + weekly cisplatin": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 176,
+     "evidence_quote": "| Leukopenia | 21 | 2 | **41** | **5** | 20 | 1 | || | GI | 8 | 4 | 9 | 9 | 10 | 4 | || - No treatment-related deaths."
+    },
+    "RT + cisplatin/5-FU/hydroxyurea": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 173,
+     "evidence_quote": "| Leukopenia | 21 | 2 | **41** | **5** | 20 | 1 | || | GI | 8 | 4 | 9 | 9 | 10 | 4 | || - No treatment-related deaths."
+    },
+    "RT + hydroxyurea": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 177,
+     "evidence_quote": "| Leukopenia | 21 | 2 | **41** | **5** | 20 | 1 | || | GI | 8 | 4 | 9 | 9 | 10 | 4 | || - No treatment-related deaths."
+    }
+   },
+   "signature_ae": [
+    "leukopenia (G3+4 ~46% CFH vs ~23% cisplatin)",
+    "granulocytopenia",
+    "gastrointestinal",
+    "hypomagnesaemia (cisplatin)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/1999_Rose_The New England Journal of Medicine.md",
+   "additional_sources": [
+    "GO_summaries/2007_Rose_GOG-120 Long-Term.md"
+   ],
+   "evidence_quote": "| Leukopenia | 21 | 2 | **41** | **5** | 20 | 1 | || | GI | 8 | 4 | 9 | 9 | 10 | 4 | || - No treatment-related deaths.",
+   "notes": "Per-category percentages by grade only (G3 / G4 columns per arm); no per-patient total, not summed. No treatment-related deaths. Rose 2007 long-term: acute grade 3-4 GI or urologic 19.1% cisplatin-based (arms I + II pooled) vs 16.8% hydroxyurea; late grade 3-4 GI/GU attributed to RT 1.7% vs 1.2% (P = 0.680), by regimen I 5 (2.8%), II 1 (0.6%), III 2 (1.1%). RT delays similar across arms."
+  },
+  {
+   "trial": "GOG-123 (Keys 1999)",
+   "regimen": "RT + weekly cisplatin 40 mg/m2 x6 -> extrafascial hysterectomy vs RT -> hysterectomy, bulky stage IB",
+   "grade3plus_any_pct": 35,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "RT + weekly cisplatin -> hysterectomy": {
+     "grade3plus_any_pct": 35,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 183,
+     "evidence_quote": "- Any G3/G4 AE: Arm 1 13% (25/186) vs Arm 2 35% (64/183). || - No treatment-related deaths in either arm."
+    },
+    "RT -> hysterectomy": {
+     "grade3plus_any_pct": 13,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 186,
+     "evidence_quote": "- Any G3/G4 AE: Arm 1 13% (25/186) vs Arm 2 35% (64/183). || - No treatment-related deaths in either arm."
+    }
+   },
+   "signature_ae": [
+    "haematologic (21% G3/4 cisplatin arm)",
+    "gastrointestinal (14% vs 5%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/1999_Keys_GOG-123.md",
+   "additional_sources": [
+    "GO_summaries/2007_Stehman_GOG-123 Long-term Follow-up.md"
+   ],
+   "evidence_quote": "- Any G3/G4 AE: Arm 1 13% (25/186) vs Arm 2 35% (64/183). || - No treatment-related deaths in either arm.",
+   "notes": "Per-patient any G3/G4 AE with no treatment-related deaths, so carried as G>=3. Late effects not different (Keys 1999); Stehman 2007: major late events 7 patients (RT + cisplatin, 135 assessable survivors) vs 4 (RT alone, 118), not significant, no actuarial analysis. Discontinuation not reported."
+  },
+  {
+   "trial": "Dueñas-González 2011 (Dueñas-González 2011)",
+   "regimen": "weekly cisplatin 40 mg/m2 + gemcitabine 125 mg/m2 x6 with EBRT 50.4 Gy -> brachytherapy -> adjuvant cisplatin 50 D1 + gemcitabine 1000 D1,8 x2 vs weekly cisplatin CCRT -> brachytherapy, stage IIB-IVA",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": 86.5,
+   "arms": {
+    "gemcitabine-cisplatin CRT -> adjuvant gemcitabine-cisplatin": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": 86.5,
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 260,
+     "evidence_quote": "Acute toxicities related to study drug (NCI-CTC v2.0; safety population arm A n = 260, arm B n = 255), grade 3 / grade 4, n (%): || | Any grade 3/4 | 86.5% (combined) | — | 46.3% (combined) | — (P < .001) | || - Deaths within 30 days of treatment: 3 in arm A, 2 possibly treatment-related (DIC + bowel perforation + septicaemia; acute leukoencephalopathy); <1% overall."
+    },
+    "cisplatin CRT": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": 46.3,
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 255,
+     "evidence_quote": "Acute toxicities related to study drug (NCI-CTC v2.0; safety population arm A n = 260, arm B n = 255), grade 3 / grade 4, n (%): || | Any grade 3/4 | 86.5% (combined) | — | 46.3% (combined) | — (P < .001) | || - Deaths within 30 days of treatment: 3 in arm A, 2 possibly treatment-related (DIC + bowel perforation + septicaemia; acute leukoencephalopathy); <1% overall."
+    }
+   },
+   "signature_ae": [
+    "neutropenia (45.0% G3 + 6.2% G4 arm A)",
+    "diarrhoea (17.7%)",
+    "anaemia",
+    "thrombocytopenia",
+    "vomiting",
+    "proctitis",
+    "transfusion (49.2% vs 27.5%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2011_Dueñas-González_Gemcitabine-Cisplatin CRT.md",
+   "evidence_quote": "Acute toxicities related to study drug (NCI-CTC v2.0; safety population arm A n = 260, arm B n = 255), grade 3 / grade 4, n (%): || | Any grade 3/4 | 86.5% (combined) | — | 46.3% (combined) | — (P < .001) | || - Deaths within 30 days of treatment: 3 in arm A, 2 possibly treatment-related (DIC + bowel perforation + septicaemia; acute leukoencephalopathy); <1% overall.",
+   "notes": "The 86.5% vs 46.3% figure is printed as acute toxicity RELATED TO STUDY DRUG, so it sits in treatment_related_grade3plus_pct and any-cause is not_reported; the note rows call it 'grade 3-4 toxicity' without the attribution. Safety 260 vs 255. Two possibly treatment-related deaths in arm A. Hospitalisation for study drug 30 vs 11 patients. Late toxicity (<= 1 year): any grade 3 0.5% vs 0.5%, any grade 4 3.6% vs 0.9%, not significant. AE-driven discontinuations occurred mostly in the concurrent phase but no rate is printed."
+  },
+  {
+   "trial": "RTOG 90-01 (Morris 1999)",
+   "regimen": "pelvic RT 45 Gy + cisplatin 75 mg/m2 + 5-FU 4 g/m2 96-h x3 vs extended-field (pelvic + para-aortic) RT alone, stage IB-IIA >= 5 cm / node-positive / IIB-IVA",
+   "grade3plus_any_pct": 45.1,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "derived_sum": true,
+   "arms": {
+    "pelvic RT + cisplatin/5-FU": {
+     "grade3plus_any_pct": 45.1,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 195,
+     "derived_sum": true,
+     "evidence_quote": "**Worst acute AE (within 60 days post-RT)** || | Any acute toxicity | 5 (3%) G3, 1 (1%) G4 | — | 65 (33%) G3, 22 (11%) G4, 1 (1%) G5 | — | || | Any late toxicity | 2 (1%) G3, 20 (10%) G4 | — | 8 (4%) G3, 16 (8%) G4 | — |"
+    },
+    "extended-field RT alone": {
+     "grade3plus_any_pct": 3.1,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 193,
+     "derived_sum": true,
+     "evidence_quote": "**Worst acute AE (within 60 days post-RT)** || | Any acute toxicity | 5 (3%) G3, 1 (1%) G4 | — | 65 (33%) G3, 22 (11%) G4, 1 (1%) G5 | — | || | Any late toxicity | 2 (1%) G3, 20 (10%) G4 | — | 8 (4%) G3, 16 (8%) G4 | — |"
+    }
+   },
+   "signature_ae": [
+    "haematologic (57 G3 + 16 G4 CTRT)",
+    "bowel/rectal",
+    "nausea/vomiting",
+    "late large bowel/rectum G4 (both arms)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/1999_Morris_RTOG-90-01.md",
+   "additional_sources": [
+    "GO_summaries/2004_Eifel_RTOG 90-01.md"
+   ],
+   "evidence_quote": "**Worst acute AE (within 60 days post-RT)** || | Any acute toxicity | 5 (3%) G3, 1 (1%) G4 | — | 65 (33%) G3, 22 (11%) G4, 1 (1%) G5 | — | || | Any late toxicity | 2 (1%) G3, 20 (10%) G4 | — | 8 (4%) G3, 16 (8%) G4 | — |",
+   "notes": "ACUTE (<= 60 days) worst-grade-per-patient categories, so G3+G4+G5 is exact and summed from counts: CTRT (65+22+1)/195 = 45.1%, EFRT (5+1)/193 = 3.1%. Late (> 60 days, Morris): G3+G4 24 (12%) CTRT vs 22 (11%) EFRT, no significant difference. Eifel 2004 update (maximum late grade per patient): CTRT 7 (4%) G3 + 17 (9%) G4 + 0 G5 = 24/191 (13%) vs EFRT 2 (1%) + 18 (9%) + 3 (2%) = 23/194 (12%); 5-yr cumulative grade >= 3 late 14% vs 14%; three late treatment-related deaths all in the EFRT arm. The adenocarcinoma note prints 'acute grade 3-4 44%' (33 + 11, without the 1% G5). Arm numbering is reversed between the 1999 and 2004 extracts."
+  },
+  {
+   "trial": "GOG-85 / SWOG (Whitney 1999)",
+   "regimen": "RT + cisplatin 50 mg/m2 + 5-FU infusion vs RT + oral hydroxyurea, stage IIB-IVA, para-aortic node-negative",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "RT + cisplatin/5-FU (CF)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "1 of 169: adverse effects prevented protocol completion (small bowel obstruction)",
+     "dose_reduction_pct": "not_reported",
+     "n": 169,
+     "evidence_quote": "Adverse effects were evaluated in patients who received radiotherapy plus at least one course/week of drug (CF n = 169; HU n = 188), graded by GOG adverse-effect criteria. || - **Severe or life-threatening (grade 3–4) leukopenia: 6 CF patients (4%) versus 46 HU patients (24%)**; the WBC difference favored CF strongly (P < .00001). All WBC counts recovered to normal. || - Grade 3–4 gastrointestinal toxicity was slightly (not significantly) more common with CF (8%) than HU (4%). Adverse effects prevented protocol completion in one patient per arm (small bowel obstruction on CF; severe nausea/vomiting on HU). || - Late major complications (grade 3–4) by life-table analysis: **16.2% at 3 years (CF) versus 16.5% at 3 years (HU)** — essentially identical."
+    },
+    "RT + hydroxyurea (HU)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "1 of 188: adverse effects prevented protocol completion (severe nausea/vomiting)",
+     "dose_reduction_pct": "not_reported",
+     "n": 188,
+     "evidence_quote": "Adverse effects were evaluated in patients who received radiotherapy plus at least one course/week of drug (CF n = 169; HU n = 188), graded by GOG adverse-effect criteria. || - **Severe or life-threatening (grade 3–4) leukopenia: 6 CF patients (4%) versus 46 HU patients (24%)**; the WBC difference favored CF strongly (P < .00001). All WBC counts recovered to normal. || - Grade 3–4 gastrointestinal toxicity was slightly (not significantly) more common with CF (8%) than HU (4%). Adverse effects prevented protocol completion in one patient per arm (small bowel obstruction on CF; severe nausea/vomiting on HU). || - Late major complications (grade 3–4) by life-table analysis: **16.2% at 3 years (CF) versus 16.5% at 3 years (HU)** — essentially identical."
+    }
+   },
+   "signature_ae": [
+    "leukopenia (24% HU vs 4% CF)",
+    "gastrointestinal (8% CF vs 4% HU)",
+    "late major complications 16% both arms"
+   ],
+   "discontinuation_pct": "1 of 169 (CF) / 1 of 188 (HU): adverse effects prevented protocol completion",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/1999_Whitney_GOG-85.md",
+   "evidence_quote": "Adverse effects were evaluated in patients who received radiotherapy plus at least one course/week of drug (CF n = 169; HU n = 188), graded by GOG adverse-effect criteria. || - **Severe or life-threatening (grade 3–4) leukopenia: 6 CF patients (4%) versus 46 HU patients (24%)**; the WBC difference favored CF strongly (P < .00001). All WBC counts recovered to normal. || - Grade 3–4 gastrointestinal toxicity was slightly (not significantly) more common with CF (8%) than HU (4%). Adverse effects prevented protocol completion in one patient per arm (small bowel obstruction on CF; severe nausea/vomiting on HU). || - Late major complications (grade 3–4) by life-table analysis: **16.2% at 3 years (CF) versus 16.5% at 3 years (HU)** — essentially identical.",
+   "notes": "Per-category G3/G4 counts only; no per-patient any-cause total, not summed. Discontinuation = adverse effects prevented protocol completion in 1 patient per arm (CF 1/169, HU 1/188), carried as strings. One treatment-related death (HU arm, vesicovaginal fistula -> pulmonary embolus). Late grade 3-4 major complications 16.2% vs 16.5% at 3 years (life-table)."
+  },
+  {
+   "trial": "NCIC CTG (Pearcey 2002)",
+   "regimen": "radical RT (EBRT + brachytherapy) + weekly cisplatin 40 mg/m2 vs the same RT alone, locally advanced squamous cell cervical cancer",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "RT + weekly cisplatin": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 127,
+     "evidence_quote": "Acute toxicity ≥grade 3 (NCIC CTG expanded CTC; Table 4): || | **Total** | **31 / 9 / —** | **4 / — / —** | || | Genitourinary | 11 (14%) / 2 (3%) / 0 | 4 (5%) / 4 (5%) / 0 | || No significant differences in late toxicity between arms. One treatment-related death (arm 1)."
+    },
+    "RT alone": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 126,
+     "evidence_quote": "Acute toxicity ≥grade 3 (NCIC CTG expanded CTC; Table 4): || | **Total** | **31 / 9 / —** | **4 / — / —** | || | Genitourinary | 11 (14%) / 2 (3%) / 0 | 4 (5%) / 4 (5%) / 0 | || No significant differences in late toxicity between arms. One treatment-related death (arm 1)."
+    }
+   },
+   "signature_ae": [
+    "gastrointestinal acute (11 G3 + 5 G4 with cisplatin)",
+    "haematologic",
+    "late genitourinary G3 (14% vs 5%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2002_Pearcey_NCIC CTG Cisplatin RT.md",
+   "evidence_quote": "Acute toxicity ≥grade 3 (NCIC CTG expanded CTC; Table 4): || | **Total** | **31 / 9 / —** | **4 / — / —** | || | Genitourinary | 11 (14%) / 2 (3%) / 0 | 4 (5%) / 4 (5%) / 0 | || No significant differences in late toxicity between arms. One treatment-related death (arm 1).",
+   "notes": "Acute >= grade 3 is tabulated by category with a 'Total' of 31 G3 / 9 G4 (cisplatin-RT) vs 4 G3 (RT) that is not stated to be per-patient, so G>=3 is not_reported. Late >= grade 3 by category (CDDP-RT n = 126, RT n = 123; percentages on a smaller evaluable denominator): GI 1 (1%) G3 / 4 (5%) G4 / 1 (1%) G5 vs 5 (6%) / 6 (7%) / 0; GU 11 (14%) / 2 (3%) vs 4 (5%) / 4 (5%). One treatment-related death (cisplatin arm). Acute toxicity did not cause clinically important RT delays."
+  },
+  {
+   "trial": "OUTBACK (Mileshkin 2023)",
+   "regimen": "weekly cisplatin 40 mg/m2 x5 CCRT -> adjuvant carboplatin AUC5 + paclitaxel 155 mg/m2 q21d x4 vs CCRT alone, locally advanced",
+   "grade3plus_any_pct": 81,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "CCRT -> adjuvant carboplatin-paclitaxel": {
+     "grade3plus_any_pct": 81,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 361,
+     "evidence_quote": "Safety population: 453 (chemoradiotherapy only, all who started chemoradiotherapy) and 361 (adjuvant chemotherapy, all who received at least one adjuvant dose). || | Grade ≥3 adverse event | 280 (62%) | 292 (81%) | <0.0001 | || | Treatment-related death | 0 | 0 | — |"
+    },
+    "CCRT alone": {
+     "grade3plus_any_pct": 62,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 453,
+     "evidence_quote": "Safety population: 453 (chemoradiotherapy only, all who started chemoradiotherapy) and 361 (adjuvant chemotherapy, all who received at least one adjuvant dose). || | Grade ≥3 adverse event | 280 (62%) | 292 (81%) | <0.0001 | || | Treatment-related death | 0 | 0 | — |"
+    }
+   },
+   "signature_ae": [
+    "lymphocyte count decreased (58% vs 46%)",
+    "neutrophils (20% vs 8%)",
+    "anaemia (18% vs 8%)",
+    "peripheral sensory neuropathy",
+    "febrile neutropenia 2% both"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2023_Mileshkin_OUTBACK.md",
+   "evidence_quote": "Safety population: 453 (chemoradiotherapy only, all who started chemoradiotherapy) and 361 (adjuvant chemotherapy, all who received at least one adjuvant dose). || | Grade ≥3 adverse event | 280 (62%) | 292 (81%) | <0.0001 | || | Treatment-related death | 0 | 0 | — |",
+   "notes": "Any-cause grade >= 3 in the first year after randomisation. The adjuvant-arm safety denominator is the 361 who received at least one adjuvant dose (78% of 463 eligible; 22% never started adjuvant chemotherapy), so the 81% excludes those patients. No treatment-related deaths. Serious AEs 22% vs 30%. Long-term: grade 2 neuropathy, pain in extremity, hyperglycaemia and fever more common after adjuvant chemotherapy. Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "TACO (GCIG/KGOG 1027/THAI 2012) (Ryu 2026)",
+   "regimen": "RT + cisplatin 75 mg/m2 q3w x3 vs RT + weekly cisplatin 40 mg/m2 x6, locally advanced",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "triweekly cisplatin 75": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 140,
+     "evidence_quote": "Toxicity was graded by GOG Common Terminology Criteria for Adverse Events version 3.0. Denominators are event counts, not patients: grade 1–2 events totalled 674 (weekly) and 575 (tri-weekly); grade 3–4 events totalled 211 (weekly) and 181 (tri-weekly). || | **Haematological (total)** | **104 (49.3)** | **55 (30.4)** | **<0.001** | || | **Gastrointestinal** | **14 (6.6)** | **29 (16.0)** | **0.005** |"
+    },
+    "weekly cisplatin 40": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 152,
+     "evidence_quote": "Toxicity was graded by GOG Common Terminology Criteria for Adverse Events version 3.0. Denominators are event counts, not patients: grade 1–2 events totalled 674 (weekly) and 575 (tri-weekly); grade 3–4 events totalled 211 (weekly) and 181 (tri-weekly). || | **Haematological (total)** | **104 (49.3)** | **55 (30.4)** | **<0.001** | || | **Gastrointestinal** | **14 (6.6)** | **29 (16.0)** | **0.005** |"
+    }
+   },
+   "signature_ae": [
+    "neutropenia (weekly)",
+    "haematological G3-4 events (49.3% of events weekly vs 30.4% tri-weekly)",
+    "gastrointestinal G3-4 events (tri-weekly)",
+    "endocrinological"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2026_Ryu_TACO KGOG 1027.md",
+   "evidence_quote": "Toxicity was graded by GOG Common Terminology Criteria for Adverse Events version 3.0. Denominators are event counts, not patients: grade 1–2 events totalled 674 (weekly) and 575 (tri-weekly); grade 3–4 events totalled 211 (weekly) and 181 (tri-weekly). || | **Haematological (total)** | **104 (49.3)** | **55 (30.4)** | **<0.001** | || | **Gastrointestinal** | **14 (6.6)** | **29 (16.0)** | **0.005** |",
+   "notes": "Grade 3-4 toxicity is tabulated as EVENT counts (211 weekly, 181 tri-weekly), not patients, so no per-patient G>=3 rate exists and nothing is carried. QoL favoured tri-weekly for global health, physical and role functioning; weekly for cognitive function, appetite loss and diarrhoea. Note row lists triweekly first."
+  }
+ ],
+ "table_2b_io_ccrt": [
+  {
+   "trial": "KEYNOTE-A18 / ENGOT-cx11 / GOG-3047 (Lorusso 2024)",
+   "regimen": "pembrolizumab 200 mg q3w x5 with cisplatin CCRT -> pembrolizumab 400 mg q6w x15 vs placebo, high-risk locally advanced",
+   "grade3plus_any_pct": 78,
+   "treatment_related_grade3plus_pct": 69,
+   "arms": {
+    "pembrolizumab + CRT -> pembrolizumab": {
+     "grade3plus_any_pct": 78,
+     "treatment_related_grade3plus_pct": 69,
+     "discontinuation_pct": 19,
+     "dose_reduction_pct": "not_reported",
+     "n": 528,
+     "evidence_quote": "Safety (as-treated) population: 528 in the pembrolizumab–CRT group and 530 in the placebo–CRT group. || | Grade ≥3 adverse event | 413 (78%) | 371 (70%) | || | Grade ≥3 treatment-related adverse event | 365 (69%) | 325 (61%) | || | Treatment-related AE leading to discontinuation of any component | 99 (19%) | 69 (13%) | || | Treatment-related death | 2 (<1%) | 2 (<1%) |"
+    },
+    "placebo + CRT -> placebo": {
+     "grade3plus_any_pct": 70,
+     "treatment_related_grade3plus_pct": 61,
+     "discontinuation_pct": 13,
+     "dose_reduction_pct": "not_reported",
+     "n": 530,
+     "evidence_quote": "Safety (as-treated) population: 528 in the pembrolizumab–CRT group and 530 in the placebo–CRT group. || | Grade ≥3 adverse event | 413 (78%) | 371 (70%) | || | Grade ≥3 treatment-related adverse event | 365 (69%) | 325 (61%) | || | Treatment-related AE leading to discontinuation of any component | 99 (19%) | 69 (13%) | || | Treatment-related death | 2 (<1%) | 2 (<1%) |"
+    }
+   },
+   "signature_ae": [
+    "anaemia (23% vs 22%)",
+    "WBC decreased",
+    "neutrophil count decreased",
+    "hypothyroidism (22% vs 7%, low grade)",
+    "hyperthyroidism",
+    "immune-mediated G>=3 5% vs 1%"
+   ],
+   "discontinuation_pct": 19,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2024_Lorusso_KEYNOTE-A18_OS.md",
+   "additional_sources": [
+    "GO_summaries/2024_Lorusso_KEYNOTE-A18.md"
+   ],
+   "evidence_quote": "Safety (as-treated) population: 528 in the pembrolizumab–CRT group and 530 in the placebo–CRT group. || | Grade ≥3 adverse event | 413 (78%) | 371 (70%) | || | Grade ≥3 treatment-related adverse event | 365 (69%) | 325 (61%) | || | Treatment-related AE leading to discontinuation of any component | 99 (19%) | 69 (13%) | || | Treatment-related death | 2 (<1%) | 2 (<1%) |",
+   "notes": "Second interim (OS) analysis used as source; the first interim (PFS) extract printed 75% vs 69% any-cause G>=3, 67% vs 61% treatment-related and 15% vs 13% TRAE discontinuation of any component. Discontinuation = treatment-related AE leading to discontinuation of ANY component (pembrolizumab/placebo, cisplatin or RT); discontinuation of all treatment 0 vs 1 (<1%). No grade >= 3 AE had a >= 5% higher risk with pembrolizumab. Treatment-related deaths 2 vs 2. Dose reduction not reported. Cisplatin-only backbone."
+  },
+  {
+   "trial": "CALLA (Monk 2023)",
+   "regimen": "durvalumab 1500 mg q4w with and after CCRT (weekly cisplatin 40 mg/m2 or carboplatin AUC2 x5 + 45 Gy + image-guided brachytherapy), up to 24 cycles vs placebo",
+   "grade3plus_any_pct": 52,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "durvalumab + CRT -> durvalumab": {
+     "grade3plus_any_pct": 52,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 12,
+     "dose_reduction_pct": "not_reported",
+     "n": 385,
+     "evidence_quote": "Safety population: 385 (durvalumab) and 384 (placebo). || | Grade 3–4 adverse event | 199 (52%) | 196 (51%) | || | Treatment-related AE leading to discontinuation | 48 (12%) | 37 (10%) | || | Adverse event leading to death | 13 (3%) | 5 (1%) | || | Treatment-related death | 5 | 1 | || **Radiotherapy-related toxicity**: acute (within 1 year of last radiotherapy) in 291 (76%) of 385 (grade ≥3, 116 [30%]) vs 287 (75%) of 384 (grade ≥3, 106 [28%]). Late-onset (≥1 year after radiotherapy) in 37 (10%) of 385 (grade ≥3, 7 [2%]) vs 36 (9%) of 384 (grade ≥3, 4 [1%])"
+    },
+    "placebo + CRT -> placebo": {
+     "grade3plus_any_pct": 51,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 10,
+     "dose_reduction_pct": "not_reported",
+     "n": 384,
+     "evidence_quote": "Safety population: 385 (durvalumab) and 384 (placebo). || | Grade 3–4 adverse event | 199 (52%) | 196 (51%) | || | Treatment-related AE leading to discontinuation | 48 (12%) | 37 (10%) | || | Adverse event leading to death | 13 (3%) | 5 (1%) | || | Treatment-related death | 5 | 1 | || **Radiotherapy-related toxicity**: acute (within 1 year of last radiotherapy) in 291 (76%) of 385 (grade ≥3, 116 [30%]) vs 287 (75%) of 384 (grade ≥3, 106 [28%]). Late-onset (≥1 year after radiotherapy) in 37 (10%) of 385 (grade ≥3, 7 [2%]) vs 36 (9%) of 384 (grade ≥3, 4 [1%])"
+    }
+   },
+   "signature_ae": [
+    "anaemia (20% vs 15% G3-4)",
+    "white blood cells decreased",
+    "neutropenia",
+    "lymphopenia",
+    "radiation proctitis",
+    "febrile neutropenia (2% vs 1%)",
+    "immune-mediated AEs 38% vs 24%"
+   ],
+   "discontinuation_pct": 12,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2023_Monk_CALLA.md",
+   "evidence_quote": "Safety population: 385 (durvalumab) and 384 (placebo). || | Grade 3–4 adverse event | 199 (52%) | 196 (51%) | || | Treatment-related AE leading to discontinuation | 48 (12%) | 37 (10%) | || | Adverse event leading to death | 13 (3%) | 5 (1%) | || | Treatment-related death | 5 | 1 | || **Radiotherapy-related toxicity**: acute (within 1 year of last radiotherapy) in 291 (76%) of 385 (grade ≥3, 116 [30%]) vs 287 (75%) of 384 (grade ≥3, 106 [28%]). Late-onset (≥1 year after radiotherapy) in 37 (10%) of 385 (grade ≥3, 7 [2%]) vs 36 (9%) of 384 (grade ≥3, 4 [1%])",
+   "notes": "Printed as any-cause grade 3-4 (not >= 3); AEs leading to death 13 (3%) vs 5 (1%) are listed separately and are not included in the 52% / 51%, so any-cause G>=3 is at least these values. Treatment-related deaths 5 (durvalumab) vs 1 (placebo). Treatment-related G>=3 total not printed (only per-event). Discontinuation = treatment-related AE leading to discontinuation. RT-related acute grade >= 3 30% vs 28%; late (>= 1 year) grade >= 3 2% vs 1%, immature. Dose reduction not reported."
+  },
+  {
+   "trial": "GOG-9929 (Mayadev 2020)",
+   "regimen": "weekly cisplatin 40 mg/m2 x6 CCRT -> sequential ipilimumab 3 or 10 mg/kg q21d x4, node-positive locally advanced (phase 1, single arm)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": 9.5,
+   "signature_ae": [
+    "lipase increase G3 (DLT)",
+    "dermatitis G3 (DLT)",
+    "diarrhoea G1-2",
+    "endocrinopathies G1-2"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2020_Mayadev_GOG-9929.md",
+   "evidence_quote": "| Grade 4 or 5 AEs | 0 | || | Any grade 3 toxic effect attributed to ipilimumab | 2 (9.5%) | || - Most acute toxic effects were grade 1–2 diarrhoea, dermatitis and endocrinopathies. Full grade 3/4 listing in eTable 1 (supplement, not in PDF).",
+   "notes": "n = 21 received ipilimumab (34 enrolled; 13 excluded before ipilimumab, including 2 for unresolved CRT toxicity). Treatment-related G3 attributed to ipilimumab 2 (9.5%) with no grade 4-5, so TRAE G>=3 = 9.5%. Any-cause G>=3 during ipilimumab not totalled (grade 3 abdominal pain and cognitive disturbance also listed; full listing in a supplement not held). Discontinuation and dose reduction not reported; one cycle-4 delay for decreased ANC."
+  }
+ ],
+ "table_3a_first_line_rm": [
+  {
+   "trial": "KEYNOTE-826 (Colombo 2021)",
+   "regimen": "pembrolizumab 200 mg q3w (<= 35 cycles) vs placebo, + paclitaxel 175 mg/m2 + cisplatin 50 mg/m2 or carboplatin AUC5 +/- bevacizumab 15 mg/kg",
+   "grade3plus_any_pct": 81.8,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "pembrolizumab + chemotherapy +/- bevacizumab": {
+     "grade3plus_any_pct": 81.8,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 37.5,
+     "dose_reduction_pct": "not_reported",
+     "n": 307,
+     "evidence_quote": "## Toxicity (as-treated population: Arm 1 n = 307; Arm 2 n = 309) || | Any AE | 99.3% | 81.8% (G5 4.6%) | 99.4% | 75.1% (G5 4.5%) | || | AE discontinuation any agent | 37.5% | — | 26.5% | — | || | Treatment-related deaths | 0.7% (2) | — | 1.3% (4) | — |"
+    },
+    "placebo + chemotherapy +/- bevacizumab": {
+     "grade3plus_any_pct": 75.1,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 26.5,
+     "dose_reduction_pct": "not_reported",
+     "n": 309,
+     "evidence_quote": "## Toxicity (as-treated population: Arm 1 n = 307; Arm 2 n = 309) || | Any AE | 99.3% | 81.8% (G5 4.6%) | 99.4% | 75.1% (G5 4.5%) | || | AE discontinuation any agent | 37.5% | — | 26.5% | — | || | Treatment-related deaths | 0.7% (2) | — | 1.3% (4) | — |"
+    }
+   },
+   "signature_ae": [
+    "anaemia (30.3% G3-5)",
+    "neutropenia (12.4%)",
+    "hypertension (9.4%, bevacizumab)",
+    "UTI",
+    "thrombocytopenia",
+    "immune-mediated G3-5 11.4% vs 2.9%",
+    "hypothyroidism (18.2%)"
+   ],
+   "discontinuation_pct": 37.5,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2021_Colombo_KEYNOTE-826.md",
+   "additional_sources": [
+    "GO_summaries/2023_Monk_KEYNOTE-826 Final OS.md",
+    "GO_summaries/2026_Hasegawa_KEYNOTE-826 5-Year Follow-Up.md",
+    "GO_summaries/2024_Tewari_KEYNOTE-826 Subgroups.md"
+   ],
+   "evidence_quote": "## Toxicity (as-treated population: Arm 1 n = 307; Arm 2 n = 309) || | Any AE | 99.3% | 81.8% (G5 4.6%) | 99.4% | 75.1% (G5 4.5%) | || | AE discontinuation any agent | 37.5% | — | 26.5% | — | || | Treatment-related deaths | 0.7% (2) | — | 1.3% (4) | — |",
+   "notes": "Printed as any-cause grade 3-5 (G5 4.6% vs 4.5% included). Final OS extract (Monk 2023): grade 3-5 82.4% vs 75.4%, AE leading to death 5.2% vs 4.9%, treatment-related deaths 2 (0.7%) vs 4 (1.3%). Five-year extract (Hasegawa 2026): treatment-related G>=3 69.4% vs 65.4% (not carried in the field because it is from an additional source), immune-mediated/infusion G>=3 14.7% vs 5.2%, no new deaths. Discontinuation = AE leading to discontinuation of any agent. Dose reduction not reported. Tewari 2024 subgroup extract has no new safety data."
+  },
+  {
+   "trial": "COMPASSION-16 (Wu 2024)",
+   "regimen": "cadonilimab (PD-1/CTLA-4 bispecific) 10 mg/kg vs placebo, + platinum-based chemotherapy +/- bevacizumab q3w x6 -> maintenance <= 2 yr (China)",
+   "grade3plus_any_pct": 85,
+   "treatment_related_grade3plus_pct": 82,
+   "arms": {
+    "cadonilimab + chemotherapy +/- bevacizumab": {
+     "grade3plus_any_pct": 85,
+     "treatment_related_grade3plus_pct": 82,
+     "discontinuation_pct": 28,
+     "dose_reduction_pct": "not_reported",
+     "n": 226,
+     "evidence_quote": "Safety set: cadonilimab n = 226, placebo n = 219. || - Treatment-emergent adverse events: **225 (>99%) vs 219 (100%); grade ≥3 in 193 (85%) vs 176 (80%)**. || - Treatment-related adverse events: 225 (>99%) vs 219 (100%); **grade ≥3 treatment-related in 186 (82%) vs 173 (79%)** — the addition of cadonilimab did not materially increase toxicity. || - **Adverse events led to discontinuation of any trial agent in 63 (28%) vs 23 (11%)**. || - **Adverse events led to death in 12 (5%) vs 7 (3%); treatment-related deaths in 9 (4%) vs 6 (3%)**."
+    },
+    "placebo + chemotherapy +/- bevacizumab": {
+     "grade3plus_any_pct": 80,
+     "treatment_related_grade3plus_pct": 79,
+     "discontinuation_pct": 11,
+     "dose_reduction_pct": "not_reported",
+     "n": 219,
+     "evidence_quote": "Safety set: cadonilimab n = 226, placebo n = 219. || - Treatment-emergent adverse events: **225 (>99%) vs 219 (100%); grade ≥3 in 193 (85%) vs 176 (80%)**. || - Treatment-related adverse events: 225 (>99%) vs 219 (100%); **grade ≥3 treatment-related in 186 (82%) vs 173 (79%)** — the addition of cadonilimab did not materially increase toxicity. || - **Adverse events led to discontinuation of any trial agent in 63 (28%) vs 23 (11%)**. || - **Adverse events led to death in 12 (5%) vs 7 (3%); treatment-related deaths in 9 (4%) vs 6 (3%)**."
+    }
+   },
+   "signature_ae": [
+    "neutrophil count decreased (41% vs 46%)",
+    "WBC decreased",
+    "anaemia",
+    "platelet count decreased",
+    "hypothyroidism (33% vs 12%, low grade)",
+    "rash",
+    "pyrexia",
+    "immune-related G>=3 10% vs <1%"
+   ],
+   "discontinuation_pct": 28,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2024_Wu_COMPASSION-16.md",
+   "additional_sources": [
+    "GO_summaries/2026_Sun_COMPASSION-16 Subgroups.md"
+   ],
+   "evidence_quote": "Safety set: cadonilimab n = 226, placebo n = 219. || - Treatment-emergent adverse events: **225 (>99%) vs 219 (100%); grade ≥3 in 193 (85%) vs 176 (80%)**. || - Treatment-related adverse events: 225 (>99%) vs 219 (100%); **grade ≥3 treatment-related in 186 (82%) vs 173 (79%)** — the addition of cadonilimab did not materially increase toxicity. || - **Adverse events led to discontinuation of any trial agent in 63 (28%) vs 23 (11%)**. || - **Adverse events led to death in 12 (5%) vs 7 (3%); treatment-related deaths in 9 (4%) vs 6 (3%)**.",
+   "notes": "Any-cause grade >= 3 TEAE 85% vs 80%; treatment-related 82% vs 79%. Discontinuation = AE leading to discontinuation of any trial agent. Treatment-related deaths 9 (4%) vs 6 (3%); no grade 5 immune-related events. Haematologic grade >= 3 events were numerically less frequent with cadonilimab. Dose reduction not reported. Sun 2026 subgroup extract carries no safety data."
+  },
+  {
+   "trial": "BEATcc / ENGOT-Cx10 (Oaknin 2024)",
+   "regimen": "atezolizumab 1200 mg + cisplatin 50 mg/m2 or carboplatin AUC5 + paclitaxel 175 mg/m2 + bevacizumab 15 mg/kg q3w vs the same without atezolizumab",
+   "grade3plus_any_pct": 79,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "atezolizumab + bevacizumab + chemotherapy": {
+     "grade3plus_any_pct": 79,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 15,
+     "dose_reduction_pct": "not_reported",
+     "n": 205,
+     "evidence_quote": "Safety population 205 vs 199. Grade ≥3 AEs: **161 (79%) vs 149 (75%)**, most commonly hypertension, haematological events, and asthenia. AEs leading to discontinuation of any treatment: 31 (15%) vs 31 (16%). || - Fatal AEs: 7 (3%) vs 6 (3%); 3 (1%) in the experimental arm treatment-related (obstructive jaundice after cycle 1, ileal perforation after cycle 25, vaginal haemorrhage after clinical progression)."
+    },
+    "bevacizumab + chemotherapy": {
+     "grade3plus_any_pct": 75,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 16,
+     "dose_reduction_pct": "not_reported",
+     "n": 199,
+     "evidence_quote": "Safety population 205 vs 199. Grade ≥3 AEs: **161 (79%) vs 149 (75%)**, most commonly hypertension, haematological events, and asthenia. AEs leading to discontinuation of any treatment: 31 (15%) vs 31 (16%). || - Fatal AEs: 7 (3%) vs 6 (3%); 3 (1%) in the experimental arm treatment-related (obstructive jaundice after cycle 1, ileal perforation after cycle 25, vaginal haemorrhage after clinical progression)."
+    }
+   },
+   "signature_ae": [
+    "hypertension G3 (18% vs 16%)",
+    "neutropenia",
+    "anaemia (14% vs 7% G3)",
+    "asthenia",
+    "peripheral neuropathy G3 (7% vs 4%)",
+    "proteinuria",
+    "female genital tract fistula G3 4% both arms",
+    "immune-mediated (hypothyroidism, rash, diarrhoea; low grade)"
+   ],
+   "discontinuation_pct": 15,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2024_Oaknin_BEATcc.md",
+   "evidence_quote": "Safety population 205 vs 199. Grade ≥3 AEs: **161 (79%) vs 149 (75%)**, most commonly hypertension, haematological events, and asthenia. AEs leading to discontinuation of any treatment: 31 (15%) vs 31 (16%). || - Fatal AEs: 7 (3%) vs 6 (3%); 3 (1%) in the experimental arm treatment-related (obstructive jaundice after cycle 1, ileal perforation after cycle 25, vaginal haemorrhage after clinical progression).",
+   "notes": "Any-cause grade >= 3. Discontinuation = AE leading to discontinuation of any treatment. Fatal AEs 3% vs 3%, 3 treatment-related in the atezolizumab arm. Bevacizumab in both arms; grade >= 3 fistulae 3% overall. Treatment-related G>=3 total and dose reduction not reported."
+  },
+  {
+   "trial": "GOG-179 (Long 2005)",
+   "regimen": "topotecan 0.75 mg/m2 D1-3 + cisplatin 50 mg/m2 D1 q21d vs cisplatin 50 mg/m2 q21d (MVAC arm closed after 4 treatment-related deaths), stage IVB / recurrent / persistent",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "cisplatin + topotecan": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 147,
+     "evidence_quote": "| Granulocytopenia G3/G4 | 1 / 1 | 36 / 67 (G3/4 neutropenia 70% vs 1.4%) | || | Thrombocytopenia G3/G4 | 5 / 0 | 36 / 10 (G3/4 31.3% vs 3.4%) | || | Febrile neutropenia | 7.5% | 17.7% | || - MVAC arm closed after 4 treatment-related deaths (neutropenic sepsis)."
+    },
+    "cisplatin alone": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 146,
+     "evidence_quote": "| Granulocytopenia G3/G4 | 1 / 1 | 36 / 67 (G3/4 neutropenia 70% vs 1.4%) | || | Thrombocytopenia G3/G4 | 5 / 0 | 36 / 10 (G3/4 31.3% vs 3.4%) | || | Febrile neutropenia | 7.5% | 17.7% | || - MVAC arm closed after 4 treatment-related deaths (neutropenic sepsis)."
+    },
+    "MVAC (closed early, not analysed)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 63,
+     "evidence_quote": "| Granulocytopenia G3/G4 | 1 / 1 | 36 / 67 (G3/4 neutropenia 70% vs 1.4%) | || | Thrombocytopenia G3/G4 | 5 / 0 | 36 / 10 (G3/4 31.3% vs 3.4%) | || | Febrile neutropenia | 7.5% | 17.7% | || - MVAC arm closed after 4 treatment-related deaths (neutropenic sepsis)."
+    }
+   },
+   "signature_ae": [
+    "neutropenia (70% G3/4 with topotecan)",
+    "thrombocytopenia (31.3%)",
+    "anaemia",
+    "febrile neutropenia (17.7% vs 7.5%)",
+    "infection"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2005_Long_GOG-179.md",
+   "evidence_quote": "| Granulocytopenia G3/G4 | 1 / 1 | 36 / 67 (G3/4 neutropenia 70% vs 1.4%) | || | Thrombocytopenia G3/G4 | 5 / 0 | 36 / 10 (G3/4 31.3% vs 3.4%) | || | Febrile neutropenia | 7.5% | 17.7% | || - MVAC arm closed after 4 treatment-related deaths (neutropenic sepsis).",
+   "notes": "Per-category G3/G4 patient counts only (CPT n = 146, CT n = 147); no per-patient any-cause total, not summed. One death in the CT arm from haemorrhage of progressive disease possibly aggravated by treatment-related thrombocytopenia; 2 pulmonary-embolus deaths deemed unrelated. MVAC arm (n = 63) closed after 4 treatment-related deaths from neutropenic sepsis and was not analysed. Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "GOG-240 (Tewari 2014)",
+   "regimen": "bevacizumab 15 mg/kg + chemotherapy (cisplatin 50 mg/m2 + paclitaxel 135 or 175 mg/m2, or topotecan 0.75 mg/m2 D1-3 + paclitaxel 175 mg/m2) q21d vs chemotherapy alone (2 x 2 factorial, four arms)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "cisplatin + paclitaxel": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 114,
+     "evidence_quote": "| Hypertension ≥ G2 | 25% | 2% | <0.001 | || | GI/GU fistula ≥ G3 | 6% | 0% | 0.002 | || | Thromboembolic event ≥ G3 | 8% | 1% | 0.001 | || | Neutropenia ≥ G4 | similar | similar | NS | || | Fatal AE | 1.8% (4 pts) | 1.8% (4 pts) | 1.0 |"
+    },
+    "topotecan + paclitaxel": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 111,
+     "evidence_quote": "| Hypertension ≥ G2 | 25% | 2% | <0.001 | || | GI/GU fistula ≥ G3 | 6% | 0% | 0.002 | || | Thromboembolic event ≥ G3 | 8% | 1% | 0.001 | || | Neutropenia ≥ G4 | similar | similar | NS | || | Fatal AE | 1.8% (4 pts) | 1.8% (4 pts) | 1.0 |"
+    },
+    "cisplatin + paclitaxel + bevacizumab": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 115,
+     "evidence_quote": "| Hypertension ≥ G2 | 25% | 2% | <0.001 | || | GI/GU fistula ≥ G3 | 6% | 0% | 0.002 | || | Thromboembolic event ≥ G3 | 8% | 1% | 0.001 | || | Neutropenia ≥ G4 | similar | similar | NS | || | Fatal AE | 1.8% (4 pts) | 1.8% (4 pts) | 1.0 |"
+    },
+    "topotecan + paclitaxel + bevacizumab": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 112,
+     "evidence_quote": "| Hypertension ≥ G2 | 25% | 2% | <0.001 | || | GI/GU fistula ≥ G3 | 6% | 0% | 0.002 | || | Thromboembolic event ≥ G3 | 8% | 1% | 0.001 | || | Neutropenia ≥ G4 | similar | similar | NS | || | Fatal AE | 1.8% (4 pts) | 1.8% (4 pts) | 1.0 |"
+    }
+   },
+   "signature_ae": [
+    "hypertension >= G2 (25% bevacizumab)",
+    "GI/GU fistula >= G3 (6%, all previously irradiated)",
+    "thromboembolism >= G3 (8%)",
+    "neutropenia >= G4 (36% vs 26%, 2017)",
+    "febrile neutropenia 5% both",
+    "neurosensory G>=3 (cisplatin-paclitaxel backbone)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2014_Tewari_New England Journal of Medicine.md",
+   "additional_sources": [
+    "GO_summaries/2017_Tewari_GOG-240 Final OS.md",
+    "GO_summaries/2023_Tewari_GOG-240 Topotecan-Paclitaxel Final OS.md"
+   ],
+   "evidence_quote": "| Hypertension ≥ G2 | 25% | 2% | <0.001 | || | GI/GU fistula ≥ G3 | 6% | 0% | 0.002 | || | Thromboembolic event ≥ G3 | 8% | 1% | 0.001 | || | Neutropenia ≥ G4 | similar | similar | NS | || | Fatal AE | 1.8% (4 pts) | 1.8% (4 pts) | 1.0 |",
+   "notes": "No per-arm or per-patient any-cause G>=3 total is printed in any of the three extracts; toxicity is reported pooled by bevacizumab (220 vs 220, 2014/2017) or by chemotherapy backbone (229 cisplatin-paclitaxel vs 223 topotecan-paclitaxel, 2023), so all four arms are not_reported. Tewari 2017 (final): fistula of any grade 32/220 (15%) with bevacizumab vs 3/220 (1%) without, every case previously irradiated; grade 3 fistula 13 (6%) vs 1 (<1%); grade >= 2 hypertension 25% vs 2%; grade >= 4 neutropenia 36% vs 26%; grade >= 3 thrombosis/embolism 8% vs 2%; no fistula caused surgical emergency, sepsis or death. Tewari 2023 (backbone): no toxic deaths attributed to either backbone; less grade >= 3 neurosensory toxicity with topotecan-paclitaxel (OR 0.25). Fatal AEs 1.8% vs 1.8% (2014). No bevacizumab discontinuations for hypertension; AE discontinuation and dose reduction not reported. Arm order follows the 2017 extract."
+  },
+  {
+   "trial": "GOG-169 (Moore 2004)",
+   "regimen": "cisplatin 50 mg/m2 + paclitaxel 135 mg/m2 (24-h) q21d x6 vs cisplatin 50 mg/m2, stage IVB / recurrent / persistent squamous cell carcinoma",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "cisplatin + paclitaxel": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 130,
+     "evidence_quote": "| Leukopenia | 1.5 | 1.5 | 35.7 | 17.0 | || | Neutropenia | 2.3 | 0.8 | 20.9 | 45.7 | || | Anemia | 9.2 | 3.8 | 22.5 | 5.4 | || - G3/4 anemia and neutropenia significantly more common with CP."
+    },
+    "cisplatin alone": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 134,
+     "evidence_quote": "| Leukopenia | 1.5 | 1.5 | 35.7 | 17.0 | || | Neutropenia | 2.3 | 0.8 | 20.9 | 45.7 | || | Anemia | 9.2 | 3.8 | 22.5 | 5.4 | || - G3/4 anemia and neutropenia significantly more common with CP."
+    }
+   },
+   "signature_ae": [
+    "neutropenia (20.9% G3 + 45.7% G4 with paclitaxel)",
+    "leukopenia",
+    "anaemia (22.5% G3)",
+    "nausea/vomiting",
+    "alopecia (64% vs 12%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2004_Moore_GOG-169.md",
+   "evidence_quote": "| Leukopenia | 1.5 | 1.5 | 35.7 | 17.0 | || | Neutropenia | 2.3 | 0.8 | 20.9 | 45.7 | || | Anemia | 9.2 | 3.8 | 22.5 | 5.4 | || - G3/4 anemia and neutropenia significantly more common with CP.",
+   "notes": "Per-category prevalence by grade only (%, cisplatin n = 134, CP n = 130); no per-patient any-cause total, not summed. Treatment-related deaths not stated in the extract. No QoL detriment from the combination. Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "GOG cisplatin schedules (Bonomi 1985)",
+   "regimen": "cisplatin 50 mg/m2 q21d vs 100 mg/m2 q21d vs 20 mg/m2 D1-5 q21d, advanced / recurrent squamous cell carcinoma",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "cisplatin 50 mg/m2 q21d": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 162,
+     "evidence_quote": "Hematologic toxicity was evaluable in 485 of 497 patients with adequate nadir counts. || | 50 mg/m² q3wk | 119 | 29 | 13 | 1 | 0 | 162 | || | 100 mg/m² q3wk | 100 | 35 | 33 | 11 | 1 | 180 | || | 20 mg/m²/d × 5 | 74 | 33 | 30 | 6 | 0 | 143 | || | **BUN >40 mg/dL and/or creatinine >2.0 mg/dL** | **7%** | **14%** | **17%** |"
+    },
+    "cisplatin 100 mg/m2 q21d": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 180,
+     "evidence_quote": "Hematologic toxicity was evaluable in 485 of 497 patients with adequate nadir counts. || | 50 mg/m² q3wk | 119 | 29 | 13 | 1 | 0 | 162 | || | 100 mg/m² q3wk | 100 | 35 | 33 | 11 | 1 | 180 | || | 20 mg/m²/d × 5 | 74 | 33 | 30 | 6 | 0 | 143 | || | **BUN >40 mg/dL and/or creatinine >2.0 mg/dL** | **7%** | **14%** | **17%** |"
+    },
+    "cisplatin 20 mg/m2 D1-5 q21d": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 143,
+     "evidence_quote": "Hematologic toxicity was evaluable in 485 of 497 patients with adequate nadir counts. || | 50 mg/m² q3wk | 119 | 29 | 13 | 1 | 0 | 162 | || | 100 mg/m² q3wk | 100 | 35 | 33 | 11 | 1 | 180 | || | 20 mg/m²/d × 5 | 74 | 33 | 30 | 6 | 0 | 143 | || | **BUN >40 mg/dL and/or creatinine >2.0 mg/dL** | **7%** | **14%** | **17%** |"
+    }
+   },
+   "signature_ae": [
+    "nausea/vomiting (74-83%, all regimens)",
+    "leukopenia (GOG grade 3-4 WBC 1/162 vs 12/180 vs 6/143)",
+    "nephrotoxicity (7% / 14% / 17%)",
+    "hearing loss (12% at 100 mg/m2)",
+    "neurotoxicity"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/1985_Bonomi_GOG Three Cisplatin Dose Schedules.md",
+   "evidence_quote": "Hematologic toxicity was evaluable in 485 of 497 patients with adequate nadir counts. || | 50 mg/m² q3wk | 119 | 29 | 13 | 1 | 0 | 162 | || | 100 mg/m² q3wk | 100 | 35 | 33 | 11 | 1 | 180 | || | 20 mg/m²/d × 5 | 74 | 33 | 30 | 6 | 0 | 143 | || | **BUN >40 mg/dL and/or creatinine >2.0 mg/dL** | **7%** | **14%** | **17%** |",
+   "notes": "1985 GOG grading of WBC and platelets by regimen only (grade 3-4 WBC 1, 12 and 6 patients; platelets 2, 2 and 4) plus threshold-based summary rates; no per-patient G>=3 total, not summed. 16 of the 22 women with grade 3-4 nephrotoxicity had obstructive uropathy on baseline IVP despite normal chemistries. Arms listed in the extract's order (50 / 100 / 20 x 5). Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "GOG-204 (Monk 2009)",
+   "regimen": "cisplatin 50 mg/m2 + paclitaxel 135 mg/m2 (24-h) (reference) vs cisplatin + vinorelbine vs cisplatin + gemcitabine vs cisplatin + topotecan, stage IVB / recurrent / persistent",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "cisplatin + paclitaxel (PC)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 103,
+     "evidence_quote": "## Toxicity (Grade ≥3, %) || | Neutropenia | 78.2 | 78.3 | 42.2 | 82.6 | || | Thrombocytopenia | 6.9 | 7.5 | 28.4 | 34.9 | || | Febrile neutropenia | 12.9 | 12.4 | 6.4 | 10.1 | || - 11 treatment-related deaths (PC 2, VC 4, GC 2, TC 3; P = 0.84)."
+    },
+    "cisplatin + vinorelbine (VC)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 108,
+     "evidence_quote": "## Toxicity (Grade ≥3, %) || | Neutropenia | 78.2 | 78.3 | 42.2 | 82.6 | || | Thrombocytopenia | 6.9 | 7.5 | 28.4 | 34.9 | || | Febrile neutropenia | 12.9 | 12.4 | 6.4 | 10.1 | || - 11 treatment-related deaths (PC 2, VC 4, GC 2, TC 3; P = 0.84)."
+    },
+    "cisplatin + gemcitabine (GC)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 112,
+     "evidence_quote": "## Toxicity (Grade ≥3, %) || | Neutropenia | 78.2 | 78.3 | 42.2 | 82.6 | || | Thrombocytopenia | 6.9 | 7.5 | 28.4 | 34.9 | || | Febrile neutropenia | 12.9 | 12.4 | 6.4 | 10.1 | || - 11 treatment-related deaths (PC 2, VC 4, GC 2, TC 3; P = 0.84)."
+    },
+    "cisplatin + topotecan (TC)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 111,
+     "evidence_quote": "## Toxicity (Grade ≥3, %) || | Neutropenia | 78.2 | 78.3 | 42.2 | 82.6 | || | Thrombocytopenia | 6.9 | 7.5 | 28.4 | 34.9 | || | Febrile neutropenia | 12.9 | 12.4 | 6.4 | 10.1 | || - 11 treatment-related deaths (PC 2, VC 4, GC 2, TC 3; P = 0.84)."
+    }
+   },
+   "signature_ae": [
+    "neutropenia (78-83% G>=3 except gemcitabine 42%)",
+    "leukopenia",
+    "thrombocytopenia (28-35% gemcitabine/topotecan)",
+    "anaemia",
+    "febrile neutropenia (6-13%)",
+    "nausea/vomiting (paclitaxel)",
+    "thrombosis/embolism ~5%"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2009_Monk_Journal of Clinical Oncology.md",
+   "evidence_quote": "## Toxicity (Grade ≥3, %) || | Neutropenia | 78.2 | 78.3 | 42.2 | 82.6 | || | Thrombocytopenia | 6.9 | 7.5 | 28.4 | 34.9 | || | Febrile neutropenia | 12.9 | 12.4 | 6.4 | 10.1 | || - 11 treatment-related deaths (PC 2, VC 4, GC 2, TC 3; P = 0.84).",
+   "notes": "Per-AE grade >= 3 percentages only (PC 103, VC 108, GC 112, TC 111 evaluable); no per-patient any-cause total, not summed. 11 treatment-related deaths (PC 2, VC 4, GC 2, TC 3). QoL not different after adjustment. Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "JCOG0505 (Kitagawa 2015)",
+   "regimen": "paclitaxel 175 mg/m2 (3-h) + carboplatin AUC5 D1 (TC) vs paclitaxel 135 mg/m2 (24-h) D1 + cisplatin 50 mg/m2 D2 (TP), q3w, metastatic or recurrent",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "paclitaxel + carboplatin (TC)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 9.5,
+     "dose_reduction_pct": "not_reported",
+     "n": 126,
+     "evidence_quote": "Safety population: TP n = 125 (neutropenia denominators n = 124 due to missing data) and TC n = 126. || | Neutropenia grade 3–4 | 106 (85.5%) | 96 (76.2%) | — | || | Febrile neutropenia | 20 (16.0%) | 9 (7.1%) | 0.031 | || - **One treatment-related death** — interstitial pneumonitis in the TC group. || - Termination for intolerable adverse events: 9.5% (TC) vs 11.8% (TP)."
+    },
+    "paclitaxel + cisplatin (TP)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 11.8,
+     "dose_reduction_pct": "not_reported",
+     "n": 125,
+     "evidence_quote": "Safety population: TP n = 125 (neutropenia denominators n = 124 due to missing data) and TC n = 126. || | Neutropenia grade 3–4 | 106 (85.5%) | 96 (76.2%) | — | || | Febrile neutropenia | 20 (16.0%) | 9 (7.1%) | 0.031 | || - **One treatment-related death** — interstitial pneumonitis in the TC group. || - Termination for intolerable adverse events: 9.5% (TC) vs 11.8% (TP)."
+    }
+   },
+   "signature_ae": [
+    "neutropenia G4 (75.0% TP vs 45.2% TC)",
+    "febrile neutropenia (16.0% vs 7.1%)",
+    "anaemia (44.4% TC)",
+    "thrombocytopenia (24.6% TC)",
+    "creatinine (TP)",
+    "sensory neuropathy (TC)"
+   ],
+   "discontinuation_pct": "9.5 (TC) / 11.8 (TP)",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2015_Kitagawa_JCOG0505.md",
+   "evidence_quote": "Safety population: TP n = 125 (neutropenia denominators n = 124 due to missing data) and TC n = 126. || | Neutropenia grade 3–4 | 106 (85.5%) | 96 (76.2%) | — | || | Febrile neutropenia | 20 (16.0%) | 9 (7.1%) | 0.031 | || - **One treatment-related death** — interstitial pneumonitis in the TC group. || - Termination for intolerable adverse events: 9.5% (TC) vs 11.8% (TP).",
+   "notes": "Per-AE grade >= 3 only; no per-patient any-cause total, not summed. Discontinuation = termination for intolerable adverse events (9.5% TC vs 11.8% TP). One treatment-related death (interstitial pneumonitis, TC). Blood transfusion 18.3% TC vs 8.7% TP. Dose reduction not reported."
+  },
+  {
+   "trial": "GOG 76-U (Muderspach 2001)",
+   "regimen": "topotecan 1.5 mg/m2 D1-5 q4w, single arm, squamous cell carcinoma",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "signature_ae": [
+    "neutropenia G4 (68.2%)",
+    "thrombocytopenia G4 (18.2%)",
+    "anaemia G3-4 (13.6%)",
+    "gastrointestinal G3-4 (9.1%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2001_Muderspach_GOG-76-U Topotecan Cervix.md",
+   "evidence_quote": "Adverse effects (N = 44, i.e. the 43 response-evaluable patients plus the one patient evaluable for toxicity only): || | **Neutropenia, grade 4** | **30 (68.2)** | || | **Thrombocytopenia, grade 4** | **8 (18.2)** | || - **One treatment-related death**: a patient who never completed the 5 days of topotecan was admitted with sepsis and died of complications of overwhelming infection and disease.",
+   "notes": "Single arm, n = 44 evaluable for toxicity. Per-AE grade counts only; no per-patient G>=3 total. One treatment-related death (sepsis). Haematologic toxicity managed with delay, dose reduction or G-CSF but no dose-reduction rate is printed. Called 'GOG 76-U topotecan' in the adenocarcinoma note."
+  }
+ ],
+ "table_3b_second_line": [
+  {
+   "trial": "EMPOWER-Cervical 1 / GOG-3016 / ENGOT-cx9 (Tewari 2022)",
+   "regimen": "cemiplimab 350 mg q3w (<= 96 wk) vs investigator's-choice single-agent chemotherapy (pemetrexed, topotecan, irinotecan, gemcitabine or vinorelbine), after first-line platinum",
+   "grade3plus_any_pct": 45.0,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "cemiplimab": {
+     "grade3plus_any_pct": 45.0,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 8.7,
+     "dose_reduction_pct": "not_reported",
+     "n": 300,
+     "evidence_quote": "### Arm 1 — Cemiplimab (n = 304; safety n = 300) || ### Arm 2 — Investigator's choice single-agent chemotherapy (n = 304; safety n = 290) || | Any AE | 88.3% / 45.0% | 91.4% / 53.4% | || | Led to discontinuation | 8.7% / 6.7% | 5.2% / 3.8% | || | Led to death | 1.7% / 1.7% | 0.7% / 0.7% |"
+    },
+    "single-agent chemotherapy": {
+     "grade3plus_any_pct": 53.4,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 5.2,
+     "dose_reduction_pct": "not_reported",
+     "n": 290,
+     "evidence_quote": "### Arm 1 — Cemiplimab (n = 304; safety n = 300) || ### Arm 2 — Investigator's choice single-agent chemotherapy (n = 304; safety n = 290) || | Any AE | 88.3% / 45.0% | 91.4% / 53.4% | || | Led to discontinuation | 8.7% / 6.7% | 5.2% / 3.8% | || | Led to death | 1.7% / 1.7% | 0.7% / 0.7% |"
+    }
+   },
+   "signature_ae": [
+    "anaemia (12.0% vs 26.9% G3-5)",
+    "UTI",
+    "neutropenia (chemotherapy)",
+    "nausea/vomiting (chemotherapy)",
+    "immune-related AEs 15.7%"
+   ],
+   "discontinuation_pct": 8.7,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2022_Tewari_EMPOWER-Cervical-1.md",
+   "additional_sources": [
+    "GO_summaries/2025_Oaknin_EMPOWER-Cervical-1 Final OS.md"
+   ],
+   "evidence_quote": "### Arm 1 — Cemiplimab (n = 304; safety n = 300) || ### Arm 2 — Investigator's choice single-agent chemotherapy (n = 304; safety n = 290) || | Any AE | 88.3% / 45.0% | 91.4% / 53.4% | || | Led to discontinuation | 8.7% / 6.7% | 5.2% / 3.8% | || | Led to death | 1.7% / 1.7% | 0.7% / 0.7% |",
+   "notes": "Table columns are any grade / grade 3-5, so 45.0% vs 53.4% is any-cause G3-5 (includes AEs leading to death 1.7% vs 0.7%). Final OS extract (Oaknin 2025): at least one grade >= 3 AE in 47% of the cemiplimab arm, discontinuation due to AEs 9.0% vs 5.2%, treatment-related deaths 0 vs 2, AESI 12% with 4% discontinuing cemiplimab for an AESI. Discontinuation = AE leading to discontinuation (any cause). Dose reduction not reported."
+  },
+  {
+   "trial": "innovaTV 301 / ENGOT-cx12 / GOG-3057 (Vergote 2024)",
+   "regimen": "tisotumab vedotin 2.0 mg/kg q3w vs investigator's-choice chemotherapy, second or third line",
+   "grade3plus_any_pct": 52.0,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "tisotumab vedotin": {
+     "grade3plus_any_pct": 52.0,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 14.8,
+     "dose_reduction_pct": "not_reported",
+     "n": 250,
+     "evidence_quote": "## Toxicity (safety: TV n = 250, chemo n = 239) || | Any event | 98.4% / 52.0% | 99.2% / 62.3% | || | Treatment-related death | 2 patients (0.8%) | 1 patient (0.4%) | || | Discontinuation for AE | 14.8% | 3.8% |"
+    },
+    "investigator's-choice chemotherapy": {
+     "grade3plus_any_pct": 62.3,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": 3.8,
+     "dose_reduction_pct": "not_reported",
+     "n": 239,
+     "evidence_quote": "## Toxicity (safety: TV n = 250, chemo n = 239) || | Any event | 98.4% / 52.0% | 99.2% / 62.3% | || | Treatment-related death | 2 patients (0.8%) | 1 patient (0.4%) | || | Discontinuation for AE | 14.8% | 3.8% |"
+    }
+   },
+   "signature_ae": [
+    "ocular events (52.8%; conjunctivitis 31.2%, keratitis 15.6%, dry eye)",
+    "peripheral neuropathy (38.4%; G>=3 5.6%)",
+    "bleeding (epistaxis 26.0%)",
+    "anaemia (chemotherapy 27.6% G>=3)",
+    "neutropenia (chemotherapy)"
+   ],
+   "discontinuation_pct": 14.8,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2024_Vergote_innovaTV-301.md",
+   "evidence_quote": "## Toxicity (safety: TV n = 250, chemo n = 239) || | Any event | 98.4% / 52.0% | 99.2% / 62.3% | || | Treatment-related death | 2 patients (0.8%) | 1 patient (0.4%) | || | Discontinuation for AE | 14.8% | 3.8% |",
+   "notes": "Any-cause grade >= 3 (table columns any / G3+). Treatment-related deaths 2 (0.8%) vs 1 (0.4%). Discontinuation = discontinuation for AE. No grade 4 ocular or neuropathy events. Treatment-related G>=3 total and dose reduction not reported."
+  },
+  {
+   "trial": "DESTINY-PanTumor02, cervical cohort (Meric-Bernstam 2024)",
+   "regimen": "trastuzumab deruxtecan 5.4 mg/kg q3w (single arm, HER2 IHC 3+/2+)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": 40.8,
+   "signature_ae": [
+    "nausea (65.0% cervical cohort)",
+    "anaemia (37.5% cervical)",
+    "diarrhoea (37.5% cervical)",
+    "neutropenia (20.0% cervical)",
+    "fatigue",
+    "ILD/pneumonitis (10.5%, 3 fatal, none in the cervical cohort)"
+   ],
+   "discontinuation_pct": 8.6,
+   "dose_reduction_pct": 20.2,
+   "source": "GO_summaries/2024_Meric-Bernstam_DESTINY-PanTumor02.md",
+   "evidence_quote": "| Drug-related G3+ | 109 (40.8%) | || | Led to discontinuation | 23 (8.6%) | || | Led to dose reduction | 54 (20.2%) | || - Adjudicated drug-related interstitial lung disease (ILD)/pneumonitis: 28 patients (10.5%) — grade 1 in 7 (2.6%), grade 2 in 17 (6.4%), grade 3 in 1 (0.4%), grade 5 (fatal) in 3 (1.1%; one each in biliary tract, endometrial, other tumors).",
+   "notes": "ALL-COHORT values (n = 267, seven tumour types); the cervical cohort (n = 40) has only any-grade drug-related AE frequencies printed, no cohort G>=3, discontinuation or dose-reduction rate. G3+, discontinuation and dose reduction are drug-related. Drug-related deaths 4 (1.5%). Same entry structure as the EMCA engine's endometrial-cohort record."
+  },
+  {
+   "trial": "CheckMate 358, cervical cohort (Naumann 2019)",
+   "regimen": "nivolumab 240 mg q2w; nivolumab 3 mg/kg q2w + ipilimumab 1 mg/kg q6w (NIVO3+IPI1); nivolumab 1 mg/kg + ipilimumab 3 mg/kg q3w x4 -> nivolumab 240 mg q2w (NIVO1+IPI3), recurrent/metastatic, PD-(L)1-naive",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "21 (nivolumab) / 29 (NIVO3+IPI1) / 46 (NIVO1+IPI3), treatment-related grade 3-4",
+   "arms": {
+    "nivolumab monotherapy": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": 21,
+     "discontinuation_pct": 11,
+     "dose_reduction_pct": "not_reported",
+     "n": 19,
+     "evidence_quote": "Safety was an exploratory endpoint, analysed in all treated patients; events between the first dose and 30 days after the last dose. || | Grade 3–4 treatment-related AE | 4 (21%) | 13 (29%) | 52 (46%) | || | Discontinuation for treatment-related AE | 2 (11%) | 8 (18%) | 27 (24%) | || | Treatment-related death | 0 | 0 | 1 (immune-mediated colitis) |"
+    },
+    "nivolumab 3 mg/kg + ipilimumab 1 mg/kg (NIVO3+IPI1)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": 29,
+     "discontinuation_pct": 18,
+     "dose_reduction_pct": "not_reported",
+     "n": 45,
+     "evidence_quote": "Safety was an exploratory endpoint, analysed in all treated patients; events between the first dose and 30 days after the last dose. || | Grade 3–4 treatment-related AE | 4 (21%) | 13 (29%) | 52 (46%) | || | Discontinuation for treatment-related AE | 2 (11%) | 8 (18%) | 27 (24%) | || | Treatment-related death | 0 | 0 | 1 (immune-mediated colitis) |"
+    },
+    "nivolumab 1 mg/kg + ipilimumab 3 mg/kg (NIVO1+IPI3, pooled)": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": 46,
+     "discontinuation_pct": 24,
+     "dose_reduction_pct": "not_reported",
+     "n": 112,
+     "evidence_quote": "Safety was an exploratory endpoint, analysed in all treated patients; events between the first dose and 30 days after the last dose. || | Grade 3–4 treatment-related AE | 4 (21%) | 13 (29%) | 52 (46%) | || | Discontinuation for treatment-related AE | 2 (11%) | 8 (18%) | 27 (24%) | || | Treatment-related death | 0 | 0 | 1 (immune-mediated colitis) |"
+    }
+   },
+   "signature_ae": [
+    "diarrhoea / colitis",
+    "hepatitis (G3-4 7% NIVO3+IPI1, 16% NIVO1+IPI3)",
+    "increased lipase",
+    "pneumonitis",
+    "hypothyroidism (low grade)",
+    "anaemia (NIVO1+IPI3)"
+   ],
+   "discontinuation_pct": "11 (nivolumab) / 18 (NIVO3+IPI1) / 24 (NIVO1+IPI3), for treatment-related AE",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2024_Oaknin_CheckMate 358 Cervical.md",
+   "additional_sources": [
+    "GO_summaries/2019_Naumann_CheckMate 358.md"
+   ],
+   "evidence_quote": "Safety was an exploratory endpoint, analysed in all treated patients; events between the first dose and 30 days after the last dose. || | Grade 3–4 treatment-related AE | 4 (21%) | 13 (29%) | 52 (46%) | || | Discontinuation for treatment-related AE | 2 (11%) | 8 (18%) | 27 (24%) | || | Treatment-related death | 0 | 0 | 1 (immune-mediated colitis) |",
+   "notes": "Treatment-related grade 3-4 only (one treatment-related death, immune-mediated colitis, in the pooled NIVO1+IPI3 group); any-cause G>=3 not reported. Discontinuation = for treatment-related AE. NIVO3+IPI1 and NIVO1+IPI3 were randomised (45 each); NIVO1+IPI3 is pooled with a 67-patient expansion (n = 112); nivolumab monotherapy is a separate non-randomised cohort (n = 19). Naumann 2019 (nivolumab monotherapy, n = 19): any TRAE 63.2%, grade 3-4 TRAE 21.1%, TRAE discontinuation 1 (5.3%, grade 3 pneumonitis) vs 2 (11%) in the 2024 long-term report. Dose reduction not applicable/not reported."
+  },
+  {
+   "trial": "Balstilimab + zalifrelimab (O'Malley 2022)",
+   "regimen": "balstilimab 3 mg/kg q2w + zalifrelimab (anti-CTLA-4) 1 mg/kg q6w, <= 24 months, single arm, second line",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": 20.0,
+   "signature_ae": [
+    "hypothyroidism (16.8%)",
+    "diarrhoea / immune-mediated enterocolitis",
+    "ALT/AST increased (leading cause of interruption)",
+    "hyperthyroidism",
+    "rash"
+   ],
+   "discontinuation_pct": 7.7,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2022_O'Malley_Balstilimab-Zalifrelimab Cervical.md",
+   "evidence_quote": "Safety population n = 155. Any-grade treatment-related adverse events in 110 (71.0%); most were grade 1–2. || | **TRAE ≥ grade 3 (any)** | **31 (20.0)** | || | TRAE leading to dose interruption | 19 (12.3) | || | TRAE leading to discontinuation | 12 (7.7) |",
+   "notes": "Treatment-related G>=3 only; any-cause not reported. Discontinuation = TRAE leading to discontinuation. Dose interruption 12.3% is not a reduction, so dose_reduction_pct is not_reported. Three treatment-related deaths (pneumonitis, immune-mediated nephritis, diabetes mellitus) reported as 1.3% although 3/155 = 1.9% (extract flags the inconsistency). n = 155 treated (125 efficacy-evaluable)."
+  },
+  {
+   "trial": "innovaTV 204 / GOG-3023 / ENGOT-cx6 (Coleman 2021)",
+   "regimen": "tisotumab vedotin 2.0 mg/kg q3w, single arm phase 2, <= 2 prior regimens",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": 28,
+   "signature_ae": [
+    "ocular (53%; conjunctivitis 26%, dry eye 23%, keratitis 11%; ulcerative keratitis G3 2%)",
+    "bleeding (39%, mostly grade 1 epistaxis)",
+    "peripheral neuropathy (33%; G3 7%; least reversible)",
+    "alopecia",
+    "fatigue",
+    "septic shock (1 fatal)"
+   ],
+   "discontinuation_pct": 12,
+   "dose_reduction_pct": 22,
+   "source": "GO_summaries/2021_Coleman_innovaTV-204.md",
+   "evidence_quote": "Treatment-related adverse events occurred in **93/101 (92%)** patients: grade 1–2 in 65 (65%), grade 3 in 25 (25%), grade 4 in 2 (2%), grade 5 in 1 (1%). **Grade ≥3 treatment-related adverse events in 28 (28%)**; serious treatment-related adverse events in **13 (13%)**. || **Dose management**: treatment-related adverse events led to dose interruption in 24 (24%), dose reduction in 22 (22%), and discontinuation in 12 (12%).",
+   "notes": "Treatment-related only (worst grade per patient: G3 25% + G4 2% + G5 1% = 28%, as printed); any-cause G>=3 not reported. Discontinuation and dose reduction are for treatment-related AEs. One treatment-related death (septic shock). n = 101 treated."
+  },
+  {
+   "trial": "Irinotecan (Verschraegen 1997)",
+   "regimen": "irinotecan 125 mg/m2 weekly x4, 2 weeks off, single arm, previously treated squamous cell carcinoma",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "signature_ae": [
+    "nausea/vomiting (G3/4 45%)",
+    "diarrhoea (G3/4 24%)",
+    "anaemia (G3/4 62%)",
+    "granulocytopenia (G3/4 36%, neutropenic fever 7)",
+    "drug fever",
+    "alopecia"
+   ],
+   "discontinuation_pct": 0,
+   "dose_reduction_pct": 77,
+   "source": "GO_summaries/1997_Verschraegen_Irinotecan Cervix.md",
+   "evidence_quote": "- **GI:** nausea/vomiting 93% (G3/4 45%); diarrhea 76% (G3/4 24%); anorexia G3 7%. || - **Hematologic:** anemia 90% (G3/4 62%); leukopenia 76% (G3/4 31%); granulocytopenia 64% (G3/4 36%, 7 with neutropenic fever); thrombocytopenia 12% (G3/4 5%, only 2 pts < 50,000/µL). || | ≥ 1 dose reduction | 30/39 pts started at 125 (77%) | || - No patient removed for intolerable toxicity; no treatment-related deaths.",
+   "notes": "Per-AE G3/4 percentages only (n = 42); no per-patient total. Dose reduction: >= 1 reduction in 30 of 39 who started at 125 mg/m2 (77%) - the 77% figure is in the regimen-detail section of the extract. No patient removed for intolerable toxicity (discontinuation 0); no treatment-related deaths. GI toxicity was dose-dependent, marrow toxicity was not."
+  },
+  {
+   "trial": "Pemetrexed, GOG (Miller 2008)",
+   "regimen": "pemetrexed 900 mg/m2 q21d, single arm (GOG-0127T), after one prior regimen",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "signature_ae": [
+    "anaemia (41% G3-4)",
+    "leukopenia (30%)",
+    "neutropenia (26%)",
+    "infection (22%)",
+    "constitutional (26%)",
+    "thrombocytopenia (19%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2008_Miller_GOG-127T Pemetrexed.md",
+   "evidence_quote": "CTCAE v3.0, all cycles (Table 2, n=27). No treatment-related deaths. || | **Anaemia** | 8 | 3 | **11 (41%)** | || | Leukopenia | 7 | 1 | 8 (30%) | || | Neutropenia | 5 | 2 | 7 (26%) | || | Infection | 5 | 1 | 6 (22%) | || - Note: the abstract states grade 3–4 infection in 26%; the Results text and Table 2 give 22% (6/27). The table value is used here.",
+   "notes": "Per-AE grade 3/4 counts only (n = 27); no per-patient total. No treatment-related deaths. The note row prints infection 26% (abstract); the extract's table gives 22% (6/27). Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "Balstilimab (O'Malley 2021)",
+   "regimen": "balstilimab 3 mg/kg q2w, <= 24 months, single arm phase II, after a prior platinum-based regimen",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": 11.8,
+   "signature_ae": [
+    "asthenia (23.0%)",
+    "diarrhoea / immune-mediated enterocolitis (G>=3 3.1%)",
+    "pruritus",
+    "immune-mediated pneumonitis (3.1%; leading cause of discontinuation)",
+    "hypothyroidism"
+   ],
+   "discontinuation_pct": 4.3,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2021_O'Malley_Balstilimab Phase II Cervical.md",
+   "evidence_quote": "Safety population n = 161. Any-grade treatment-related adverse events in 115 (71.4%). || | **Grade ≥3 TRAE (any)** | **19 (11.8)** | || | TRAE leading to dose interruption | 23 (14.3) | || | TRAE leading to discontinuation | 7 (4.3) |",
+   "notes": "Treatment-related G>=3 only; any-cause not reported. Discontinuation = TRAE leading to discontinuation. Dose interruption 14.3% is not a reduction. One death possibly related to treatment (unknown cause, 41 days after last dose). n = 161 treated (140 efficacy-evaluable)."
+  },
+  {
+   "trial": "KEYNOTE-158, cervical cohort (Chung 2019)",
+   "regimen": "pembrolizumab 200 mg q3w, <= 2 years, single arm, previously treated (PD-L1 CPS >= 1 for activity)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": 12.2,
+   "signature_ae": [
+    "hypothyroidism (10.2%)",
+    "hyperthyroidism",
+    "AST/ALT increased (G3-4 2.0% / 3.1%)",
+    "hepatitis G3-4 (2.0%)",
+    "severe skin reactions G3-4 (2.0%)",
+    "fatigue"
+   ],
+   "discontinuation_pct": 4.1,
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2019_Chung_Journal of Clinical Oncology.md",
+   "evidence_quote": "## Toxicity (CTCAE v4.0; N = 98) || | Any treatment-related AE | 64 (65.3%) | 12 (12.2%) | || - 4 (4.1%) discontinued for treatment-related AE. || - No treatment-related deaths.",
+   "notes": "Treatment-related grade 3-4 only (no treatment-related deaths, so = TRAE G>=3); any-cause not reported. Discontinuation = for treatment-related AE. Immune-mediated AEs in 25.5%. Dose reduction not applicable/not reported. n = 98."
+  },
+  {
+   "trial": "GOG-227C (Monk 2009)",
+   "regimen": "bevacizumab 15 mg/kg q21d, single arm phase II, 1-2 prior cytotoxic regimens, squamous cell carcinoma",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "signature_ae": [
+    "hypertension (7 G3)",
+    "thromboembolism (5; 10.9%)",
+    "GI (3 G3, 1 G4)",
+    "urinary fistula (1 G4)",
+    "vaginal bleeding (1 G4)",
+    "infection (1 fatal)"
+   ],
+   "discontinuation_pct": "4 of 46 discontinued for toxicity (all thrombosis)",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2009_Monk_Journal of Clinical Oncology_2.md",
+   "evidence_quote": "| Discontinuation reasons (44 of 46 stopped by April 2008) | Progression 36; toxicity 4 (all thrombosis); bowel obstruction 1; refusal 1; thrombosis unrelated to treatment 1 | || ## Toxicity (Table 3, reported as at least possibly related to study drug) || | Hypertension | 7 | 0 | || | Thromboembolism (DVT 5; 1 with PE) | 4 | 1 | || - 1 grade 5 infection (treatment-related death).",
+   "notes": "Per-AE G3/G4 counts 'at least possibly related to study drug' (n = 46); no per-patient G>=3 total. One grade 5 infection (treatment-related death). Discontinuation for toxicity 4 of 46 (all thrombosis), from the disposition table, carried as a string. Hypertension and proteinuria did not require discontinuation. Dose reduction not reported."
+  },
+  {
+   "trial": "Docetaxel, GOG (Garcia 2007)",
+   "regimen": "docetaxel 100 mg/m2 (1-h) q21d, single arm phase II, refractory squamous cell carcinoma",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "signature_ae": [
+    "neutropenia (8 G3 + 7 G4 of 23 = 65%)",
+    "leukopenia",
+    "transfusion required (10 G3)",
+    "gastrointestinal",
+    "infection"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2007_Garcia_American Journal of Clinical Oncology.md",
+   "evidence_quote": "## Toxicity (Table 2, n = 23; counts of G3/G4) || | Leukopenia | 8 | 6 | || | Neutropenia | 8 | 7 (1 febrile neutropenia) | || - No treatment-related deaths.",
+   "notes": "Per-AE G3/G4 counts only (n = 23); no per-patient total. The note's 'grade 3-4 neutropenia 65%' is 15/23. No treatment-related deaths. Closed after the first stage. Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "Gemcitabine, GOG (SCC) (Schilder 2000)",
+   "regimen": "gemcitabine 800 mg/m2 D1, 8, 15 q28d, single arm phase II, squamous cell carcinoma",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "signature_ae": [
+    "neutropenia G4 (2 patients)",
+    "anaemia G4 (1)",
+    "leukopenia (13 patients, any grade)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2000_Schilder_Gynecologic Oncology.md",
+   "evidence_quote": "## Toxicity (n = 25 evaluable) || | G4 neutropenia | 2 patients | || | G4 anemia | 1 patient | || | Treatment-related deaths | 0 |",
+   "notes": "Only grade 4 events are listed (n = 25 evaluable for toxicity); no G3 or per-patient G>=3 total. No treatment-related deaths. Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "Gemcitabine, GOG non-squamous (Schilder 2005)",
+   "regimen": "gemcitabine 800 mg/m2 D1, 8, 15 q28d, single arm phase II, non-squamous (adenocarcinoma, adenosquamous, undifferentiated)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "signature_ae": [
+    "anaemia G3 (27%)",
+    "leukopenia G3 (23%)",
+    "transfusion (23%)",
+    "pain G3 (32%, tumour-related)",
+    "deep vein thrombosis (14%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2005_Schilder_Gemcitabine Cervix NonSCC.md",
+   "evidence_quote": "## Toxicity (safety, n = 22) || | Leukopenia | 5 (23) | || | Anemia | 6 (27) | || - **No grade 4 hematologic toxicities.** || - **No treatment-related deaths.**",
+   "notes": "Grade 3 maximum per patient listed per category (n = 22); no per-patient G>=3 total, not summed. Grade 4 events (rectovaginal fistula and metabolic disturbance) attributed to disease. No treatment-related deaths. Called 'Gemcitabine, GOG (non-SCC)' in the squamous note. Discontinuation and dose reduction not reported."
+  }
+ ],
+ "table_4_neoadjuvant": [
+  {
+   "trial": "Chang 2000 (Chang 2000)",
+   "regimen": "neoadjuvant cisplatin 50 mg/m2 + vincristine 1 mg/m2 D1 + bleomycin 25 mg/m2 D1-3 x3 -> radical hysterectomy vs pelvic radiotherapy alone, bulky stage IB-IIA (6:4 allocation)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "NACT (cisplatin/vincristine/bleomycin) -> radical hysterectomy": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 68,
+     "evidence_quote": "Graded by NCI common toxicity criteria; NAC arm n = 68, R/T arm n = 50 (two patients treated elsewhere excluded). Data are numbers of patients; some patients had more than one adverse effect. **There were no treatment-related deaths.** || | Late — intestinal obstruction | 11 | 8 | 3 | 1 | 6 | 5 | 1 | 0 | || | Late — radiation proctitis | 7 | 4 | 1 | 0 | 10 | 7 | 4 | 0 |"
+    },
+    "pelvic RT alone": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 50,
+     "evidence_quote": "Graded by NCI common toxicity criteria; NAC arm n = 68, R/T arm n = 50 (two patients treated elsewhere excluded). Data are numbers of patients; some patients had more than one adverse effect. **There were no treatment-related deaths.** || | Late — intestinal obstruction | 11 | 8 | 3 | 1 | 6 | 5 | 1 | 0 | || | Late — radiation proctitis | 7 | 4 | 1 | 0 | 10 | 7 | 4 | 0 |"
+    }
+   },
+   "signature_ae": [
+    "nausea/vomiting (NAC)",
+    "diarrhoea, radiation cystitis and proctitis (RT)",
+    "intestinal obstruction G3-4 (all after both modalities)",
+    "lower-leg lymphoedema (15/24 after surgery + RT)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2000_Chang_NAC-RAH versus Radiotherapy Bulky IB-IIA.md",
+   "evidence_quote": "Graded by NCI common toxicity criteria; NAC arm n = 68, R/T arm n = 50 (two patients treated elsewhere excluded). Data are numbers of patients; some patients had more than one adverse effect. **There were no treatment-related deaths.** || | Late — intestinal obstruction | 11 | 8 | 3 | 1 | 6 | 5 | 1 | 0 | || | Late — radiation proctitis | 7 | 4 | 1 | 0 | 10 | 7 | 4 | 0 |",
+   "notes": "Per-category patient counts by grade (NAC n = 68, RT n = 50), some patients with more than one event; no per-patient total, not summed. No treatment-related deaths. All five grade 3-4 intestinal obstructions occurred in patients who had both hysterectomy and pelvic RT. Control arm is RT alone (pre-CCRT standard). Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "JCOG 0102 (Katsumata 2013)",
+   "regimen": "neoadjuvant BOMP (bleomycin, vincristine, mitomycin, cisplatin 14 mg/m2 D1-5) q3w x2-4 -> radical surgery vs radical surgery alone, stage IB2 / IIA2 / IIB squamous",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "NACT BOMP -> radical surgery": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "3 of 66 stopped NACT for toxicity (grade 3 thrombocytopenia 2, grade 3 skin toxicity 1)",
+     "dose_reduction_pct": "not_reported",
+     "n": 66,
+     "evidence_quote": "**Chemotherapy toxicity (NACT, n = 66)** || | Neutropenia | 21 | 15 | **56%** | || Nearly all toxic effects were tolerable; chemotherapy was continued in all but three patients who stopped during the third or fourth cycle (persistent grade 3 thrombocytopenia in two, grade 3 skin toxicity in one). || - Any late adverse event: **65% (43 of 66) RS versus 42% (28 of 67) NACT (P = 0.009)**. || - **One treatment-related death** in the NACT group: perforation and necrosis of the small intestine 215 days after the last radiation dose."
+    },
+    "radical surgery alone": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 66,
+     "evidence_quote": "**Chemotherapy toxicity (NACT, n = 66)** || | Neutropenia | 21 | 15 | **56%** | || Nearly all toxic effects were tolerable; chemotherapy was continued in all but three patients who stopped during the third or fourth cycle (persistent grade 3 thrombocytopenia in two, grade 3 skin toxicity in one). || - Any late adverse event: **65% (43 of 66) RS versus 42% (28 of 67) NACT (P = 0.009)**. || - **One treatment-related death** in the NACT group: perforation and necrosis of the small intestine 215 days after the last radiation dose."
+    }
+   },
+   "signature_ae": [
+    "neutropenia G3-4 56% (NACT)",
+    "leukopenia 41%",
+    "thrombocytopenia 27%",
+    "anaemia 24%",
+    "post-RT urinary retention and bowel obstruction (more with surgery alone)",
+    "lymphoedema"
+   ],
+   "discontinuation_pct": "3 of 66 stopped NACT for toxicity (grade 3 thrombocytopenia 2, grade 3 skin toxicity 1)",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2013_Katsumata_JCOG0102.md",
+   "evidence_quote": "**Chemotherapy toxicity (NACT, n = 66)** || | Neutropenia | 21 | 15 | **56%** | || Nearly all toxic effects were tolerable; chemotherapy was continued in all but three patients who stopped during the third or fourth cycle (persistent grade 3 thrombocytopenia in two, grade 3 skin toxicity in one). || - Any late adverse event: **65% (43 of 66) RS versus 42% (28 of 67) NACT (P = 0.009)**. || - **One treatment-related death** in the NACT group: perforation and necrosis of the small intestine 215 days after the last radiation dose.",
+   "notes": "Chemotherapy toxicity per category (NACT n = 66) and radiation morbidity grade 3-4 per category; no per-patient G>=3 total, not summed. 'Any early / late adverse event' (70% / 65% RS vs 55% / 42% NACT) is any-grade RT morbidity, not G>=3. Chemotherapy stopped for toxicity in 3 of 66 (persistent grade 3 thrombocytopenia 2, grade 3 skin toxicity 1), carried as a string. One treatment-related death (NACT, small-bowel perforation after RT). Control is surgery alone, not CCRT."
+  },
+  {
+   "trial": "Gupta 2018 (Gupta 2018)",
+   "regimen": "neoadjuvant paclitaxel + carboplatin q3w x3 -> radical hysterectomy (+/- adjuvant RT/CCRT) vs weekly cisplatin CCRT x5, stage IB2 / IIA / IIB squamous (single centre)",
+   "grade3plus_any_pct": "not_reported",
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "NACT paclitaxel-carboplatin -> radical hysterectomy": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 316,
+     "evidence_quote": "| Thrombocytopenia | 24 (7.6%) | 11 (3.5%) | 7 (2.2%) | 1 (0.3%) | || Grade 3–4 thrombocytopenia was significantly higher with NACT + surgery (3.5% vs 0.3%; P = 0.003). There was no significant difference between groups in grade 3–4 gastrointestinal or bladder toxicity. Perioperative haemorrhage >1000 mL occurred in 7.9% of NACT + surgery patients. || **Only vaginal toxicity remained significantly higher with concomitant chemoradiation at 24 months or later (12.0% vs 25.6%; P < 0.001).**"
+    },
+    "weekly cisplatin CCRT": {
+     "grade3plus_any_pct": "not_reported",
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 317,
+     "evidence_quote": "| Thrombocytopenia | 24 (7.6%) | 11 (3.5%) | 7 (2.2%) | 1 (0.3%) | || Grade 3–4 thrombocytopenia was significantly higher with NACT + surgery (3.5% vs 0.3%; P = 0.003). There was no significant difference between groups in grade 3–4 gastrointestinal or bladder toxicity. Perioperative haemorrhage >1000 mL occurred in 7.9% of NACT + surgery patients. || **Only vaginal toxicity remained significantly higher with concomitant chemoradiation at 24 months or later (12.0% vs 25.6%; P < 0.001).**"
+    }
+   },
+   "signature_ae": [
+    "thrombocytopenia G3-4 (3.5% NACT)",
+    "perioperative haemorrhage > 1000 mL (7.9%)",
+    "diarrhoea (CCRT)",
+    "late vaginal toxicity (25.6% CCRT vs 12.0%)",
+    "late rectal / bladder toxicity (CCRT, resolved by 24 months)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2018_Gupta_Tata Memorial NACT-Surgery vs CCRT.md",
+   "evidence_quote": "| Thrombocytopenia | 24 (7.6%) | 11 (3.5%) | 7 (2.2%) | 1 (0.3%) | || Grade 3–4 thrombocytopenia was significantly higher with NACT + surgery (3.5% vs 0.3%; P = 0.003). There was no significant difference between groups in grade 3–4 gastrointestinal or bladder toxicity. Perioperative haemorrhage >1000 mL occurred in 7.9% of NACT + surgery patients. || **Only vaginal toxicity remained significantly higher with concomitant chemoradiation at 24 months or later (12.0% vs 25.6%; P < 0.001).**",
+   "notes": "Per-category early grade 3-4 percentages (NACT + surgery n = 316, CCRT n = 317 analysed); no per-patient G>=3 total, not summed; grade 3-4 rates are low in every category. Late adverse events are any-grade. Treatment-related deaths not stated in the extract. Discontinuation and dose reduction not reported."
+  },
+  {
+   "trial": "EORTC 55994 (Kenter 2023)",
+   "regimen": "cisplatin-based neoadjuvant chemotherapy -> radical surgery (NACT-S) vs concomitant chemoradiotherapy (CCRT), FIGO IB2-IIB",
+   "grade3plus_any_pct": 41,
+   "treatment_related_grade3plus_pct": "not_reported",
+   "arms": {
+    "NACT -> radical surgery (NACT-S)": {
+     "grade3plus_any_pct": 41,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 300,
+     "evidence_quote": "Safety details were reported in 591 patients who started allocated treatment (300 NACT-S, 291 CCRT as denominators used in the text). || | Grade 3/4 AE during treatment (CTCAE v2, to 8 weeks after end of treatment) | 122 of 300 (41%) | 66 of 291 (23%) | || | Chassagne grade ≥3 during follow-up (long-term) | 44 of 300 (15%) | 60 of 291 (21%) | || | Deaths from treatment complications | 0 | 2 |"
+    },
+    "concomitant chemoradiotherapy (CCRT)": {
+     "grade3plus_any_pct": 23,
+     "treatment_related_grade3plus_pct": "not_reported",
+     "discontinuation_pct": "not_reported",
+     "dose_reduction_pct": "not_reported",
+     "n": 291,
+     "evidence_quote": "Safety details were reported in 591 patients who started allocated treatment (300 NACT-S, 291 CCRT as denominators used in the text). || | Grade 3/4 AE during treatment (CTCAE v2, to 8 weeks after end of treatment) | 122 of 300 (41%) | 66 of 291 (23%) | || | Chassagne grade ≥3 during follow-up (long-term) | 44 of 300 (15%) | 60 of 291 (21%) | || | Deaths from treatment complications | 0 | 2 |"
+    }
+   },
+   "signature_ae": [
+    "gastrointestinal and haematologic (chemotherapy, short-term; GI G3-4 11.4%)",
+    "small bowel and vaginal late toxicity (CCRT, Chassagne >= 3 21%)"
+   ],
+   "discontinuation_pct": "not_reported",
+   "dose_reduction_pct": "not_reported",
+   "source": "GO_summaries/2023_Kenter_EORTC-55994.md",
+   "evidence_quote": "Safety details were reported in 591 patients who started allocated treatment (300 NACT-S, 291 CCRT as denominators used in the text). || | Grade 3/4 AE during treatment (CTCAE v2, to 8 weeks after end of treatment) | 122 of 300 (41%) | 66 of 291 (23%) | || | Chassagne grade ≥3 during follow-up (long-term) | 44 of 300 (15%) | 60 of 291 (21%) | || | Deaths from treatment complications | 0 | 2 |",
+   "notes": "Short-term grade 3/4 AE during treatment (CTCAE v2, to 8 weeks after end of treatment) 41% vs 23%, per patient; two deaths from treatment complications, both CCRT, occurred during follow-up (chronic small bowel obstruction; sepsis after surgery for rectal stricture) and are listed separately. Long-term Chassagne grade >= 3: 15% NACT-S vs 21% CCRT. 48% of NACT-S patients who completed treatment also received RT. No itemised AE table in the article body. Discontinuation and dose reduction not reported."
+  }
+ ]
+}

@@ -1,0 +1,2235 @@
+{
+ "outcomes": {
+  "os": {
+   "label": "OS benefit (trial-wide)",
+   "c": "var(--os)"
+  },
+  "pfs": {
+   "label": "PFS / RFS benefit only",
+   "c": "var(--pfs)"
+  },
+  "signal": {
+   "label": "Subgroup or molecular signal",
+   "c": "var(--pfs)"
+  },
+  "ns": {
+   "label": "NS / non-inferior / negative",
+   "c": "var(--ns)"
+  },
+  "harm": {
+   "label": "Harm",
+   "c": "var(--harm)"
+  },
+  "single": {
+   "label": "Single-arm",
+   "c": "var(--single)"
+  },
+  "obs": {
+   "label": "Observational / retrospective",
+   "c": "var(--fg-3)"
+  },
+  "excluded": {
+   "label": "Histotype excluded",
+   "c": "var(--harm)"
+  },
+  "extrapolated": {
+   "label": "Extrapolated",
+   "c": "var(--single)"
+  },
+  "pending": {
+   "label": "Unpublished / ongoing",
+   "c": "var(--fg-3)"
+  }
+ },
+ "reading": "itt",
+ "_meta": {
+  "source": "Cervical Squamous Cell Carcinoma — Evidence Tables by Treatment Setting — vault note version v1.1, updated 2026-09-25",
+  "histology": "scc",
+  "extracted": "2026-10-06",
+  "note": "Cells are verbatim from the vault note (markdown bold retained). 'out' and 'level' are derived; 'out' overrides are listed in tools/overrides/<hist>.json."
+ },
+ "sections": [
+  {
+   "id": "mol",
+   "title": "Molecular profile of cervical squamous cell carcinoma",
+   "intro": "Cervical SCC is **HPV-driven and APOBEC-mutagenic**, with frequent PI3K and 9p24.1 (PD-L1/PD-L2) alterations; **PD-L1 CPS ≥1 is the only treatment-selecting biomarker**. HPV-independent SCC is a minority with older age, p53 abnormality and worse survival [8]; TCGA splits SCC into keratin-high and keratin-low clusters [9].",
+   "mol": [
+    {
+     "caption": "",
+     "columns": [
+      "Feature",
+      "Cervical SCC",
+      "Source"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "HPV status / clade",
+        "All histotypes (TCGA core set, n = 178): HPV-positive **169 (95%)**; alpha-9 types 120 (67%; HPV16 103); alpha-7 types 45 (25%; HPV18 27); HPV-negative **9 (5%)**. HPV integration in 141/169 (83%), including all HPV18 tumours. 7 of the 9 HPV-negative tumours fell in the endometrial-like group (8 tumours, 5 of them adenocarcinomas) [9]",
+        ""
+       ],
+       "refs": [
+        9
+       ]
+      },
+      {
+       "cells": [
+        "HPV-independent SCC",
+        "49 true HPVI SCC among 89 HPV-negative SCC collected from 22 institutions (40 excluded as equivocal); median age 68 (36–88); 77.6% aged ≥60; uterine prolapse history 14.2%; p53-abnormal HPVI SCC the most aggressive [8]",
+        ""
+       ],
+       "refs": [
+        8
+       ]
+      },
+      {
+       "cells": [
+        "Mutations (exome, n = 192)",
+        "PIK3CA mostly helical E542K/E545K; APOBEC signature enrichment in 150/192 exomes. HLA-A, HLA-B, NFE2L2, MAPK1, CASP8, SHKBP1 and TGFBR2 mutations were found **only in squamous tumours** [9]",
+        ""
+       ],
+       "refs": [
+        9
+       ]
+      },
+      {
+       "cells": [
+        "Copy number",
+        "Focal amplification 9p24.1 (CD274, PDCD1LG2) **21%**, 3q26.31 (TERC, MECOM) 78%, 3q28 (TP63) 77%, 17q12 (ERBB2) 17%, 7p11.2 (EGFR) 17%; the copy-number-high cluster was largely squamous [9]",
+        ""
+       ],
+       "refs": [
+        9
+       ]
+      },
+      {
+       "cells": [
+        "Tumour mutational burden",
+        "4.04 mutations/Mb overall; 2.53 excluding 11 hypermutant tumours (>600 mutations) [9]",
+        ""
+       ],
+       "refs": [
+        9
+       ]
+      },
+      {
+       "cells": [
+        "PD-L1 (22C3 CPS ≥1)",
+        "**SCC 91% (397/437)** vs usual-type adenocarcinoma 60% (35/58) in 647 profiled cervical carcinomas [10]. Trial screening (all histotypes): KEYNOTE-826 CPS ≥1 548/617, CPS ≥10 317 (51.4%), CPS <1 69 (11.2%) [2,11]; KEYNOTE-158 CPS ≥1 82/98 (83.7%), SCC 92/98 (93.9%) [12]",
+        ""
+       ],
+       "refs": [
+        10,
+        2,
+        11,
+        12
+       ]
+      },
+      {
+       "cells": [
+        "HER2 (SCC-only series, n = 548)",
+        "IHC 0 56.9%, 1+ 26.3%, 2+ 14.1%, **3+ 2.7%**; FISH amplification in all 3+ and 5.2% of 2+; reclassified HER2-positive 3.5%, HER2-low 39.6%; biopsy–hysterectomy discordance 48.3%, metastatic-site discordance 50.8% [13]",
+        ""
+       ],
+       "refs": [
+        13
+       ]
+      },
+      {
+       "cells": [
+        "Tissue factor",
+        "Membrane expression ≥1% in 93.3% of 404 assessed (innovaTV 301, all histotypes; not an eligibility criterion) [1]",
+        ""
+       ],
+       "refs": [
+        1
+       ]
+      },
+      {
+       "cells": [
+        "MSI",
+        "MSI-H in **8/305 (2.6%)** of TCGA-CESC by MANTIS whole-exome analysis; MSI-H tumours were hypermutated (mean 5,675 vs 639 mutations, P = .003). CESC pools SCC and endocervical adenocarcinoma, so no SCC-specific rate is printed [14]. In 647 profiled cervical carcinomas MSI-H was 1.9% (12/647) overall and did not differ by PD-L1 status (2.2% vs 0%, P = 0.230; TMB-high 26.3% vs 17.2%, P = 0.058) [10]",
+        ""
+       ],
+       "refs": [
+        14,
+        10
+       ]
+      }
+     ]
+    },
+    {
+     "caption": "**B. Treatment-selecting biomarkers.** Every row kept; two cervical-specific rows added (HPV status, tissue factor).",
+     "columns": [
+      "Biomarker",
+      "Assay / cutoff used in the pivotal trial",
+      "Cervical SCC (%)",
+      "Existing regimens that select on it",
+      "Tables affected",
+      "Source"
+     ],
+     "rows": [
+      {
+       "cells": [
+        "**MMRd / MSI-H**",
+        "IHC loss of MLH1, PMS2, MSH2 or MSH6, or MSI-H by PCR/NGS",
+        "MSI-H 8/305 (2.6%) in TCGA-CESC (SCC and adenocarcinoma pooled; no SCC-specific rate printed) [14]; 1.9% (12/647) in a clinical cervical-carcinoma cohort [10]. Not a selection criterion in this histotype: cervical pembrolizumab is selected on PD-L1 CPS",
+        "Endometrial templates only: EM Dostarlimab · EM Keytruda (no cervical MMRd template)",
+        "—",
+        ""
+       ],
+       "refs": [
+        14
+       ]
+      },
+      {
+       "cells": [
+        "**⭐ PD-L1**",
+        "22C3 CPS **≥1** (KEYNOTE-826 first line; KEYNOTE-158 after chemotherapy); CPS ≥10 tested as a secondary population in KEYNOTE-826. Not required in KEYNOTE-A18 (chemoradiation), EMPOWER-Cervical 1, BEATcc or COMPASSION-16",
+        "**SCC 91% CPS ≥1** [10]; KEYNOTE-826 548/617 CPS ≥1 [11]. CPS <1 subgroups: no response in KEYNOTE-158 (0/15) [12]; cadonilimab PFS HR 0.65 (0.42–1.03), OS 0.77 (0.44–1.34) [15]; cemiplimab final OS in PD-L1 TC <1% (n = 92) HR 0.86 (0.54–1.37), NS [16]",
+        "CC Keytruda · CC Keytruda with Avastin · CC Paclitaxel, Carboplatin and Keytruda with Avastin · CC Paclitaxel, Cisplatin and Keytruda with Avastin · CC Paclitaxel, Cisplatin and Keytruda with Avastin(魏爺). Not PD-L1-selected: CC CCRT (Cisplatin+Keytruda) for豪哥的VIP · CC CCRT (Carboplatin+Keytruda) for豪哥的VIP",
+        "T2B, T3A, T3B",
+        ""
+       ],
+       "refs": [
+        10,
+        11,
+        12,
+        15,
+        16
+       ]
+      },
+      {
+       "cells": [
+        "**HER2**",
+        "IHC 0 / 1+ / 2+ / 3+, 2+ reflexed to ISH. T-DXd: **IHC 3+ or 2+** (DESTINY-PanTumor02; 5 IHC 1+ patients added to the cervical cohort after the interim analysis)",
+        "3+ 2.7%, 2+ 14.1%, 1+ 26.3% [13]",
+        "Endometrial template only: EM Enhertu (no cervical template)",
+        "T3B",
+        ""
+       ],
+       "refs": [
+        13,
+        57
+       ]
+      },
+      {
+       "cells": [
+        "**HRD / BRCA1/2**",
+        "Germline or tumour BRCA1/2; myChoice GIS ≥42 (PAOLA-1)",
+        "Not reported in the sources retrieved. Not a selection criterion in this histotype",
+        "OV Alymsys (限健保併用olaparib) (ovarian)",
+        "—",
+        "—"
+       ],
+       "refs": []
+      },
+      {
+       "cells": [
+        "**FRα**",
+        "VENTANA FOLR1-2.1, ≥75% of viable tumour cells with ≥2+ membrane staining (MIRASOL)",
+        "Not reported in the sources retrieved. Not a selection criterion in this histotype",
+        "OV Elahere (Mirvetuximab Soravtansine) (ovarian)",
+        "—",
+        "—"
+       ],
+       "refs": []
+      },
+      {
+       "cells": [
+        "**HPV status / genotype** (cervical)",
+        "HPV ISH, PCR or IHC; known HPV-negative tumours were ineligible for CheckMate 358 [17]",
+        "HPV-negative 5% of all cervical cancers [9]; HPVI SCC prognostically worse [8]. HPV genotype not associated with PFS or OS after chemoradiation + ipilimumab [18]. Not a selection criterion for any regimen in the tables",
+        "None",
+        "T3B (CheckMate 358 eligibility)",
+        ""
+       ],
+       "refs": [
+        17,
+        9,
+        8,
+        18
+       ]
+      },
+      {
+       "cells": [
+        "**Tissue factor** (cervical)",
+        "Not required; tisotumab vedotin given regardless of expression (innovaTV 204/301)",
+        "93.3% of 404 assessed ≥1% membrane (all histotypes) [1]",
+        "Tisotumab vedotin (no NTUH template)",
+        "T3B",
+        ""
+       ],
+       "refs": [
+        1
+       ]
+      },
+      {
+       "cells": [
+        "*Other actionable*",
+        "*TMB-high (tumour-agnostic pembrolizumab); ERBB3 and PIK3CA alterations; NTRK / RET / BRAF V600E not reported*",
+        "*TMB 4.04 mut/Mb overall [9]; adding TMB to PD-L1 testing made 17 more patients pembrolizumab-eligible in 647 profiled cervical carcinomas [10]*",
+        "*No NTUH template*",
+        "*T3B*",
+        ""
+       ],
+       "refs": [
+        9,
+        10
+       ]
+      }
+     ]
+    }
+   ],
+   "notes": [
+    {
+     "kind": "info",
+     "title": "Practical consequence for testing",
+     "md": "- **PD-L1 22C3 CPS** on every recurrent/metastatic SCC before first line (pembrolizumab, T3A); ~9 in 10 are CPS ≥1 [10], so CPS <1 → check the sample.\n- **HER2 IHC** at recurrence if T-DXd is considered (T3B); test the most recent sample [13].\n- **HPV/p16 and p53** in older women: prognostic only [8]."
+    }
+   ]
+  },
+  {
+   "id": "t1",
+   "title": "1. Adjuvant therapy after radical hysterectomy (FIGO 2009 IA2–IIA)",
+   "intro": "Split by pathological risk: **1A intermediate risk** (node-negative, with combinations of deep stromal invasion, lymph–vascular space involvement and tumour size) and **1B high risk** (positive pelvic nodes, positive margins or parametrial involvement).",
+   "container": true,
+   "notes": []
+  },
+  {
+   "id": "t1a",
+   "title": "1A. Intermediate risk (node-negative)",
+   "intro": "",
+   "columns": {
+    "trial": "Trial",
+    "regimen": "Regimen (exp vs control)",
+    "pop": "Population",
+    "n": "n",
+    "hist": "SCC data",
+    "pfs": "DFS / RFS",
+    "os": "OS",
+    "hr": "HR",
+    "tox": "Toxicity / notes",
+    "source": "Source"
+   },
+   "rows": [
+    {
+     "name": "GOG-92",
+     "cite": "Sedlis 1999; follow-up Rotman 2006",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Pelvic RT (46 Gy/23 fx to 50.4 Gy/28 fx) vs no further treatment",
+      "pop": "Stage IB, node-negative, ≥2 of: >1/3 stromal invasion, capillary lymphatic space involvement, clinical tumour diameter ≥4 cm",
+      "n": "277 (137 vs 140)",
+      "hist": "**Included, not broken out**: SCC 218/277 (78.7%); squamous recurrence 21/103 (20.4%) with RT vs 32/115 (27.8%) with observation, but **no SCC-specific HR is printed**; non-squamous 59 (34 RT, 25 observation). RT-by-histology interaction HR **0.23 (90% CI 0.07–0.74)**, P = 0.019 — larger benefit in adeno/adenosquamous (recurrence 8.8% vs 44.0%)",
+      "pfs": "2-yr recurrence-free 88% vs 79% (1999); recurrences 24 vs 43 (2006)",
+      "os": "Deaths 27 vs 40; NS",
+      "hr": "Recurrence **0.54 (90% CI 0.35–0.81)**, P = 0.007; progression or death 0.58 (90% CI 0.40–0.85); OS 0.70 (90% CI 0.46–1.05; abstract prints 0.45–1.05), P = 0.074, NS",
+      "tox": "Grade 3–4 adverse events 6% vs 2.1%; one death from grade 4 GI toxicity. HRs printed with 90% CIs"
+     },
+     "refs": [
+      19,
+      6
+     ],
+     "level": "included",
+     "out": "pfs",
+     "tags": []
+    },
+    {
+     "name": "NRG/GOG-263 / KGOG 1008",
+     "cite": "Ryu 2025",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Pelvic RT (median 50.4 Gy; conformal or IMRT) + weekly cisplatin 40 mg/m² ×6 vs RT alone",
+      "pop": "Stage I–IIA (FIGO 2009), intermediate-risk combinations after radical hysterectomy and lymphadenectomy",
+      "n": "316 eligible (340 randomized)",
+      "hist": "**Included, not broken out**: SCC 233/316 (73.7%); **no histology subgroup is printed** — the RFS forest plot covers stage, risk factors, surgery and RT technique only",
+      "pfs": "3-yr RFS 88.5% vs 85.4%",
+      "os": "3-yr OS 97.2% vs 90.3%",
+      "hr": "RFS 0.698 (0.408–1.192), P = 0.09; OS 0.586 (0.286–1.199), P = 0.07; NS",
+      "tox": "Grade 3–4 adverse events 43% vs 15% (P < 0.01); transient QoL decline with CRT, recovered by 36 weeks. RFS HR 0.47 (0.24–0.92) with conformal RT (subgroup, not for inference)"
+     },
+     "refs": [
+      20
+     ],
+     "level": "included",
+     "out": "ns",
+     "tags": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "t1b",
+   "title": "1B. High risk (node-positive, margin-positive or parametrial involvement)",
+   "intro": "",
+   "columns": {
+    "trial": "Trial",
+    "regimen": "Regimen (exp vs control)",
+    "pop": "Population",
+    "n": "n",
+    "hist": "SCC data",
+    "pfs": "DFS / RFS",
+    "os": "OS",
+    "hr": "HR",
+    "tox": "Toxicity / notes",
+    "source": "Source"
+   },
+   "rows": [
+    {
+     "name": "GOG-109 / SWOG 8797 / RTOG intergroup",
+     "cite": "Peters 2000",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Pelvic RT 49.3 Gy/29 fx + cisplatin 70 mg/m² D1 + 5-FU 1000 mg/m²/day ×4 days, q3w ×4 (2 concurrent, 2 after RT) vs RT alone",
+      "pop": "Stage IA2, IB, IIA after radical hysterectomy with positive pelvic nodes, positive margins or parametrial involvement",
+      "n": "243 evaluable (268 entered)",
+      "hist": "**Included, not broken out**: SCC 97/127 (76%) vs 96/116 (83%). Non-squamous tumours did worse with RT alone (PFS, Fig 3), a difference that disappeared with chemotherapy; treatment-by-cell-type interaction P = .12 (PFS), .19 (OS); SCC-specific HR not reported",
+      "pfs": "4-yr PFS **80% vs 63%**",
+      "os": "4-yr OS **81% vs 71%**",
+      "hr": "Printed RT vs CT + RT: PFS 2.01 (P = .003), OS 1.96 (P = .007); CI not printed",
+      "tox": "Grade 4 toxicity: 27 episodes in 21 CT + RT patients vs 4 on RT; ≥3 cycles in 71%. Median lesion size 2.1–2.2 cm"
+     },
+     "refs": [
+      21
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "↳ GOG-109 clinical–pathological reanalysis",
+     "cite": "Monk 2005",
+     "star": false,
+     "observational": false,
+     "cols": {
+      "regimen": "*Same trial, retrospective univariate analysis*",
+      "pop": "*As above*",
+      "n": "*243*",
+      "hist": "***Included, not broken out***: *5-year survival with RT vs RT + CT — squamous 69% vs 80% (P = 0.019), non-squamous 55% vs 82% (P = 0.014); histology not prognostic within either arm (P = 0.170 / 0.764); no HRs or interaction test printed*",
+      "pfs": "*5-yr survival, RT vs RT + CT, by tumour size: ≤2 cm 77% vs 82%; >2 cm 58% vs 77%*",
+      "os": "*Overall 5-yr survival 66% vs 80% (median follow-up 5.2 yr). By nodes: 1 positive node 79% vs 83%; ≥2 nodes 55% vs 75%*",
+      "hr": "*not reported*",
+      "tox": "*Hypothesis-generating: smaller absolute benefit with 1 node or tumour ≤2 cm*"
+     },
+     "refs": [
+      22
+     ],
+     "level": "included",
+     "out": "obs",
+     "tags": []
+    },
+    {
+     "name": "STARS",
+     "cite": "Huang 2021",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Sequential chemoradiation (cisplatin 60–75 mg/m² + paclitaxel 135–175 mg/m² q21d, 2 cycles before and 2 after RT) vs concurrent weekly cisplatin 30–40 mg/m² + RT vs RT alone (45–50 Gy)",
+      "pop": "FIGO IB–IIA after radical hysterectomy with adverse pathological factors (intermediate and high risk mixed; nodal involvement lowest in RT arm, 18.3%); 8 Chinese hospitals",
+      "n": "1048 (353 / 345 / 350)",
+      "hist": "**SCC subgroup reported**: SCC 908/1048 (86.6%); recurrence HR SCRT vs RT **0.547 (0.357–0.839)**, CCRT vs RT 0.931 (0.635–1.365) — in SCC the concurrent weekly-cisplatin arm gave essentially no benefit over RT alone; in the AC/ASC group (n = 140) both SCRT (0.294) and CCRT (0.360) beat RT",
+      "pfs": "3-yr DFS SCRT **90% (86–94)** vs CCRT 85% (81–89) vs RT 82% (78–86)",
+      "os": "5-yr OS SCRT **92% (88–96)** vs CCRT 89% (85–93) vs RT 88% (84–92)",
+      "hr": "DFS SCRT vs RT **0.52 (0.35–0.76)** (nodal-adjusted; unadjusted 0.61, 0.42–0.89); SCRT vs CCRT 0.65 (0.44–0.96); CCRT vs RT 0.79 (0.56–1.12), NS; cancer death SCRT vs RT 0.58 (0.35–0.95), SCRT vs CCRT 0.74 (0.45–1.23), CCRT vs RT 0.78 (0.49–1.23)",
+      "tox": "Concurrent weekly cisplatin did not improve DFS or cancer death over RT alone, in the trial overall or in SCC. Single-country trial mixing intermediate- and high-risk patients"
+     },
+     "refs": [
+      23
+     ],
+     "level": "subgroup",
+     "out": "pfs",
+     "tags": []
+    },
+    {
+     "name": "NOGGO-AGO",
+     "cite": "Sehouli 2012",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Paclitaxel 175 mg/m² + carboplatin AUC5 → pelvic RT 50.4 Gy vs RT + weekly cisplatin 40 mg/m²",
+      "pop": "Stage IB–IIB after surgery, high risk",
+      "n": "263 eligible (271 randomized)",
+      "hist": "**Included, not broken out**: SCC 197/263 (74.9%); histology was not a significant prognostic factor for PFS or OS, and no histology-by-treatment interaction was analysed",
+      "pfs": "2-yr PFS 87.2% (81.2–93.3) vs 81.8% (74.4–89.1), P = 0.235",
+      "os": "5-yr survival 85.8% vs 78.9%, P = 0.25 (abstract); 84.2% vs 77.4%, P = 0.34 in the Results text",
+      "hr": "Exploratory multivariate PFS 0.483 (0.25–0.92), P = 0.028; OS 0.59 (0.30–1.18), P = 0.137 — the authors call the model unreliable (26 disease events)",
+      "tox": "Early termination 12.9% vs 32.1% (P = 0.001); alopecia 87.9% vs 4.1%, neurotoxicity 65.9% vs 15.6%; more grade 3–4 haematological toxicity with CCRT"
+     },
+     "refs": [
+      24
+     ],
+     "level": "included",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "JGOG1082",
+     "cite": "Furusawa 2021, design",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Paclitaxel 175 mg/m² + cisplatin 50 mg/m² or carboplatin AUC6 q3w ×6 vs CCRT (50.4 Gy + weekly cisplatin 40 mg/m²)",
+      "pop": "Stage IB–IIB after radical hysterectomy with pelvic nodal metastasis and/or parametrial invasion",
+      "n": "Target 250",
+      "hist": "**Included**: SCC, adenocarcinoma and adenosquamous eligible",
+      "pfs": "Ongoing (accrual from November 2019)",
+      "os": "Primary endpoint OS (non-inferiority)",
+      "hr": "—",
+      "tox": "**Design-only row (ongoing trial, no results).** Non-inferiority margin OS HR 1.33, 118 per arm; minimisation includes SCC vs non-SCC, so an SCC subgroup is planned. No PubMed results publication found (2026-09-15)"
+     },
+     "refs": [
+      25
+     ],
+     "level": "included",
+     "out": "pending",
+     "tags": []
+    }
+   ],
+   "notes": [
+    {
+     "kind": "info",
+     "title": "Reading Table 1",
+     "md": "- Only STARS reports an SCC HR (SCRT vs RT recurrence 0.547; CCRT vs RT 0.931, NS) [23]; in GOG-92/109 the non-squamous minority drove or modified the effect [6,21,22].\n- Intermediate risk: RT cuts recurrence without an OS gain [6]; adding weekly cisplatin (GOG-263) did not help and tripled toxicity [20].\n- High risk: cisplatin/5-FU + RT is the only regimen with an OS benefit [21]; RTOG 0724 is unpublished (see Open items).\n- Context: minimally invasive radical hysterectomy worse than open (LACC) [26]; simple hysterectomy non-inferior in low-risk disease (SHAPE) [27]."
+    }
+   ]
+  },
+  {
+   "id": "t2",
+   "title": "2. Primary treatment of locally advanced disease (FIGO 2008/2009 IB2–IVA; FIGO 2018 IB3–IVA)",
+   "intro": "",
+   "container": true,
+   "notes": []
+  },
+  {
+   "id": "t2a",
+   "title": "2A. Definitive chemoradiation: backbone, schedule, induction and adjuvant chemotherapy",
+   "intro": "",
+   "columns": {
+    "trial": "Trial",
+    "regimen": "Regimen (exp vs control)",
+    "pop": "Population",
+    "n": "n",
+    "hist": "SCC data",
+    "pfs": "PFS / DFS",
+    "os": "OS",
+    "hr": "HR",
+    "tox": "Toxicity / notes",
+    "source": "Source"
+   },
+   "rows": [
+    {
+     "name": "Weekly vs triweekly cisplatin",
+     "cite": "Ryu 2011",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "RT + cisplatin 75 mg/m² q3w ×3 vs RT + weekly cisplatin 40 mg/m² ×6",
+      "pop": "Stage IIB–IVA",
+      "n": "104",
+      "hist": "**Included, not broken out**: SCC 93/104 (89.4%); no histology subgroup",
+      "pfs": "Recurrence 24.5% vs 29.4% (P = 0.510); PFS \"almost identical\" (data not shown)",
+      "os": "5-yr OS **88.7% vs 66.5%**",
+      "hr": "OS 0.375 (0.154–0.914), P = 0.03",
+      "tox": "Grade 3–4 neutropenia 22.6% vs 39.2% (P = 0.03); compliance 92.5% vs 86.3%. Small trial; the phase III TACO trial (below) did not confirm superiority"
+     },
+     "refs": [
+      28
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "GCIG INTERLACE",
+     "cite": "McCormack 2024",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Induction weekly carboplatin AUC2 + paclitaxel 80 mg/m² ×6 → CCRT vs CCRT alone (weekly cisplatin 40 mg/m² ×5 + 45–50.4 Gy EBRT + brachytherapy, EQD2 78–86 Gy)",
+      "pop": "FIGO 2008 IB1 node-positive, IB2, IIA, IIB, IIIB, IVA (IIB 70%, IIIB 11%; nodes positive 43%)",
+      "n": "500",
+      "hist": "**Included, not broken out**: SCC 411/500 (82%); randomization minimised on squamous vs non-squamous, but **no histology-subgroup HR is printed in the article** (appendix forest plots only; every subgroup CI included the overall HR)",
+      "pfs": "5-yr PFS **72% vs 64%**",
+      "os": "5-yr OS **80% vs 72%**",
+      "hr": "PFS 0.65 (0.46–0.91), P = 0.013; OS **0.60 (0.40–0.91)**, P = 0.015",
+      "tox": "Grade ≥3 adverse events 59% vs 48%; median 7 days from induction to CCRT; ≥5 induction cycles in 92%"
+     },
+     "refs": [
+      29
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "GOG-120",
+     "cite": "Rose 1999; long-term Rose 2007",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "RT + weekly cisplatin 40 mg/m² ×6 vs RT + cisplatin 50 mg/m² D1, D29 + 5-FU 4 g/m² 96-h + hydroxyurea (CFH) vs RT + hydroxyurea 3 g/m² twice weekly",
+      "pop": "Stage IIB, III, IVA with surgically negative para-aortic nodes",
+      "n": "526 evaluable (575)",
+      "hist": "**Included, not broken out**: SCC 157/176, 152/173, 163/177 (87.9–92.1%)",
+      "pfs": "24-mo PFS **67% vs 64% vs 47%**",
+      "os": "Deaths 34% vs 33% vs 50%; 10-yr OS **53% vs 53% vs 34%** (2007); median follow-up of survivors 106 mo",
+      "hr": "vs hydroxyurea — cisplatin: PFS 0.57 (0.42–0.78), OS **0.61 (0.44–0.85)**; CFH: PFS 0.55 (0.40–0.75), OS 0.58 (0.41–0.81). Long-term progression/death relative risk 0.57 (0.43–0.75) and 0.51 (0.38–0.67)",
+      "tox": "Grade 3–4 leukopenia ~23% (cisplatin) vs ~46% (CFH); no treatment-related deaths. Delayed radiation toxicity 1.7% (cisplatin) vs 1.2% (hydroxyurea), P = .680 (2007). Established weekly cisplatin 40 mg/m²"
+     },
+     "refs": [
+      4,
+      30
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "GOG-123",
+     "cite": "Keys 1999; follow-up Stehman 2007",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "RT + weekly cisplatin 40 mg/m² (max 70 mg/wk) ×6 → extrafascial hysterectomy vs RT → hysterectomy",
+      "pop": "Bulky (≥4 cm) stage IB, radiographically node-negative",
+      "n": "369 evaluable (374)",
+      "hist": "**Included, not broken out**: SCC 152/186 (82%) vs 147/183 (80%)",
+      "pfs": "Recurrence 21% vs 37%; 72-mo alive and disease-free (adjusted) 71% vs 60%",
+      "os": "3-yr OS **83% vs 74%**; 72-mo 78% vs 64%",
+      "hr": "Progression 0.51 (0.34–0.75), death 0.54 (0.34–0.86) (printed as relative risks, 1999); at 101 mo: progression relative risk 0.61 (0.43–0.85), adjusted death HR **0.63 (0.43–0.91)**",
+      "tox": "Any grade 3–4 AE 35% vs 13%; no excess late effects. Adjuvant hysterectomy since discontinued"
+     },
+     "refs": [
+      31,
+      32
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "Dueñas-González 2011",
+     "cite": "",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Weekly cisplatin 40 mg/m² + gemcitabine 125 mg/m² ×6 with EBRT 50.4 Gy → brachytherapy → cisplatin 50 mg/m² D1 + gemcitabine 1000 mg/m² D1, 8 ×2 vs weekly cisplatin CCRT → brachytherapy",
+      "pop": "Stage IIB–IVA, KPS ≥70",
+      "n": "515",
+      "hist": "**Included, not broken out**: \"non-adenocarcinoma\" (squamous, poorly differentiated and adenosquamous pooled) 483/515 (93.8%); pure SCC fraction not printed and no histology subgroup reported",
+      "pfs": "3-yr PFS **74.4% vs 65.0%** (P = .029)",
+      "os": "Improved (log-rank P = .0224); distant failure 8.1% vs 16.4%",
+      "hr": "PFS 0.68 (0.49–0.95); OS **0.68 (0.49–0.95)**; time to progression 0.54 (0.37–0.79)",
+      "tox": "Grade 3–4 toxicity 86.5% vs 46.3% (P < .001); two deaths possibly treatment-related (experimental arm). Two changes at once (gemcitabine concurrent + adjuvant)"
+     },
+     "refs": [
+      33
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "RTOG 90-01",
+     "cite": "Morris 1999; update Eifel 2004",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Pelvic RT 45 Gy + cisplatin 75 mg/m² + 5-FU 4 g/m² 96-h ×3 vs extended-field (pelvic + para-aortic) RT alone",
+      "pop": "Stage IIB–IVA, or IB–IIA with tumour ≥5 cm or positive pelvic nodes; para-aortic nodes negative",
+      "n": "388 evaluable (403)",
+      "hist": "**Included, not broken out**: SCC 176 (90%) vs 174 (90%)",
+      "pfs": "5-yr DFS 67% vs 40% (1999); **68% (62–75) vs 43% (36–50)**, 8-yr 61% vs 36% (2004 update)",
+      "os": "5-yr OS 73% vs 58% (1999); **73% (67–80) vs 52% (45–59)**, 8-yr **67% (60–75) vs 41% (33–49)** (2004 update, P < .0001)",
+      "hr": "Printed as relative risks (2004): OS **0.48 (0.35–0.67)**, DFS 0.49 (0.36–0.66), locoregional failure 0.42 (0.28–0.64), distant metastasis 0.48 (0.32–0.73); 51% reduction in death or recurrence (95% CI 34%–64%)",
+      "tox": "Acute grade 3–4 in the chemotherapy arm: 33% grade 3, 11% grade 4, 1% grade 5; late toxicity similar. Stage III–IVA 5-yr OS 59% (46–72) vs 45% (32–59), RR 0.63 (0.39–1.04), P = .07 (2004; 116 patients, not powered)"
+     },
+     "refs": [
+      34,
+      35
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "GOG-85 / SWOG",
+     "cite": "Whitney 1999",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "RT + cisplatin + 5-FU infusion vs RT + oral hydroxyurea",
+      "pop": "Stage IIB–IVA, negative para-aortic nodes and cytologic washings",
+      "n": "368 eligible (388)",
+      "hist": "**Included, not broken out**: SCC 335/368 (156, 88.1% vs 179, 93.7%); no histology-specific subgroup HR printed",
+      "pfs": "Progression 76/177 (43%) vs 101/191 (53%), P = .033",
+      "os": "Deaths 79 (45%) vs 108 (57%); median not reached vs 59.8 mo, P = .018",
+      "hr": "Printed as relative risks with 90% CIs: death **0.74 (0.58–0.95)**, P = .018; progression or death 0.79 (0.62–0.99), P = .033",
+      "tox": "Severe or life-threatening leukopenia 4% vs 24%. Cell type was the most imbalanced baseline factor (non-squamous 12% vs 6%)"
+     },
+     "refs": [
+      36
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "NCIC CTG",
+     "cite": "Pearcey 2002",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Radical RT (EBRT + brachytherapy) + weekly cisplatin 40 mg/m² vs same RT",
+      "pop": "Stage IB–IVA with central disease ≥5 cm or histologically positive pelvic nodes",
+      "n": "253 analysed (259)",
+      "hist": "**SCC-only trial**",
+      "pfs": "No PFS difference (P = .33)",
+      "os": "3-yr 69% vs 66%; 5-yr **62% vs 58%** (P = .42)",
+      "hr": "Printed RT alone vs CRT: OS **1.13 (0.77–1.67)** in the Results text (abstract prints 1.10, 0.75–1.62), P = .42; NS",
+      "tox": "Negative in SCC; authors stress radiotherapy quality (median RT 49–51 days) and note a 46% chance of missing a true 10-point 5-yr OS gain"
+     },
+     "refs": [
+      37
+     ],
+     "level": "histotype_only",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "OUTBACK",
+     "cite": "Mileshkin 2023",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Weekly cisplatin 40 mg/m² ×5 CCRT → carboplatin AUC5 + paclitaxel 155 mg/m² q21d ×4 vs CCRT alone",
+      "pop": "FIGO 2008 IB1 node-positive, IB2, II, IIIB, IVA",
+      "n": "919 eligible (926)",
+      "hist": "**Included, not broken out**: SCC 358 (79%) CCRT vs 383 (83%) adjuvant; squamous or adenosquamous 377 vs 395 (post hoc): OS HR **0.90 (0.68–1.20)**, P interaction 0.98; PFS HR 0.86 (0.68–1.10), P interaction 0.94 — no differential effect by histology",
+      "pfs": "5-yr PFS 63% vs 62%",
+      "os": "5-yr OS 72% vs 71%",
+      "hr": "OS 0.90 (0.70–1.17), P = 0.81; PFS 0.86 (0.69–1.07); NS",
+      "tox": "Grade 3–4 neutropenia 20% vs 8%, anaemia 18% vs 8%; 22% never started adjuvant chemotherapy"
+     },
+     "refs": [
+      38
+     ],
+     "level": "subgroup",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "TACO, (Ryu 2026)",
+     "cite": "GCIG/KGOG 1027/THAI 2012",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "RT + cisplatin 75 mg/m² q3w ×3 vs RT + weekly cisplatin 40 mg/m² ×6",
+      "pop": "Stage IIB–IVA",
+      "n": "314 randomized (292 analysed: 140 triweekly vs 152 weekly)",
+      "hist": "**Included, not broken out**: SCC 114 (81.4%) triweekly vs 137 (90.1%) weekly (251/292, 86.0%); no histology subgroup",
+      "pfs": "3-yr RFS **84.1% vs 78.7%**",
+      "os": "5-yr OS **72.7% vs 73.9%**",
+      "hr": "RFS 3-yr **0.71 (0.39–1.32)**, P = 0.28; 5-yr RFS 0.81 (0.46–1.43); OS 3-yr 1.44 (0.78–2.65), 5-yr 1.10 (0.65–1.86); all NS",
+      "tox": "Fewer grade 3–4 haematological toxicities (P < 0.001), fewer chemotherapy delays and better QoL with triweekly"
+     },
+     "refs": [
+      39
+     ],
+     "level": "included",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "Carboplatin CCRT",
+     "cite": "Nam 2013",
+     "star": false,
+     "observational": true,
+     "cols": {
+      "regimen": "*Weekly carboplatin 100 mg/m² + RT (prospective) vs historical weekly cisplatin 40 mg/m² + RT*",
+      "pop": "*Locally advanced, patients with morbidity risks / poor general condition*",
+      "n": "*51 carboplatin (50 evaluable) vs 48 cisplatin*",
+      "hist": "***Included, not broken out***: *SCC ~91%; no histology subgroup*",
+      "pfs": "*3-yr PFS 78% vs 80%; recurrence HR 1.21 (0.52–2.81), P = 0.66*",
+      "os": "*3-yr OS 88% vs 94%; survival HR 1.80 (0.49–6.54), P = 0.38*",
+      "hr": "*Recurrence 1.21 (0.52–2.81); survival 1.80 (0.49–6.54); NS, non-randomized*",
+      "tox": "*Overall response 90.0% vs 87.5% (P = 0.31). Grade 3–4 toxicity similar (more thrombocytopenia with carboplatin); 7.5 vs 6.0 cycles received. The only carboplatin-substitution comparison retrieved*"
+     },
+     "refs": [
+      40
+     ],
+     "level": "included",
+     "out": "obs",
+     "tags": []
+    },
+    {
+     "name": "GOG chemoradiation trials pooled by histology",
+     "cite": "Rose 2014",
+     "star": false,
+     "observational": true,
+     "cols": {
+      "regimen": "*Cisplatin-based CRT vs RT without cisplatin (GOG 85, 120, 123, 165, 191)*",
+      "pop": "*Stage IB2–IVA*",
+      "n": "*1671 (SCC 1489; adeno/adenosquamous 182)*",
+      "hist": "***SCC reference group, retrospective***: adeno/adenosquamous vs SCC adjusted PFS 1.21 (0.98–1.51), OS 1.25 (1.00–1.56). With cisplatin CRT: similar PFS (P = 0.315) and OS (HR 1.12, P = 0.459), 112 vs 842; without concurrent cisplatin: worse OS (HR 1.39, P = 0.0499), 70 vs 647; within-stratum CIs not printed",
+      "pfs": "*see SCC data*",
+      "os": "*see SCC data*",
+      "hr": "*Prognostic (histology), not a treatment HR*",
+      "tox": "*Adverse effects similar across histologies; pulmonary toxicity 1.1% SCC vs 3.3% non-squamous*"
+     },
+     "refs": [
+      5
+     ],
+     "level": "subgroup",
+     "out": "obs",
+     "tags": []
+    }
+   ],
+   "notes": [
+    {
+     "kind": "warn",
+     "title": "Traps in Table 2A",
+     "md": "- **Cisplatin CCRT benefit is not uniform:** the SCC-only NCIC trial was negative [37], the GOG/RTOG trials positive [4,31,34,36]; meta-analysis HR 0.81 (6% absolute 5-yr gain) [41].\n- RTOG 90-01 changed two variables; GOG-120 and GOG-85 used hydroxyurea controls [4,34,36].\n- **Adjuvant chemo after CCRT is negative** (OUTBACK) [38]; **short induction before CCRT is positive** (INTERLACE) [29].\n- Triweekly vs weekly cisplatin: no difference in TACO [39]; carboplatin substitution has no randomized support [40]."
+    }
+   ]
+  },
+  {
+   "id": "t2b",
+   "title": "2B. Immunotherapy with chemoradiation",
+   "intro": "",
+   "columns": {
+    "trial": "Trial",
+    "regimen": "Regimen (exp vs control)",
+    "pop": "Population",
+    "n": "n",
+    "hist": "SCC data",
+    "pfs": "PFS",
+    "os": "OS",
+    "hr": "HR",
+    "tox": "Toxicity / notes",
+    "source": "Source"
+   },
+   "rows": [
+    {
+     "name": "KEYNOTE-A18 / ENGOT-cx11 / GOG-3047",
+     "cite": "Lorusso 2024 PFS; OS 2024",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Pembrolizumab 200 mg q3w ×5 with cisplatin CCRT (EBRT + brachytherapy) → pembrolizumab 400 mg q6w ×15 vs placebo",
+      "pop": "Newly diagnosed high-risk: FIGO 2014 IB2–IIB node-positive or III–IVA any node status; PD-L1 not required",
+      "n": "1060 (529 vs 531)",
+      "hist": "**Included, not broken out**: SCC 884/1060 (83.4%) at the PFS analysis and 885/1060 (83.5%) at the OS analysis; **histology is not a protocol-specified subgroup in either paper, so no SCC HR exists**",
+      "pfs": "24-mo PFS **68% vs 57%**",
+      "os": "36-mo OS **82.6% vs 74.8%** (second interim; median follow-up 29.9 mo)",
+      "hr": "PFS 0.70 (0.55–0.89), P = 0.0020; OS **0.67 (0.50–0.90)**, P = 0.0040",
+      "tox": "Grade ≥3 adverse events 78% vs 70%; potentially immune-mediated 39% vs 17%. Cisplatin only. PFS benefit concentrated in FIGO 2014 III–IVA (HR 0.58, 0.42–0.80) vs node-positive IB2–IIB (0.91, 0.63–1.31) [42]; disease-specific survival HR 0.64 (0.46–0.89) [43]"
+     },
+     "refs": [
+      42,
+      43
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "CALLA",
+     "cite": "Monk 2023",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Durvalumab 1500 mg q4w with and after CCRT (weekly cisplatin 40 mg/m² or carboplatin AUC2 ×5 + 45 Gy + image-guided brachytherapy), up to 24 cycles vs placebo",
+      "pop": "FIGO 2009 IB2–IIB node-positive, or ≥III any node status",
+      "n": "770",
+      "hist": "**Included, not broken out**: SCC 642/770 (83%); histology was not a prespecified subgroup — no SCC HR is printed",
+      "pfs": "Median not reached either arm; 12-mo PFS 76.0% vs 73.3%",
+      "os": "Deaths 59 (15%) vs 74 (19%); median not reached",
+      "hr": "PFS **0.84 (0.65–1.08)**, P = 0.17; NS. OS 0.78 (0.55–1.10) — not formally interpretable because the hierarchical testing procedure was not met",
+      "tox": "Grade 3–4 anaemia 20% vs 15%; treatment-related deaths 5 vs 1. Authors suggest exploring high PD-L1 expression"
+     },
+     "refs": [
+      44
+     ],
+     "level": "included",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "GOG-9929",
+     "cite": "Mayadev 2020, phase 1",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Weekly cisplatin 40 mg/m² ×6 CCRT → ipilimumab 3 or 10 mg/kg q21d ×4",
+      "pop": "FIGO IB2–IVA with positive pelvic and/or para-aortic nodes",
+      "n": "34 enrolled; 21 received ipilimumab",
+      "hist": "**Included, not broken out**: SCC 28/32 (88%); no histology subgroup",
+      "pfs": "12-mo PFS 81%",
+      "os": "12-mo OS 90%",
+      "hr": "not reported",
+      "tox": "Grade 3 toxicity 2/21 (9.5%); MTD 10 mg/kg; HPV genotype not associated with PFS or OS"
+     },
+     "refs": [
+      18
+     ],
+     "level": "included",
+     "out": "single",
+     "tags": []
+    }
+   ],
+   "notes": [
+    {
+     "kind": "warn",
+     "title": "Reading Table 2B",
+     "md": "KEYNOTE-A18 is the only positive immuno-chemoradiation trial (OS HR 0.67) [43]; CALLA was negative [44]. **Neither reports an SCC result** (83% squamous in both). KEYNOTE-A18 used cisplatin only and excluded node-negative IB2–IIB [43]."
+    },
+    {
+     "kind": "info",
+     "title": "Trial dosing vs NTUH templates (Table 2)",
+     "md": "- Weekly cisplatin CCRT and induction templates match GOG-120/123 and INTERLACE [4,29,31].\n- ⚠️ CC CCRT (Cisplatin+Keytruda) for豪哥的VIP: 2 pembrolizumab cycles, no maintenance; KEYNOTE-A18 gave 200 mg q3w ×5 then 400 mg q6w ×15 [42].\n- ⚠️ CC CCRT (Carboplatin+Keytruda) for豪哥的VIP: no trial support (KEYNOTE-A18 cisplatin only [43]; carboplatin allowed in CALLA, negative [44]).\n- CC PF(Cisplatin and 5FU(2600)) and the two P-HDFL templates match no trial dose [21,34]."
+    }
+   ]
+  },
+  {
+   "id": "t3",
+   "title": "3. Recurrent or metastatic disease",
+   "intro": "Split by line: **3A** first line (radiosensitising cisplatin allowed) · **3B** after platinum ± bevacizumab ± PD-(L)1 inhibitor. Every row carries a `Prior systemic therapy` column.",
+   "container": true,
+   "notes": [
+    {
+     "kind": "warn",
+     "title": "Why this split exists",
+     "md": "3A trials mixed IVB, persistent and recurrent disease, mostly after radiosensitising cisplatin only. Prior cisplatin lowers response and survival [45,46,47], so 3A medians are not second-line expectations."
+    }
+   ]
+  },
+  {
+   "id": "t3a",
+   "title": "3A. First-line systemic therapy for recurrent, persistent or metastatic disease",
+   "intro": "",
+   "columns": {
+    "trial": "Trial",
+    "regimen": "Regimen (exp vs control)",
+    "pop": "Prior systemic therapy",
+    "n": "n",
+    "recurrent_fraction": "Recurrent fraction",
+    "hist": "SCC data",
+    "pfs": "PFS",
+    "os": "OS",
+    "orr": "ORR",
+    "hr": "HR",
+    "tox": "Toxicity / notes",
+    "source": "Source"
+   },
+   "rows": [
+    {
+     "name": "KEYNOTE-826",
+     "cite": "Colombo 2021; final OS Monk 2023; 5-yr Hasegawa 2026; subgroups Tewari 2024",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Pembrolizumab 200 mg q3w (≤35 cycles) vs placebo, + paclitaxel 175 mg/m² + cisplatin 50 mg/m² or carboplatin AUC5 ± bevacizumab 15 mg/kg",
+      "pop": "None for recurrence; prior CCRT ± surgery 56.4%",
+      "n": "617 (CPS ≥1: 548)",
+      "recurrent_fraction": "Previously untreated metastatic at entry 19.8%",
+      "hist": "**SCC subgroup reported**: SCC 446/617 (72.3%); OS HR SCC **0.61 (0.47–0.80)** vs non-squamous 0.76 (0.47–1.23) (ITT); CPS ≥1: SCC **0.60 (0.46–0.79)**, non-squamous 0.70 (0.41–1.20); CPS ≥1 PFS HR SCC **0.61 (0.48–0.78)**, non-squamous 0.59 (0.37–0.93). The subgroup paper [7] reports interim analysis 1 (cutoff May 2021), not the final analysis [11]",
+      "pfs": "ITT median **10.4 vs 8.2 mo**; 5-yr analysis ITT 10.4 vs 8.2",
+      "os": "Final ITT median **26.4 vs 16.8 mo**; CPS ≥1 28.6 vs 16.5",
+      "orr": "ITT 65.9% vs 50.8%",
+      "hr": "ITT PFS 0.65 (0.53–0.79); OS 0.67 (0.54–0.84); final OS **0.63 (0.52–0.77)**; CPS ≥1 final OS 0.60 (0.49–0.74); 5-yr ITT OS 0.64 (0.53–0.78)",
+      "tox": "Grade ≥3 AE 81.8% vs 75.1%; immune-mediated grade 3–5 11.4% vs 2.9%. Benefit with and without bevacizumab (ITT OS 0.63 and 0.74) [7]"
+     },
+     "refs": [
+      2,
+      11,
+      7,
+      48
+     ],
+     "level": "subgroup",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "COMPASSION-16",
+     "cite": "Wu 2024; subgroups Sun 2026",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Cadonilimab (PD-1/CTLA-4 bispecific) 10 mg/kg vs placebo, + platinum-based chemotherapy ± bevacizumab q3w ×6 → maintenance ≤2 yr",
+      "pop": "None for recurrence (stratified by prior CCRT)",
+      "n": "445 (China)",
+      "recurrent_fraction": "Metastatic at baseline 323 (73%); stage IVB at initial diagnosis 92 (21%)",
+      "hist": "**SCC subgroup reported**: SCC 370/445 (83%); PFS HR SCC **0.58 (0.44–0.76)** vs non-squamous 0.94 (0.52–1.69); OS HR SCC **0.64 (0.47–0.88)** vs non-squamous 0.63 (0.33–1.22) [49]. The 2026 subgroup paper does not analyse histology [15]",
+      "pfs": "Median **12.7 vs 8.1 mo** (BICR)",
+      "os": "Median not reached vs 22.8 mo",
+      "orr": "**83% vs 69%** (BICR; CR 36% vs 23%); investigator-assessed 79% vs 68%",
+      "hr": "PFS 0.62 (0.49–0.80); OS **0.64 (0.48–0.86)**; PFS CPS <1 0.65 (0.42–1.03), CPS ≥1 0.62 (0.47–0.83)",
+      "tox": "Commonest grade ≥3: decreased neutrophils, white cells, anaemia. PD-L1 not required"
+     },
+     "refs": [
+      49,
+      15
+     ],
+     "level": "subgroup",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "BEATcc / ENGOT-Cx10",
+     "cite": "Oaknin 2024",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Atezolizumab 1200 mg + cisplatin 50 mg/m² or carboplatin AUC5 + paclitaxel 175 mg/m² + bevacizumab 15 mg/kg q3w vs same without atezolizumab",
+      "pop": "None for recurrence (stratified by prior CCRT)",
+      "n": "410",
+      "recurrent_fraction": "Recurrent 301 (73%); newly diagnosed IVB 90 (22%); persistent 19 (5%)",
+      "hist": "**SCC subgroup reported**: SCC 321/410 (78%; adenocarcinoma capped at 20% of enrolment); OS HR SCC **0.72 (0.54–0.97)** vs adeno/adenosquamous 0.62 (0.36–1.06); PFS HR SCC 0.75 (0.47–1.19) vs adeno 0.59 (0.45–0.76) — the printed PFS histology rows have CI widths inverted relative to subgroup size and may be transposed in Figure 3A",
+      "pfs": "Median **13.7 vs 10.4 mo**",
+      "os": "Median **32.1 vs 22.8 mo** (interim)",
+      "orr": "**84% (79–89) vs 72% (66–78)**; CR 32% vs 20%",
+      "hr": "PFS 0.62 (0.49–0.78); OS **0.68 (0.52–0.88)**",
+      "tox": "Grade ≥3 AE 79% vs 75%; more grade 1–2 diarrhoea, arthralgia, pyrexia, rash. PD-L1 not required; all patients received bevacizumab"
+     },
+     "refs": [
+      50
+     ],
+     "level": "subgroup",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "GOG-179",
+     "cite": "Long 2005",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Topotecan 0.75 mg/m² D1–3 + cisplatin 50 mg/m² D1 q21d vs cisplatin 50 mg/m² (MVAC arm closed after 4 treatment-related deaths)",
+      "pop": "No prior chemotherapy for recurrence; prior radiosensitising cisplatin ~57%",
+      "n": "293",
+      "recurrent_fraction": "Recurrent ~78%, persistent ~10%, IVB ~12%",
+      "hist": "**Included, not broken out**: SCC 121 (83%) vs 128 (87%)",
+      "pfs": "Median 4.6 vs 2.9 mo",
+      "os": "Median **9.4 vs 6.5 mo**; no prior cisplatin 15.4 vs 8.8",
+      "orr": "27% vs 13% (P = 0.004)",
+      "hr": "PFS 0.76 (0.597–0.969); OS **0.76 (0.593–0.979)**",
+      "tox": "Grade 3–4 neutropenia 70% vs 1.4%; febrile neutropenia 17.7% vs 7.5%. Treatment-by-prior-cisplatin interaction P = 0.03 (PFS), 0.42 (OS)"
+     },
+     "refs": [
+      46
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "GOG-240",
+     "cite": "Tewari 2014; final OS Tewari 2017",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Bevacizumab 15 mg/kg + chemotherapy (cisplatin 50 mg/m² + paclitaxel 135 or 175 mg/m², or topotecan 0.75 mg/m² D1–3 + paclitaxel 175 mg/m²) q21d vs chemotherapy alone",
+      "pop": "No chemotherapy for recurrence; prior platinum 75%",
+      "n": "452",
+      "recurrent_fraction": "Recurrent 72%, persistent 11%",
+      "hist": "**Included, not broken out**: SCC 152/225 (67.6%) vs 158/227 (69.6%); histology was the factor with the smallest interaction P (0.07) in the OS forest plot, but **no SCC-specific bevacizumab HR is printed** (forest-plot figure only)",
+      "pfs": "Median **8.2 vs 5.9 mo**",
+      "os": "Median 17.0 vs 13.3 mo; final **16.8 vs 13.3 mo**",
+      "orr": "48% vs 36% (P = 0.008)",
+      "hr": "PFS 0.67 (0.54–0.82); OS 0.71 (98% CI 0.54–0.95); final OS **0.77 (0.62–0.95)**, P = 0.007",
+      "tox": "Hypertension ≥grade 2 25% vs 2%; thromboembolism ≥grade 3 8% vs 1%; fistula any grade 15% vs 1% (all previously irradiated), grade 3 6% vs <1%"
+     },
+     "refs": [
+      51,
+      52
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "↳ GOG-240 backbone, final",
+     "cite": "Tewari 2023",
+     "star": false,
+     "observational": false,
+     "cols": {
+      "regimen": "Topotecan–paclitaxel vs cisplatin–paclitaxel (± bevacizumab)",
+      "pop": "As above; platinum-exposed 75%",
+      "n": "452 (223 vs 229)",
+      "recurrent_fraction": "As above",
+      "hist": "**SCC subgroup reported**: SCC alone OS **1.12 (0.87–1.44)** (median 16.1 vs 12.9 mo); SCC + adenosquamous 1.09 (0.85–1.38); adenocarcinoma alone 1.58 (0.97–2.57)",
+      "pfs": "Median **6.0 vs 7.8 mo**; HR 1.24 (1.02–1.50), P = 0.03 — worse with topotecan",
+      "os": "Median 13.8 vs 16.3 mo",
+      "orr": "—",
+      "hr": "OS 1.12 (0.91–1.38), P = 0.28; platinum-exposed 1.09 (0.86–1.38); NS. PFS **1.24 (1.02–1.50)**, P = 0.03 (topotecan worse)",
+      "tox": "Non-platinum doublet not better for OS even after prior platinum, and significantly worse for PFS"
+     },
+     "refs": [
+      53
+     ],
+     "level": "subgroup",
+     "out": "harm",
+     "tags": []
+    },
+    {
+     "name": "GOG-169",
+     "cite": "Moore 2004",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Cisplatin 50 mg/m² + paclitaxel 135 mg/m² (24-h) q21d ×6 vs cisplatin 50 mg/m²",
+      "pop": "No prior chemotherapy except radiosensitisation; prior CCRT 30% vs 24%",
+      "n": "264 eligible (280)",
+      "recurrent_fraction": "Recurrent, persistent or stage IVB; proportions not broken out",
+      "hist": "**SCC-only trial** (central pathology review)",
+      "pfs": "Median **4.8 vs 2.8 mo** (P < .001)",
+      "os": "Median 9.7 vs 8.8 mo, NS",
+      "orr": "**36% vs 19%** (P = .002); after prior CRT 32% vs 5%",
+      "hr": "not reported",
+      "tox": "Grade 3–4 neutropenia and anaemia more common with paclitaxel; no QoL detriment"
+     },
+     "refs": [
+      45
+     ],
+     "level": "histotype_only",
+     "out": "pfs",
+     "tags": []
+    },
+    {
+     "name": "GOG cisplatin schedules",
+     "cite": "Bonomi 1985",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Cisplatin 50 mg/m² q21d vs 100 mg/m² q21d vs 20 mg/m² D1–5 q21d",
+      "pop": "No prior chemotherapy; prior radiotherapy 460/497 (92.6%)",
+      "n": "497 evaluable (581 entered); 444 evaluable for response",
+      "recurrent_fraction": "Recurrent or metastatic at entry; not broken out",
+      "hist": "**SCC-only trial**",
+      "pfs": "Median progression-free interval 3.7 vs 4.6 vs 3.9 mo, NS",
+      "os": "Median **7.1 vs 7.0 vs 6.1 mo**, NS",
+      "orr": "20.7% vs 31.4% vs 25.0% (50 vs 100: P = .015)",
+      "hr": "not reported",
+      "tox": "100 mg/m² more myelosuppression and nephrotoxicity (creatinine >2 mg/dL and/or BUN >40: 7%, 14%, 17%) without survival gain"
+     },
+     "refs": [
+      54
+     ],
+     "level": "histotype_only",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "GOG-204",
+     "cite": "Monk 2009",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Cisplatin 50 mg/m² + vinorelbine, gemcitabine or topotecan vs cisplatin + paclitaxel 135 mg/m² (24-h)",
+      "pop": "No chemotherapy for recurrence; prior cisplatin CCRT 302/434",
+      "n": "434 evaluable (513)",
+      "recurrent_fraction": "Recurrent 308/434; persistent 52; IVB 74",
+      "hist": "**Included, not broken out**: SCC 81/103, 80/108, 88/112, 86/111 (335/434, 77%)",
+      "pfs": "PC median 5.82 mo; experimental HRs 1.27–1.39",
+      "os": "PC median **12.87 mo** vs 9.99–10.28",
+      "orr": "29.1% (PC) vs 22.3–25.9%",
+      "hr": "OS vs PC: vinorelbine 1.15 (0.79–1.67), gemcitabine 1.32 (0.91–1.92), topotecan 1.26 (0.86–1.82); NS",
+      "tox": "Closed for futility; 11 treatment-related deaths across arms. Established cisplatin–paclitaxel as the reference"
+     },
+     "refs": [
+      55
+     ],
+     "level": "included",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "JCOG0505",
+     "cite": "Kitagawa 2015",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Paclitaxel 175 mg/m² (3-h) + carboplatin AUC5 D1 vs paclitaxel 135 mg/m² (24-h) D1 + cisplatin 50 mg/m² D2, q3w",
+      "pop": "≤1 prior platinum-containing treatment; no prior taxane",
+      "n": "253",
+      "recurrent_fraction": "First recurrence 167 (66%); second recurrence 35 (14%); stage IVB or persistent 51 (20%)",
+      "hist": "**SCC subgroup reported**: SCC 211/253 (83%); OS HR in the SCC stratum **0.96 (0.71–1.29)** vs non-SCC 1.28 (0.66–2.48); histology was not prognostic in this trial",
+      "pfs": "Median **6.2 vs 6.9 mo**; HR 1.041 (0.803–1.351)",
+      "os": "Median 17.5 vs 18.3 mo",
+      "orr": "**62.6% (52.3–72.2) vs 58.8% (48.6–68.5)**, P = 0.665",
+      "hr": "OS 0.994 (adjusted 90% CI 0.789–1.253), non-inferiority P = .032; PFS 1.041 (0.803–1.351). No prior cisplatin: OS 13.0 vs 23.2 mo, HR **1.571 (95% CI 1.062–2.324)**; prior platinum 0.69 (0.47–1.02)",
+      "tox": "Longer non-hospitalisation with carboplatin (P < .001); one treatment-related death (carboplatin)"
+     },
+     "refs": [
+      47
+     ],
+     "level": "subgroup",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "GOG 76-U",
+     "cite": "Muderspach 2001",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Topotecan 1.5 mg/m² D1–5 q4w (single arm)",
+      "pop": "No prior chemotherapy except radiosensitisation; prior RT 38/43",
+      "n": "43 evaluable (49 entered)",
+      "recurrent_fraction": "Recurrent or advanced; not broken out",
+      "hist": "**SCC-only trial**",
+      "pfs": "Median 2.4 mo (range 0.4–25.9+)",
+      "os": "Median **6.4 mo** (range 0.4–42.3+)",
+      "orr": "18.6% (95% CI 8.4–33.4); CR 3, PR 5",
+      "hr": "—",
+      "tox": "Grade 4 neutropenia 68%, grade 4 thrombocytopenia 18%"
+     },
+     "refs": [
+      56
+     ],
+     "level": "histotype_only",
+     "out": "single",
+     "tags": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "t3b",
+   "title": "3B. Second line and beyond (after platinum ± bevacizumab ± PD-(L)1 inhibitor)",
+   "intro": "",
+   "columns": {
+    "trial": "Trial",
+    "regimen": "Regimen (exp vs control)",
+    "pop": "Prior systemic therapy",
+    "n": "n",
+    "hist": "SCC data",
+    "pfs": "PFS",
+    "os": "OS",
+    "orr": "ORR",
+    "hr": "HR",
+    "tox": "Toxicity / notes",
+    "source": "Source"
+   },
+   "rows": [
+    {
+     "name": "EMPOWER-Cervical 1 / GOG-3016 / ENGOT-cx9",
+     "cite": "Tewari 2022; final OS Oaknin 2025",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Cemiplimab 350 mg q3w (≤96 wk) vs investigator's-choice single-agent chemotherapy (pemetrexed, topotecan, irinotecan, gemcitabine or vinorelbine)",
+      "pop": "Progression after platinum for recurrence; >1 prior line ~40%; prior bevacizumab ~50%; no prior PD-(L)1",
+      "n": "608",
+      "hist": "**SCC subgroup reported — SCC was the primary population** (tested first in the hierarchy): 477 (SCC per IWRS; 77.8% by EDC). SCC: OS **11.1 vs 8.8 mo, HR 0.73 (0.58–0.91)**, P = 0.006 at the primary analysis and **10.9 vs 8.8 mo, HR 0.70 (0.57–0.86)** at the final analysis [16]; PFS 2.8 vs 2.9 mo, HR 0.71 (0.58–0.86); ORR 17.6% vs 6.7%. Adeno/adenosquamous OS HR 0.56 (0.36–0.85) primary, 0.55 (0.37–0.82) final — benefit numerically larger in non-squamous",
+      "pfs": "Median 2.8 vs 2.9 mo (all)",
+      "os": "Median **12.0 vs 8.5 mo**; final 11.7 vs 8.5",
+      "orr": "16.4% vs 6.3%",
+      "hr": "OS 0.69 (0.56–0.84); final OS **0.67 (0.56–0.80)**; PFS 0.75 (0.63–0.89)",
+      "tox": "Grade ≥3 AE 45.0% vs 53.4%; immune-related AE 15.7%. Final OS by PD-L1 TC: ≥1% HR 0.72 (0.50–1.0), <1% 0.86 (0.54–1.37); PD-L1 not required"
+     },
+     "refs": [
+      3,
+      16
+     ],
+     "level": "subgroup",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "innovaTV 301 / ENGOT-cx12 / GOG-3057",
+     "cite": "Vergote 2024",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Tisotumab vedotin 2.0 mg/kg q3w vs investigator's-choice chemotherapy",
+      "pop": "1–2 prior lines including platinum doublet ± bevacizumab; prior bevacizumab 63.9%; **prior anti-PD-(L)1 27.5%**",
+      "n": "502",
+      "hist": "**SCC subgroup reported**: SCC 317/502 (63.1%); OS HR **0.69 (0.50–0.94)**; PFS HR 0.71 (0.55–0.93)",
+      "pfs": "Median 4.2 vs 2.9 mo",
+      "os": "Median **11.5 vs 9.5 mo**; 12-mo 48.7% vs 35.3%",
+      "orr": "17.8% vs 5.2%",
+      "hr": "OS **0.70 (0.54–0.89)**, P = 0.0226; PFS 0.67 (0.54–0.82)",
+      "tox": "Grade ≥3 AE 52.0% vs 62.3%; conjunctivitis 31.2%, keratitis 15.6%, peripheral sensory neuropathy 28.4%; discontinuation for AE 14.8%. OS HR with prior PD-(L)1 0.72, without 0.67"
+     },
+     "refs": [
+      1
+     ],
+     "level": "subgroup",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "DESTINY-PanTumor02, cervical cohort",
+     "cite": "Meric-Bernstam 2024",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Trastuzumab deruxtecan 5.4 mg/kg q3w (single arm)",
+      "pop": "Median 2 prior lines (1–6); ≥2 prior lines 85.0%",
+      "n": "40",
+      "hist": "**Included, not broken out**: histology not reported",
+      "pfs": "Median 7.0 mo (4.2–11.1); IHC 3+ not reached",
+      "os": "Median 13.6 mo (11.1–NR); IHC 2+ 11.5",
+      "orr": "**50.0% (33.8–66.2)** investigator; IHC 3+ 75.0% (n = 8); IHC 2+ 40.0% (n = 20); central review 37.5%",
+      "hr": "—",
+      "tox": "All cohorts: drug-related grade ≥3 AE 40.8%; drug-related deaths 1.5%. HER2 IHC 3+/2+ required (5 IHC 1+ added late)"
+     },
+     "refs": [
+      57
+     ],
+     "level": "included",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "CheckMate 358, cervical cohort",
+     "cite": "Naumann 2019; Oaknin 2024",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Nivolumab 240 mg q2w; nivolumab 3 mg/kg q2w + ipilimumab 1 mg/kg q6w; nivolumab 1 mg/kg + ipilimumab 3 mg/kg q3w ×4 → nivolumab 240 mg q2w",
+      "pop": "≤2 prior systemic therapies; prior systemic therapy for metastatic disease 78.9% (nivolumab cohort); known HPV-negative ineligible",
+      "n": "176 treated (nivolumab 19; NIVO3 + IPI1 45; NIVO1 + IPI3 112)",
+      "hist": "**SCC-only trial**",
+      "pfs": "Nivolumab median 5.1 mo (1.9–9.1); NIVO3 + IPI1 3.8 mo; randomized NIVO1 + IPI3 7.2 mo",
+      "os": "Nivolumab median **21.9 mo** (2019) / 21.6 mo (8.3–46.9) (2024); NIVO3 + IPI1 15.2 mo; randomized NIVO1 + IPI3 24.7 mo",
+      "orr": "Nivolumab 26%; NIVO3 + IPI1 31%; randomized NIVO1 + IPI3 **40%**; pooled NIVO1 + IPI3 38%",
+      "hr": "—",
+      "tox": "Serious treatment-related AE 16%, 27%, 42%; one death (immune-mediated colitis). PD-(L)1-naive"
+     },
+     "refs": [
+      17,
+      58
+     ],
+     "level": "histotype_only",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "Balstilimab + zalifrelimab",
+     "cite": "O'Malley 2022",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Balstilimab 3 mg/kg q2w + zalifrelimab (anti-CTLA-4) 1 mg/kg q6w, ≤24 mo",
+      "pop": "1 prior platinum-based line (efficacy population)",
+      "n": "125 efficacy-evaluable (155 treated)",
+      "hist": "**SCC subgroup reported**: SCC 89/125 (71%); ORR **32.6%** (29/89) in SCC vs adenocarcinoma 8.8% (3/34)",
+      "pfs": "Median **2.7 mo** (1.5–3.7); 12-mo 21.3%",
+      "os": "Median **12.8 mo** (8.8–17.6); 12-mo 53.3%",
+      "orr": "25.6% (18.8–33.9); CR 8.0%; PD-L1+ 32.8%, PD-L1− 9.1%",
+      "hr": "—",
+      "tox": "Hypothyroidism 14.2%, hyperthyroidism 7.1% (commonest immune-mediated AEs)"
+     },
+     "refs": [
+      59
+     ],
+     "level": "subgroup",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "innovaTV 204 / GOG-3023 / ENGOT-cx6",
+     "cite": "Coleman 2021",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Tisotumab vedotin 2.0 mg/kg q3w (single arm)",
+      "pop": "≤2 prior regimens; progression on/after doublet + bevacizumab (if eligible)",
+      "n": "101 treated",
+      "hist": "**SCC subgroup reported**: SCC 69/101 (68%); ORR squamous **23% (14–35)** vs non-squamous 25% (12–43)",
+      "pfs": "Median **4.2 mo** (3.0–4.4)",
+      "os": "Median **12.1 mo** (9.6–13.9); 12-mo 51%",
+      "orr": "24% (16–33); CR 7%",
+      "hr": "—",
+      "tox": "Grade ≥3 treatment-related AE 28%; conjunctivitis 26%, dry eye 23%; one septic-shock death"
+     },
+     "refs": [
+      60
+     ],
+     "level": "subgroup",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "Irinotecan",
+     "cite": "Verschraegen 1997",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Irinotecan 125 mg/m² weekly ×4, 2 weeks off",
+      "pop": "All had prior chemotherapy (1 regimen 52%, ≥2 48%)",
+      "n": "42 assessable (46)",
+      "hist": "**SCC-only trial**",
+      "pfs": "not reported",
+      "os": "Median 6.4 mo",
+      "orr": "21% (10–35%)",
+      "hr": "—",
+      "tox": "Dose reduction in 77% started at 125 mg/m²; no response in liver (0/7)"
+     },
+     "refs": [
+      61
+     ],
+     "level": "histotype_only",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "Pemetrexed, GOG",
+     "cite": "Miller 2008",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Pemetrexed 900 mg/m² q21d",
+      "pop": "Failed one prior chemotherapy regimen",
+      "n": "27 treated (29)",
+      "hist": "**Included, not broken out**: SCC 19/27 (70%); no histology-specific response reported",
+      "pfs": "Median 3.1 mo",
+      "os": "Median 7.4 mo",
+      "orr": "15% (4 PR); non-irradiated sites 25% vs irradiated 7%",
+      "hr": "—",
+      "tox": "Grade 3–4 anaemia 41%, leukopenia 30%, neutropenia 26%, infection 26%"
+     },
+     "refs": [
+      62
+     ],
+     "level": "included",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "Balstilimab",
+     "cite": "O'Malley 2021",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Balstilimab 3 mg/kg q2w, ≤24 mo",
+      "pop": "Relapsed after a prior platinum-based regimen; 1 prior line (efficacy population)",
+      "n": "140 efficacy (161 treated)",
+      "hist": "**SCC subgroup reported**: SCC 85/140 (61%); SCC ORR **17.6%** (15/85) vs adenocarcinoma 12.5% (6/48)",
+      "pfs": "not reported in the abstract",
+      "os": "not reported in the abstract",
+      "orr": "15% (10.0–21.8); PD-L1+ 20%, PD-L1− 7.9%",
+      "hr": "—",
+      "tox": "Median DOR 15.4 mo; grade ≥3 immune-mediated enterocolitis 3.1%"
+     },
+     "refs": [
+      63
+     ],
+     "level": "subgroup",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "KEYNOTE-158, cervical cohort",
+     "cite": "Chung 2019",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Pembrolizumab 200 mg q3w, ≤2 yr",
+      "pop": "≥1 prior line; ≥2 prior lines for recurrent/metastatic disease 65%; prior bevacizumab 42%",
+      "n": "98",
+      "hist": "**Included, not broken out**: SCC 92/98 (93.9%)",
+      "pfs": "Median 2.1 mo",
+      "os": "Median 9.4 mo; CPS ≥1 11.0",
+      "orr": "12.2% (6.5–20.4); CPS ≥1 14.6%; **CPS <1 0/15**",
+      "hr": "—",
+      "tox": "Treatment-related grade 3–4 AE 12.2%; hypothyroidism 10.2%. Basis for CPS ≥1 selection"
+     },
+     "refs": [
+      12
+     ],
+     "level": "included",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "GOG-227C",
+     "cite": "Monk 2009",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Bevacizumab 15 mg/kg q21d",
+      "pop": "1–2 prior cytotoxic regimens (1 in 74%)",
+      "n": "46",
+      "hist": "**SCC-only trial** (SCC 43, adenosquamous 3)",
+      "pfs": "Median 3.40 mo; PFS ≥6 mo 23.9%",
+      "os": "Median 7.29 mo",
+      "orr": "10.9% (5 PR)",
+      "hr": "—",
+      "tox": "Thrombosis led to 4 discontinuations. Rationale for bevacizumab in GOG-240"
+     },
+     "refs": [
+      64
+     ],
+     "level": "histotype_only",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "Docetaxel, GOG",
+     "cite": "Garcia 2007",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Docetaxel 100 mg/m² (1-h) q21d",
+      "pop": "≥1 prior regimen; all had prior platinum; prior CCRT 65%",
+      "n": "23",
+      "hist": "**SCC-only trial**",
+      "pfs": "Median time to progression 3.8 mo",
+      "os": "Median 7.0 mo",
+      "orr": "8.7% (2 PR)",
+      "hr": "—",
+      "tox": "Grade 3–4 neutropenia 65%; closed after first stage"
+     },
+     "refs": [
+      65
+     ],
+     "level": "histotype_only",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "Gemcitabine, GOG, (Schilder 2000)",
+     "cite": "SCC",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Gemcitabine 800 mg/m² D1, 8, 15 q28d",
+      "pop": "≤1 prior regimen; prior chemotherapy 14/24 (prior cisplatin 7)",
+      "n": "24 evaluable (27)",
+      "hist": "**SCC-only trial**",
+      "pfs": "Median progression-free interval 1.9 mo",
+      "os": "Median 4.9 mo",
+      "orr": "8.4% (2 PR)",
+      "hr": "—",
+      "tox": "Grade 4 neutropenia 2 patients. Minimal activity"
+     },
+     "refs": [
+      66
+     ],
+     "level": "histotype_only",
+     "out": "single",
+     "tags": []
+    },
+    {
+     "name": "Gemcitabine, GOG, (Schilder 2005)",
+     "cite": "non-SCC",
+     "star": false,
+     "observational": false,
+     "cols": {
+      "regimen": "Gemcitabine 800 mg/m² D1, 8, 15 q28d",
+      "pop": "One prior regimen (cisplatin-containing in all)",
+      "n": "22",
+      "hist": "**❌ excluded**: adenocarcinoma, adenosquamous or undifferentiated only",
+      "pfs": "not reported",
+      "os": "not reported",
+      "orr": "4.5% (1 PR)",
+      "hr": "—",
+      "tox": "Closed at first stage. Shown because it completes the gemcitabine data"
+     },
+     "refs": [
+      67
+     ],
+     "level": "excluded",
+     "out": "excluded",
+     "tags": []
+    }
+   ],
+   "notes": [
+    {
+     "kind": "info",
+     "title": "Reading notes for Table 3",
+     "md": "- **3A:** KEYNOTE-826, COMPASSION-16 and BEATcc all have SCC OS HRs close to their trial-wide HRs [7,49,50]; they were not compared directly.\n- **3A backbone:** cisplatin–paclitaxel is the reference [55]; carboplatin–paclitaxel is non-inferior overall but inferior without prior cisplatin [47].\n- **3B:** cemiplimab and tisotumab vedotin OS benefits hold in SCC [1,3]; evidence after first-line pembrolizumab is limited to the innovaTV 301 subgroup. Single-arm ORRs are not comparable with randomized medians.\n- Old single agents (ORR 8–21%) set the pre-immunotherapy salvage baseline [61,62,64,65,66]."
+    },
+    {
+     "kind": "info",
+     "title": "Trial dosing vs NTUH templates (Table 3)",
+     "md": "- ⚠️ **Cisplatin 75 mg/m²** in the paclitaxel–cisplatin templates; every 3A trial used 50 mg/m² [2,45,50,51,55].\n- ⚠️ **Pembrolizumab** is weight-based in the templates; the trials used a flat 200 mg q3w [2,12].\n- Carboplatin–paclitaxel (AUC5) matches JCOG0505 / KEYNOTE-826; prefer cisplatin if cisplatin-naive [2,47].\n- Topotecan–cisplatin templates match GOG-179 doses but give cisplatin on D3, not D1 [46]."
+    }
+   ]
+  },
+  {
+   "id": "t4",
+   "title": "4. Neoadjuvant chemotherapy before surgery vs chemoradiation or radiotherapy (bulky IB–IIB)",
+   "intro": "",
+   "columns": {
+    "trial": "Trial",
+    "regimen": "Regimen (exp vs control)",
+    "pop": "Population",
+    "n": "n",
+    "hist": "SCC data",
+    "dfs_pfs": "DFS / PFS",
+    "os": "OS",
+    "hr": "HR",
+    "tox": "Toxicity / notes",
+    "source": "Source"
+   },
+   "rows": [
+    {
+     "name": "GCIG INTERLACE",
+     "cite": "",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Induction weekly carboplatin AUC2 + paclitaxel 80 mg/m² ×6 → CCRT vs CCRT",
+      "pop": "FIGO 2008 IB1 node-positive to IVA",
+      "n": "500",
+      "hist": "**Included, not broken out** (see T2A): SCC 411/500 (82%); no histology-subgroup HR printed",
+      "dfs_pfs": "5-yr PFS 72% vs 64%",
+      "os": "5-yr OS 80% vs 72%",
+      "hr": "PFS 0.65 (0.46–0.91); OS **0.60 (0.40–0.91)**",
+      "tox": "Neoadjuvant chemotherapy before chemoradiation, not before surgery"
+     },
+     "refs": [
+      29
+     ],
+     "level": "included",
+     "out": "os",
+     "tags": []
+    },
+    {
+     "name": "Chang 2000",
+     "cite": "",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Cisplatin 50 mg/m² + vincristine 1 mg/m² D1 + bleomycin 25 mg/m² D1–3 ×3 → radical hysterectomy vs pelvic radiotherapy alone (6:4 allocation)",
+      "pop": "Bulky (≥4 cm) stage IB–IIA, non-small-cell carcinoma",
+      "n": "120 eligible and analysed (124 registered)",
+      "hist": "**Included, not broken out**: SCC 62/68 (91%) vs 46/52 (88%); survival not affected by histology (squamous vs other)",
+      "dfs_pfs": "Relapse or persistence 21/68 (31%) vs 14/52 (27%); DFS not different (P = .76)",
+      "os": "5-yr **70% (56–83) vs 62% (43–80)**, P = .77",
+      "hr": "not reported",
+      "tox": "Control was RT alone (pre-CCRT standard); disease-specific deaths 21% in each arm; clinical response to NACT 86.2%, pathological CR 4.6%"
+     },
+     "refs": [
+      68
+     ],
+     "level": "included",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "JCOG 0102",
+     "cite": "Katsumata 2013",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "BOMP (bleomycin, vincristine, mitomycin, cisplatin 14 mg/m² D1–5) q3w ×2–4 → radical surgery vs radical surgery alone",
+      "pop": "Stage IB2, IIA2, IIB",
+      "n": "134 (67 vs 67)",
+      "hist": "**SCC-only trial**",
+      "dfs_pfs": "5-yr PFS **59.9% vs 62.7%**",
+      "os": "5-yr **70.0% vs 74.4%** (P = 0.85)",
+      "hr": "OS **1.07 (0.54–2.12)**, P = 0.85; PFS 1.06 (0.60–1.88), P = 0.85; NS",
+      "tox": "**The control arm is radical surgery alone, not chemoradiation** — this row does not test NACT against CCRT. Stopped at the first interim analysis (interim OS HR 2.11, multiplicity-adjusted 99% CI 0.34–13.2; 6.4% predicted probability of showing superiority). The one clear gain was less postoperative RT: 58% vs 79% in the Results, 80% in the abstract, P = 0.015"
+     },
+     "refs": [
+      69
+     ],
+     "level": "histotype_only",
+     "out": "ns",
+     "tags": []
+    },
+    {
+     "name": "Gupta 2018",
+     "cite": "single centre",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Paclitaxel + carboplatin q3w ×3 → radical hysterectomy (± adjuvant RT/CCRT) vs weekly cisplatin CCRT ×5",
+      "pop": "Stage IB2, IIA, IIB, age 18–65",
+      "n": "633 analysed (635)",
+      "hist": "**SCC-only trial**",
+      "dfs_pfs": "5-yr DFS **69.3% vs 76.7%**",
+      "os": "5-yr OS 75.4% vs 74.7%",
+      "hr": "DFS **1.38 (1.02–1.87)**, P = .038 (worse with NACT-surgery; adjusted 1.46, 1.08–1.99, P = .015); stage IIB DFS 1.90 (1.25–2.89), P = .003; OS 1.025 (0.752–1.398), P = .87 (adjusted 1.06, 0.77–1.44)",
+      "tox": "Late vaginal toxicity 12.0% vs 25.6%, bladder 1.6% vs 3.5%, rectal 2.2% vs 3.5%"
+     },
+     "refs": [
+      70
+     ],
+     "level": "histotype_only",
+     "out": "harm",
+     "tags": []
+    },
+    {
+     "name": "EORTC 55994",
+     "cite": "Kenter 2023",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Cisplatin-based neoadjuvant chemotherapy → surgery vs CCRT",
+      "pop": "FIGO IB2–IIB",
+      "n": "626 (314 NACT-S vs 312 CCRT)",
+      "hist": "**Included, not broken out**: SCC 530/626 (85%), balanced between arms; **no histology-subgroup HR printed**",
+      "dfs_pfs": "5-yr PFS **57.0% (51.1–62.4) vs 65.6% (59.9–70.7)**; median 12.2 mo vs not estimable",
+      "os": "5-yr OS **71.7% (66.2–76.5) vs 75.5% (70.2–80.0)**; NS",
+      "hr": "Printed CCRT vs NACT-S: OS **0.84 (0.64–1.12)**, P = 0.240; PFS **0.72 (0.57–0.93)**, P = 0.010 — both favour CCRT (Results text prints PFS 0.73, 0.57–0.93)",
+      "tox": "Short-term grade ≥3 AE 41% vs 23%; long-term 15% vs 21%; 48% of completed NACT-S patients also received RT"
+     },
+     "refs": [
+      71
+     ],
+     "level": "included",
+     "out": "harm",
+     "tags": []
+    },
+    {
+     "name": "CSEM 006",
+     "cite": "Tu 2021, design",
+     "star": true,
+     "observational": false,
+     "cols": {
+      "regimen": "Paclitaxel + cisplatin ×3 → type C radical hysterectomy vs CCRT",
+      "pop": "Stage IIB, age 18–60; SCC, adenocarcinoma, adenosquamous",
+      "n": "Target 240 (115 enrolled by February 2020)",
+      "hist": "**Included**: SCC, adenocarcinoma and adenosquamous eligible",
+      "dfs_pfs": "Primary endpoint 2-yr DFS",
+      "os": "—",
+      "hr": "—",
+      "tox": "**Design/protocol paper with no results — it cannot support an outcome row (ongoing).** Assumed 2-yr PFS 75% (CCRT) vs 85% (NACT-surgery), 240 patients. No PubMed results publication found (2026-09-15)"
+     },
+     "refs": [
+      72
+     ],
+     "level": "included",
+     "out": "pending",
+     "tags": []
+    }
+   ],
+   "notes": [
+    {
+     "kind": "info",
+     "title": "Reading Table 4",
+     "md": "- NACT → surgery has not beaten chemoradiation: worse DFS (Gupta, SCC-only) and worse PFS (EORTC 55994) [70,71]; almost half of EORTC surgical patients still needed RT.\n- NACT did not beat surgery alone (JCOG 0102) [69]; the 2004 meta-analysis's RT-alone control is no longer standard [73].\n- Induction before CCRT (INTERLACE) is the one positive neoadjuvant strategy [29]. JGOG1082 and CSEM 006 are design-only [25,72]; no fertility-sparing RCTs."
+    },
+    {
+     "kind": "info",
+     "title": "Trial dosing vs NTUH templates (Table 4)",
+     "md": "⚠️ CC POB (Cisplatin + Vincristine + Bleomycin) matches Chang 2000 except bleomycin 15 vs 25 mg/m²/day; that trial's comparator was RT alone, not CCRT [68]."
+    }
+   ]
+  }
+ ],
+ "references": [
+  [
+   1,
+   "Vergote I, González-Martín A, Fujiwara K, et al. Tisotumab Vedotin as Second- or Third-Line Therapy for Recurrent Cervical Cancer.",
+   "N Engl J Med",
+   "2024;391(1):44-55",
+   "38959480"
+  ],
+  [
+   2,
+   "Colombo N, Dubot C, Lorusso D, et al. Pembrolizumab for Persistent, Recurrent, or Metastatic Cervical Cancer.",
+   "N Engl J Med",
+   "2021;385(20):1856-1867",
+   "34534429"
+  ],
+  [
+   3,
+   "Tewari KS, Monk BJ, Vergote I, et al. Survival with Cemiplimab in Recurrent Cervical Cancer.",
+   "N Engl J Med",
+   "2022;386(6):544-555",
+   "35139273"
+  ],
+  [
+   4,
+   "Rose PG, Bundy BN, Watkins EB, et al. Concurrent cisplatin-based radiotherapy and chemotherapy for locally advanced cervical cancer.",
+   "N Engl J Med",
+   "1999;340(15):1144-53",
+   "10202165"
+  ],
+  [
+   5,
+   "Rose PG, Java JJ, Whitney CW, et al. Locally advanced adenocarcinoma and adenosquamous carcinomas of the cervix compared to squamous cell carcinomas of the cervix in gynecologic oncology group trials of cisplatin-based chemoradiation.",
+   "Gynecol Oncol",
+   "2014;135(2):208-12",
+   "25152438"
+  ],
+  [
+   6,
+   "Rotman M, Sedlis A, Piedmonte MR, et al. A phase III randomized trial of postoperative pelvic irradiation in Stage IB cervical carcinoma with poor prognostic features: follow-up of a gynecologic oncology group study.",
+   "Int J Radiat Oncol Biol Phys",
+   "2006;65(1):169-76",
+   "16427212"
+  ],
+  [
+   7,
+   "Tewari KS, Colombo N, Monk BJ, et al. Pembrolizumab or Placebo Plus Chemotherapy With or Without Bevacizumab for Persistent, Recurrent, or Metastatic Cervical Cancer: Subgroup Analyses From the KEYNOTE-826 Randomized Clinical Trial.",
+   "JAMA Oncol",
+   "2024;10(2):185-192",
+   "38095881"
+  ],
+  [
+   8,
+   "Stolnicu S, Rakislova N, Morató A, et al. Cervical Human Papillomavirus-Independent Squamous Cell Carcinoma: A Clinicopathological Review and Outcomes Analysis Compared With Human Papillomavirus-Associated Squamous Cell Carcinoma.",
+   "Mod Pathol",
+   "2025;38(6):100742",
+   "40010435"
+  ],
+  [
+   9,
+   "Cancer Genome Atlas Research Network. Integrated genomic and molecular characterization of cervical cancer.",
+   "Nature",
+   "2017;543(7645):378-384",
+   "28112728"
+  ],
+  [
+   10,
+   "Huang RSP, Haberberger J, Murugesan K, et al. Clinicopathologic and genomic characterization of PD-L1-positive uterine cervical carcinoma.",
+   "Mod Pathol",
+   "2021;34(7):1425-1433",
+   "33637877"
+  ],
+  [
+   11,
+   "Monk BJ, Colombo N, Tewari KS, et al. First-Line Pembrolizumab + Chemotherapy Versus Placebo + Chemotherapy for Persistent, Recurrent, or Metastatic Cervical Cancer: Final Overall Survival Results of KEYNOTE-826.",
+   "J Clin Oncol",
+   "2023;41(36):5505-5511",
+   "37910822"
+  ],
+  [
+   12,
+   "Chung HC, Ros W, Delord JP, et al. Efficacy and Safety of Pembrolizumab in Previously Treated Advanced Cervical Cancer: Results From the Phase II KEYNOTE-158 Study.",
+   "J Clin Oncol",
+   "2019;37(17):1470-1478",
+   "30943124"
+  ],
+  [
+   13,
+   "Liu W, Wang X, Cui Y, et al. HER2 expression in cervical squamous cell carcinoma: high prevalence of HER2-low/ultralow and spatiotemporal heterogeneity across tumor evolution.",
+   "NPJ Precis Oncol",
+   "2025;9(1):410",
+   "41315811"
+  ],
+  [
+   14,
+   "Bonneville R, Krook MA, Kautto EA, et al. Landscape of Microsatellite Instability Across 39 Cancer Types.",
+   "JCO Precis Oncol",
+   "2017;2017:PO.17.00073",
+   "29850653"
+  ],
+  [
+   15,
+   "Sun Y, Yang H, Wang J, et al. Cadonilimab plus chemotherapy with or without bevacizumab as first-line treatment for advanced cervical cancer: subgroup analyses from the COMPASSION-16 phase 3 trial.",
+   "Nat Commun",
+   "2026;17(1):3931",
+   "41826281"
+  ],
+  [
+   16,
+   "Oaknin A, Monk BJ, de Melo AC, et al. Cemiplimab in recurrent cervical cancer: Final analysis of overall survival in the phase III EMPOWER-Cervical 1/GOG-3016/ENGOT-cx9 trial.",
+   "Eur J Cancer",
+   "2025;216:115146",
+   "39798514"
+  ],
+  [
+   17,
+   "Naumann RW, Hollebecque A, Meyer T, et al. Safety and Efficacy of Nivolumab Monotherapy in Recurrent or Metastatic Cervical, Vaginal, or Vulvar Carcinoma: Results From the Phase I/II CheckMate 358 Trial.",
+   "J Clin Oncol",
+   "2019;37(31):2825-2834",
+   "31487218"
+  ],
+  [
+   18,
+   "Mayadev JS, Enserro D, Lin YG, et al. Sequential Ipilimumab After Chemoradiotherapy in Curative-Intent Treatment of Patients With Node-Positive Cervical Cancer.",
+   "JAMA Oncol",
+   "2020;6(1):92-99",
+   "31774464"
+  ],
+  [
+   19,
+   "Sedlis A, Bundy BN, Rotman MZ, et al. A randomized trial of pelvic radiation therapy versus no further therapy in selected patients with stage IB carcinoma of the cervix after radical hysterectomy and pelvic lymphadenectomy: A Gynecologic Oncology Group Study.",
+   "Gynecol Oncol",
+   "1999;73(2):177-83",
+   "10329031"
+  ],
+  [
+   20,
+   "Ryu SY, Deng W, Albuquerque K, et al. Randomized phase III trial of adjuvant radiation versus chemoradiation in intermediate-risk, early-stage cervical cancer following radical hysterectomy and lymphadenectomy: results from NRG Oncology/GOG-263/KGOG 1008.",
+   "Ann Oncol",
+   "2025;36(12):1514-1524",
+   "40947016"
+  ],
+  [
+   21,
+   "Peters WA, Liu PY, Barrett RJ, et al. Concurrent chemotherapy and pelvic radiation therapy compared with pelvic radiation therapy alone as adjuvant therapy after radical surgery in high-risk early-stage cancer of the cervix.",
+   "J Clin Oncol",
+   "2000;18(8):1606-13",
+   "10764420"
+  ],
+  [
+   22,
+   "Monk BJ, Wang J, Im S, et al. Rethinking the use of radiation and chemotherapy after radical hysterectomy: a clinical-pathologic analysis of a Gynecologic Oncology Group/Southwest Oncology Group/Radiation Therapy Oncology Group trial.",
+   "Gynecol Oncol",
+   "2005;96(3):721-8",
+   "15721417"
+  ],
+  [
+   23,
+   "Huang H, Feng YL, Wan T, et al. Effectiveness of Sequential Chemoradiation vs Concurrent Chemoradiation or Radiation Alone in Adjuvant Treatment After Hysterectomy for Cervical Cancer: The STARS Phase 3 Randomized Clinical Trial.",
+   "JAMA Oncol",
+   "2021;7(3):361-369",
+   "33443541"
+  ],
+  [
+   24,
+   "Sehouli J, Runnebaum IB, Fotopoulou C, et al. A randomized phase III adjuvant study in high-risk cervical cancer: simultaneous radiochemotherapy with cisplatin (S-RC) versus systemic paclitaxel and carboplatin followed by percutaneous radiation (PC-R): a NOGGO-AGO Intergroup Study.",
+   "Ann Oncol",
+   "2012;23(9):2259-2264",
+   "22357252"
+  ],
+  [
+   25,
+   "Furusawa A, Takekuma M, Mori K, et al. A randomized phase III trial of adjuvant chemotherapy versus concurrent chemoradiotherapy for postoperative cervical cancer: Japanese Gynecologic Oncology Group study (JGOG1082).",
+   "Int J Gynecol Cancer",
+   "2021;31(4):623-626",
+   "33664127"
+  ],
+  [
+   26,
+   "Ramirez PT, Frumovitz M, Pareja R, et al. Minimally Invasive versus Abdominal Radical Hysterectomy for Cervical Cancer.",
+   "N Engl J Med",
+   "2018;379(20):1895-1904",
+   "30380365"
+  ],
+  [
+   27,
+   "Plante M, Kwon JS, Ferguson S, et al. Simple versus Radical Hysterectomy in Women with Low-Risk Cervical Cancer.",
+   "N Engl J Med",
+   "2024;390(9):819-829",
+   "38416430"
+  ],
+  [
+   28,
+   "Ryu SY, Lee WM, Kim K, et al. Randomized clinical trial of weekly vs. triweekly cisplatin-based chemotherapy concurrent with radiotherapy in the treatment of locally advanced cervical cancer.",
+   "Int J Radiat Oncol Biol Phys",
+   "2011;81(4):e577-81",
+   "21840137"
+  ],
+  [
+   29,
+   "McCormack M, Eminowicz G, Gallardo D, et al. Induction chemotherapy followed by standard chemoradiotherapy versus standard chemoradiotherapy alone in patients with locally advanced cervical cancer (GCIG INTERLACE): an international, multicentre, randomised phase 3 trial.",
+   "Lancet",
+   "2024;404(10462):1525-1535",
+   "39419054"
+  ],
+  [
+   30,
+   "Rose PG, Ali S, Watkins E, et al. Long-term follow-up of a randomized trial comparing concurrent single agent cisplatin, cisplatin-based combination chemotherapy, or hydroxyurea during pelvic irradiation for locally advanced cervical cancer: a Gynecologic Oncology Group Study.",
+   "J Clin Oncol",
+   "2007;25(19):2804-10",
+   "17502627"
+  ],
+  [
+   31,
+   "Keys HM, Bundy BN, Stehman FB, et al. Cisplatin, radiation, and adjuvant hysterectomy compared with radiation and adjuvant hysterectomy for bulky stage IB cervical carcinoma.",
+   "N Engl J Med",
+   "1999;340(15):1154-61",
+   "10202166"
+  ],
+  [
+   32,
+   "Stehman FB, Ali S, Keys HM, et al. Radiation therapy with or without weekly cisplatin for bulky stage 1B cervical carcinoma: follow-up of a Gynecologic Oncology Group trial.",
+   "Am J Obstet Gynecol",
+   "2007;197(5):503.e1-6",
+   "17980189"
+  ],
+  [
+   33,
+   "Dueñas-González A, Zarbá JJ, Patel F, et al. Phase III, open-label, randomized study comparing concurrent gemcitabine plus cisplatin and radiation followed by adjuvant gemcitabine and cisplatin versus concurrent cisplatin and radiation in patients with stage IIB to IVA carcinoma of the cervix.",
+   "J Clin Oncol",
+   "2011;29(13):1678-85",
+   "21444871"
+  ],
+  [
+   34,
+   "Morris M, Eifel PJ, Lu J, et al. Pelvic radiation with concurrent chemotherapy compared with pelvic and para-aortic radiation for high-risk cervical cancer.",
+   "N Engl J Med",
+   "1999;340(15):1137-43",
+   "10202164"
+  ],
+  [
+   35,
+   "Eifel PJ, Winter K, Morris M, et al. Pelvic irradiation with concurrent chemotherapy versus pelvic and para-aortic irradiation for high-risk cervical cancer: an update of radiation therapy oncology group trial (RTOG) 90-01.",
+   "J Clin Oncol",
+   "2004;22(5):872-80",
+   "14990643"
+  ],
+  [
+   36,
+   "Whitney CW, Sause W, Bundy BN, et al. Randomized comparison of fluorouracil plus cisplatin versus hydroxyurea as an adjunct to radiation therapy in stage IIB-IVA carcinoma of the cervix with negative para-aortic lymph nodes: a Gynecologic Oncology Group and Southwest Oncology Group study.",
+   "J Clin Oncol",
+   "1999;17(5):1339-48",
+   "10334517"
+  ],
+  [
+   37,
+   "Pearcey R, Brundage M, Drouin P, et al. Phase III trial comparing radical radiotherapy with and without cisplatin chemotherapy in patients with advanced squamous cell cancer of the cervix.",
+   "J Clin Oncol",
+   "2002;20(4):966-72",
+   "11844818"
+  ],
+  [
+   38,
+   "Mileshkin LR, Moore KN, Barnes EH, et al. Adjuvant chemotherapy following chemoradiotherapy as primary treatment for locally advanced cervical cancer versus chemoradiotherapy alone (OUTBACK): an international, open-label, randomised, phase 3 trial.",
+   "Lancet Oncol",
+   "2023;24(5):468-482",
+   "37080223"
+  ],
+  [
+   39,
+   "Ryu SY, Nam BH, Kim MH, et al. A randomized phase III clinical trial of weekly versus tri-weekly cisplatin-based chemoradiotherapy for locally advanced cervical cancer: results of the TACO (GCIG/KGOG 1027/THAI 2012) study.",
+   "ESMO Open",
+   "2026;11(4):106102",
+   "41812622"
+  ],
+  [
+   40,
+   "Nam EJ, Lee M, Yim GW, et al. Comparison of carboplatin- and cisplatin-based concurrent chemoradiotherapy in locally advanced cervical cancer patients with morbidity risks.",
+   "Oncologist",
+   "2013;18(7):843-9",
+   "23821328"
+  ],
+  [
+   41,
+   "Chemoradiotherapy for Cervical Cancer Meta-Analysis Collaboration. Reducing uncertainties about the effects of chemoradiotherapy for cervical cancer: a systematic review and meta-analysis of individual patient data from 18 randomized trials.",
+   "J Clin Oncol",
+   "2008;26(35):5802-12",
+   "19001332"
+  ],
+  [
+   42,
+   "Lorusso D, Xiang Y, Hasegawa K, et al. Pembrolizumab or placebo with chemoradiotherapy followed by pembrolizumab or placebo for newly diagnosed, high-risk, locally advanced cervical cancer (ENGOT-cx11/GOG-3047/KEYNOTE-A18): a randomised, double-blind, phase 3 clinical trial.",
+   "Lancet",
+   "2024;403(10434):1341-1350",
+   "38521086"
+  ],
+  [
+   43,
+   "Lorusso D, Xiang Y, Hasegawa K, et al. Pembrolizumab or placebo with chemoradiotherapy followed by pembrolizumab or placebo for newly diagnosed, high-risk, locally advanced cervical cancer (ENGOT-cx11/GOG-3047/KEYNOTE-A18): overall survival results from a randomised, double-blind, placebo-controlled, phase 3 trial.",
+   "Lancet",
+   "2024;404(10460):1321-1332",
+   "39288779"
+  ],
+  [
+   44,
+   "Monk BJ, Toita T, Wu X, et al. Durvalumab versus placebo with chemoradiotherapy for locally advanced cervical cancer (CALLA): a randomised, double-blind, phase 3 trial.",
+   "Lancet Oncol",
+   "2023;24(12):1334-1348",
+   "38039991"
+  ],
+  [
+   45,
+   "Moore DH, Blessing JA, McQuellon RP, et al. Phase III study of cisplatin with or without paclitaxel in stage IVB, recurrent, or persistent squamous cell carcinoma of the cervix: a gynecologic oncology group study.",
+   "J Clin Oncol",
+   "2004;22(15):3113-9",
+   "15284262"
+  ],
+  [
+   46,
+   "Long HJ, Bundy BN, Grendys EC, et al. Randomized phase III trial of cisplatin with or without topotecan in carcinoma of the uterine cervix: a Gynecologic Oncology Group Study.",
+   "J Clin Oncol",
+   "2005;23(21):4626-33",
+   "15911865"
+  ],
+  [
+   47,
+   "Kitagawa R, Katsumata N, Shibata T, et al. Paclitaxel Plus Carboplatin Versus Paclitaxel Plus Cisplatin in Metastatic or Recurrent Cervical Cancer: The Open-Label Randomized Phase III Trial JCOG0505.",
+   "J Clin Oncol",
+   "2015;33(19):2129-35",
+   "25732161"
+  ],
+  [
+   48,
+   "Hasegawa K, Colombo N, Tewari KS, et al. Pembrolizumab Plus Chemotherapy for Cervical Cancer: An Exploratory Analysis of the KEYNOTE-826 Randomized Clinical Trial.",
+   "JAMA Oncol",
+   "2026:e263547",
+   "42720936"
+  ],
+  [
+   49,
+   "Wu X, Sun Y, Yang H, et al. Cadonilimab plus platinum-based chemotherapy with or without bevacizumab as first-line treatment for persistent, recurrent, or metastatic cervical cancer (COMPASSION-16): a randomised, double-blind, placebo-controlled phase 3 trial in China.",
+   "Lancet",
+   "2024;404(10463):1668-1676",
+   "39426385"
+  ],
+  [
+   50,
+   "Oaknin A, Gladieff L, Martínez-García J, et al. Atezolizumab plus bevacizumab and chemotherapy for metastatic, persistent, or recurrent cervical cancer (BEATcc): a randomised, open-label, phase 3 trial.",
+   "Lancet",
+   "2024;403(10421):31-43",
+   "38048793"
+  ],
+  [
+   51,
+   "Tewari KS, Sill MW, Long HJ, et al. Improved survival with bevacizumab in advanced cervical cancer.",
+   "N Engl J Med",
+   "2014;370(8):734-43",
+   "24552320"
+  ],
+  [
+   52,
+   "Tewari KS, Sill MW, Penson RT, et al. Bevacizumab for advanced cervical cancer: final overall survival and adverse event analysis of a randomised, controlled, open-label, phase 3 trial (Gynecologic Oncology Group 240).",
+   "Lancet",
+   "2017;390(10103):1654-1663",
+   "28756902"
+  ],
+  [
+   53,
+   "Tewari KS, Sill MW, Birrer MJ, et al. Final survival analysis of topotecan and paclitaxel for first-line treatment of advanced cervical cancer: An NRG oncology randomized study.",
+   "Gynecol Oncol",
+   "2023;171:141-150",
+   "36898292"
+  ],
+  [
+   54,
+   "Bonomi P, Blessing JA, Stehman FB, et al. Randomized trial of three cisplatin dose schedules in squamous-cell carcinoma of the cervix: a Gynecologic Oncology Group study.",
+   "J Clin Oncol",
+   "1985;3(8):1079-85",
+   "3894589"
+  ],
+  [
+   55,
+   "Monk BJ, Sill MW, McMeekin DS, et al. Phase III trial of four cisplatin-containing doublet combinations in stage IVB, recurrent, or persistent cervical carcinoma: a Gynecologic Oncology Group study.",
+   "J Clin Oncol",
+   "2009;27(28):4649-55",
+   "19720909"
+  ],
+  [
+   56,
+   "Muderspach LI, Blessing JA, Levenback C, et al. A Phase II study of topotecan in patients with squamous cell carcinoma of the cervix: a gynecologic oncology group study.",
+   "Gynecol Oncol",
+   "2001;81(2):213-5",
+   "11354055"
+  ],
+  [
+   57,
+   "Meric-Bernstam F, Makker V, Oaknin A, et al. Efficacy and Safety of Trastuzumab Deruxtecan in Patients With HER2-Expressing Solid Tumors: Primary Results From the DESTINY-PanTumor02 Phase II Trial.",
+   "J Clin Oncol",
+   "2024;42(1):47-58",
+   "37870536"
+  ],
+  [
+   58,
+   "Oaknin A, Moore K, Meyer T, et al. Nivolumab with or without ipilimumab in patients with recurrent or metastatic cervical cancer (CheckMate 358): a phase 1-2, open-label, multicohort trial.",
+   "Lancet Oncol",
+   "2024;25(5):588-602",
+   "38608691"
+  ],
+  [
+   59,
+   "O'Malley DM, Neffa M, Monk BJ, et al. Dual PD-1 and CTLA-4 Checkpoint Blockade Using Balstilimab and Zalifrelimab Combination as Second-Line Treatment for Advanced Cervical Cancer: An Open-Label Phase II Study.",
+   "J Clin Oncol",
+   "2022;40(7):762-771",
+   "34932394"
+  ],
+  [
+   60,
+   "Coleman RL, Lorusso D, Gennigens C, et al. Efficacy and safety of tisotumab vedotin in previously treated recurrent or metastatic cervical cancer (innovaTV 204/GOG-3023/ENGOT-cx6): a multicentre, open-label, single-arm, phase 2 study.",
+   "Lancet Oncol",
+   "2021;22(5):609-619",
+   "33845034"
+  ],
+  [
+   61,
+   "Verschraegen CF, Levy T, Kudelka AP, et al. Phase II study of irinotecan in prior chemotherapy-treated squamous cell carcinoma of the cervix.",
+   "J Clin Oncol",
+   "1997;15(2):625-31",
+   "9053486"
+  ],
+  [
+   62,
+   "Miller DS, Blessing JA, Bodurka DC, et al. Evaluation of pemetrexed (Alimta, LY231514) as second line chemotherapy in persistent or recurrent carcinoma of the cervix: a phase II study of the Gynecologic Oncology Group.",
+   "Gynecol Oncol",
+   "2008;110(1):65-70",
+   "18455781"
+  ],
+  [
+   63,
+   "O'Malley DM, Oaknin A, Monk BJ, et al. Phase II study of the safety and efficacy of the anti-PD-1 antibody balstilimab in patients with recurrent and/or metastatic cervical cancer.",
+   "Gynecol Oncol",
+   "2021;163(2):274-280",
+   "34452745"
+  ],
+  [
+   64,
+   "Monk BJ, Sill MW, Burger RA, et al. Phase II trial of bevacizumab in the treatment of persistent or recurrent squamous cell carcinoma of the cervix: a gynecologic oncology group study.",
+   "J Clin Oncol",
+   "2009;27(7):1069-74",
+   "19139430"
+  ],
+  [
+   65,
+   "Garcia AA, Blessing JA, Vaccarello L, et al. Phase II clinical trial of docetaxel in refractory squamous cell carcinoma of the cervix: a Gynecologic Oncology Group Study.",
+   "Am J Clin Oncol",
+   "2007;30(4):428-31",
+   "17762444"
+  ],
+  [
+   66,
+   "Schilder RJ, Blessing JA, Morgan M, et al. Evaluation of gemcitabine in patients with squamous cell carcinoma of the cervix: a Phase II study of the gynecologic oncology group.",
+   "Gynecol Oncol",
+   "2000;76(2):204-7",
+   "10637071"
+  ],
+  [
+   67,
+   "Schilder RJ, Blessing J, Cohn DE. Evaluation of gemcitabine in previously treated patients with non-squamous cell carcinoma of the cervix: a phase II study of the Gynecologic Oncology Group.",
+   "Gynecol Oncol",
+   "2005;96(1):103-7",
+   "15589587"
+  ],
+  [
+   68,
+   "Chang TC, Lai CH, Hong JH, et al. Randomized trial of neoadjuvant cisplatin, vincristine, bleomycin, and radical hysterectomy versus radiation therapy for bulky stage IB and IIA cervical cancer.",
+   "J Clin Oncol",
+   "2000;18(8):1740-7",
+   "10764435"
+  ],
+  [
+   69,
+   "Katsumata N, Yoshikawa H, Kobayashi H, et al. Phase III randomised controlled trial of neoadjuvant chemotherapy plus radical surgery vs radical surgery alone for stages IB2, IIA2, and IIB cervical cancer: a Japan Clinical Oncology Group trial (JCOG 0102).",
+   "Br J Cancer",
+   "2013;108(10):1957-63",
+   "23640393"
+  ],
+  [
+   70,
+   "Gupta S, Maheshwari A, Parab P, et al. Neoadjuvant Chemotherapy Followed by Radical Surgery Versus Concomitant Chemotherapy and Radiotherapy in Patients With Stage IB2, IIA, or IIB Squamous Cervical Cancer: A Randomized Controlled Trial.",
+   "J Clin Oncol",
+   "2018;36(16):1548-1555",
+   "29432076"
+  ],
+  [
+   71,
+   "Kenter GG, Greggi S, Vergote I, et al. Randomized Phase III Study Comparing Neoadjuvant Chemotherapy Followed by Surgery Versus Chemoradiation in Stage IB2-IIB Cervical Cancer: EORTC-55994.",
+   "J Clin Oncol",
+   "2023;41(32):5035-5043",
+   "37656948"
+  ],
+  [
+   72,
+   "Tu H, Huang H, Ouyang Y, et al. Neoadjuvant chemotherapy followed by radical surgery versus concurrent chemoradiotherapy in patients with FIGO stage IIB cervical cancer: the CSEM 006 study.",
+   "Int J Gynecol Cancer",
+   "2021;31(1):129-133",
+   "32522771"
+  ],
+  [
+   73,
+   "Neoadjuvant Chemotherapy for Cervical Cancer Meta-Analysis Collaboration (NACCCMA) Collaboration. Neoadjuvant chemotherapy for locally advanced cervix cancer.",
+   "Cochrane Database Syst Rev",
+   "2004;2004(2):CD001774",
+   "15106161"
+  ]
+ ]
+}

@@ -1,0 +1,452 @@
+{
+ "_meta": {
+  "source": "data/labels.json (DailyMed SPL; shared records fetched 2026-10-05/06, cervical additions 2026-10-06)",
+  "built": "2026-10-06",
+  "use": "Applied to every regimen that contains the drug, in addition to the regimen's own trial-specific risk_rules.",
+  "effects": {
+   "exclude": "label §4 contraindication, or a label instruction not to start",
+   "caution": "a label stop/hold rule the patient's baseline is already close to"
+  },
+  "note": "Rules for agents fetched by the labels subagent on 2026-10-06 were written from the ranker-facing summary of those labels; verify wording against data/labels.json rules before relying on a section number."
+ },
+ "carboplatin": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Label: do not repeat until neutrophils ≥2,000 and platelets ≥100,000"
+  },
+  {
+   "flag": "renal_crcl",
+   "lt": 15,
+   "effect": "caution",
+   "reason": "Label: CrCl <15 mL/min — data too limited for a dose recommendation"
+  }
+ ],
+ "cisplatin": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Label: withhold until platelets ≥100,000 and WBC ≥4,000"
+  },
+  {
+   "flag": "neuropathy_grade",
+   "gte": 2,
+   "effect": "caution",
+   "reason": "Label §2.5: consider permanent discontinuation for grade 3–4 neuropathy; baseline G2 leaves little margin"
+  },
+  {
+   "flag": "renal_crcl",
+   "lt": 60,
+   "effect": "exclude",
+   "reason": "Label: impaired creatinine clearance → consider alternative treatment"
+  }
+ ],
+ "paclitaxel": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Label: do not treat solid tumours with baseline neutrophils <1,500/mm³"
+  },
+  {
+   "flag": "hepatic_impairment",
+   "in": [
+    "severe"
+   ],
+   "effect": "exclude",
+   "reason": "Label Table 17: transaminases ≥10×ULN or bilirubin >5×ULN → not recommended"
+  },
+  {
+   "flag": "neuropathy_grade",
+   "gte": 2,
+   "effect": "caution",
+   "reason": "Label: severe neuropathy → 20% dose reduction"
+  }
+ ],
+ "topotecan": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Label: first cycle only if neutrophils ≥1,500 and platelets ≥100,000"
+  },
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "Label 5.2: confirmed ILD → permanent discontinuation"
+  },
+  {
+   "flag": "renal_crcl",
+   "lt": 40,
+   "effect": "caution",
+   "reason": "Label 2.6: CrCl 20–39 → reduced dose"
+  }
+ ],
+ "ifosfamide": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "IFEX §2.2: repeat only after recovery from haematologic toxicity"
+  },
+  {
+   "flag": "renal_crcl",
+   "lt": 60,
+   "effect": "caution",
+   "reason": "Ifosfamide nephrotoxicity (and cisplatin where combined)"
+  }
+ ],
+ "bevacizumab": [
+  {
+   "flag": "gi_fistula_or_obstruction_risk",
+   "effect": "exclude",
+   "reason": "AVASTIN §2: GI perforation → discontinue"
+  },
+  {
+   "flag": "surgery_within_28d",
+   "effect": "exclude",
+   "reason": "AVASTIN §2: start ≥28 days after major surgery and when the wound is healed"
+  },
+  {
+   "flag": "uncontrolled_htn_or_proteinuria",
+   "effect": "exclude",
+   "reason": "AVASTIN §2: proteinuria ≥2 g/24 h → withhold; hypertensive crisis → discontinue"
+  },
+  {
+   "flag": "cardiac_lvef_low",
+   "effect": "caution",
+   "reason": "AVASTIN §2: congestive heart failure → discontinue"
+  },
+  {
+   "flag": "prior_pelvic_rt",
+   "effect": "caution",
+   "reason": "GOG-240: fistula of any grade 15% vs 1% — all in previously irradiated patients; grade 3 fistula 6%"
+  }
+ ],
+ "pembrolizumab": [
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "KEYTRUDA §2.3: pneumonitis G3–4 → permanent discontinuation"
+  },
+  {
+   "flag": "active_autoimmune_disease",
+   "effect": "caution",
+   "reason": "Checkpoint-inhibitor trials excluded active autoimmune disease; the label has no contraindication"
+  },
+  {
+   "flag": "systemic_glucocorticoid_dependence",
+   "effect": "caution",
+   "reason": "KEYTRUDA §2.3: permanent discontinuation if prednisone cannot be reduced to ≤10 mg/day within 12 weeks"
+  }
+ ],
+ "atezolizumab": [
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "TECENTRIQ §2: pneumonitis G3–4 → permanent discontinuation"
+  },
+  {
+   "flag": "active_autoimmune_disease",
+   "effect": "caution",
+   "reason": "Checkpoint-inhibitor trials excluded active autoimmune disease; TECENTRIQ §4 lists no contraindication"
+  },
+  {
+   "flag": "cardiac_lvef_low",
+   "effect": "caution",
+   "reason": "TECENTRIQ §2: myocarditis or pericarditis G2–4 → permanent discontinuation"
+  }
+ ],
+ "durvalumab": [
+  {
+   "flag": "active_autoimmune_disease",
+   "effect": "caution",
+   "reason": "Checkpoint-inhibitor trials excluded active autoimmune disease; the label has no contraindication"
+  },
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "IMFINZI §2: pneumonitis G3–4 → permanent discontinuation"
+  }
+ ],
+ "nivolumab": [
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "OPDIVO/YERVOY §2.3: pneumonitis G3–4 → permanent discontinuation of both drugs"
+  },
+  {
+   "flag": "active_autoimmune_disease",
+   "effect": "caution",
+   "reason": "Checkpoint-inhibitor trials excluded active autoimmune disease"
+  },
+  {
+   "flag": "hepatic_impairment",
+   "in": [
+    "moderate",
+    "severe"
+   ],
+   "effect": "caution",
+   "reason": "Combination label: AST/ALT >5×ULN → permanent discontinuation of both"
+  },
+  {
+   "flag": "systemic_glucocorticoid_dependence",
+   "effect": "caution",
+   "reason": "Label: permanent discontinuation if prednisone cannot be reduced to ≤10 mg/day within 12 weeks"
+  }
+ ],
+ "ipilimumab": [
+  {
+   "flag": "cardiac_lvef_low",
+   "effect": "caution",
+   "reason": "YERVOY §2.3: myocarditis G2–4 → permanent discontinuation"
+  }
+ ],
+ "trastuzumab_deruxtecan": [
+  {
+   "flag": "cardiac_lvef_low",
+   "effect": "exclude",
+   "reason": "Label Table 3: LVEF <40% or symptomatic CHF → permanent discontinuation"
+  },
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "exclude",
+   "reason": "Label Table 3: any symptomatic (≥G2) ILD → permanent discontinuation"
+  },
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "caution",
+   "reason": "Label Table 3: G3 neutropenia → interrupt"
+  }
+ ],
+ "cemiplimab": [
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "LIBTAYO §2: pneumonitis G3–4 → permanent discontinuation"
+  },
+  {
+   "flag": "active_autoimmune_disease",
+   "effect": "caution",
+   "reason": "Checkpoint-inhibitor trials excluded active autoimmune disease; LIBTAYO §4 lists no contraindication"
+  },
+  {
+   "flag": "cardiac_lvef_low",
+   "effect": "caution",
+   "reason": "LIBTAYO §2: myocarditis G2–4 → permanent discontinuation"
+  }
+ ],
+ "tisotumab_vedotin": [
+  {
+   "flag": "ocular_disease",
+   "effect": "exclude",
+   "reason": "TIVDAK boxed warning / §2: ocular toxicity ladder to permanent discontinuation (corneal ulceration, G4 conjunctival or corneal events); innovaTV 301 conjunctivitis 31.2%, keratitis 15.6%"
+  },
+  {
+   "flag": "neuropathy_grade",
+   "gte": 2,
+   "effect": "caution",
+   "reason": "TIVDAK §2: peripheral neuropathy G2 → withhold/reduce, G3–4 → permanent discontinuation; innovaTV 301 sensory neuropathy 28.4%"
+  },
+  {
+   "flag": "gi_fistula_or_obstruction_risk",
+   "effect": "caution",
+   "reason": "TIVDAK §2: haemorrhage G3–4 → permanent discontinuation (class)"
+  }
+ ],
+ "docetaxel": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "TAXOTERE §4: neutrophil count <1,500 cells/mm³"
+  },
+  {
+   "flag": "hepatic_impairment",
+   "in": [
+    "moderate",
+    "severe"
+   ],
+   "effect": "exclude",
+   "reason": "TAXOTERE §2 / §4: bilirubin > ULN, or AST/ALT >1.5×ULN with ALP >2.5×ULN → do not administer"
+  },
+  {
+   "flag": "neuropathy_grade",
+   "gte": 2,
+   "effect": "caution",
+   "reason": "TAXOTERE §2: severe neurosensory symptoms → reduce dose; persistent → discontinue"
+  }
+ ],
+ "vinorelbine": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Vinorelbine label §2: do not administer with ANC <1,000 cells/mm³"
+  },
+  {
+   "flag": "hepatic_impairment",
+   "in": [
+    "moderate",
+    "severe"
+   ],
+   "effect": "caution",
+   "reason": "Vinorelbine label §2: dose reduction for total bilirubin >2 mg/dL"
+  },
+  {
+   "flag": "neuropathy_grade",
+   "gte": 2,
+   "effect": "caution",
+   "reason": "Vinorelbine label §2: G3–4 neuropathy → discontinue"
+  }
+ ],
+ "pemetrexed": [
+  {
+   "flag": "renal_crcl",
+   "lt": 45,
+   "effect": "exclude",
+   "reason": "Pemetrexed label §2: not recommended with CrCl <45 mL/min"
+  },
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Pemetrexed label §2: start a cycle only with ANC ≥1,500 and platelets ≥100,000"
+  }
+ ],
+ "gemcitabine": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Gemcitabine label §2: day 1 ANC <1,500 or platelets <100,000 → delay"
+  },
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "Gemcitabine label §2: unexplained dyspnoea / severe pulmonary toxicity → permanent discontinuation"
+  }
+ ],
+ "irinotecan": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "CAMPTOSAR §2: new cycle only when granulocytes ≥1,500/mm³ and platelets ≥100,000/mm³"
+  },
+  {
+   "flag": "hepatic_impairment",
+   "in": [
+    "moderate",
+    "severe"
+   ],
+   "effect": "exclude",
+   "reason": "CAMPTOSAR §2: dosing cannot be recommended with bilirubin >2 mg/dL"
+  },
+  {
+   "flag": "gi_fistula_or_obstruction_risk",
+   "effect": "caution",
+   "reason": "CAMPTOSAR: severe diarrhoea; baseline bowel obstruction is a contraindication (§4)"
+  }
+ ],
+ "fluorouracil": [
+  {
+   "flag": "cardiac_lvef_low",
+   "effect": "caution",
+   "reason": "Fluorouracil §2.7: cardiac toxicity → withhold, no recommended resumption dose"
+  }
+ ],
+ "hydroxyurea": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "HYDREA §2: do not start with marked bone-marrow depression (WBC <2,500 or platelets <100,000)"
+  }
+ ],
+ "mitomycin": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Mitomycin §4: thrombocytopenia, coagulation disorder or increased bleeding tendency"
+  },
+  {
+   "flag": "renal_crcl",
+   "lt": 60,
+   "effect": "exclude",
+   "reason": "Mitomycin §4: serum creatinine >1.7 mg/dL"
+  },
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "Mitomycin: pulmonary toxicity → discontinue (label warning)"
+  }
+ ],
+ "vincristine": [
+  {
+   "flag": "neuropathy_grade",
+   "gte": 2,
+   "effect": "caution",
+   "reason": "Vincristine label: neurotoxicity dose-limiting; pre-existing neuromuscular disease is a contraindication class concern"
+  }
+ ],
+ "bleomycin": [
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "exclude",
+   "reason": "Bleomycin boxed warning: pulmonary fibrosis; pre-existing lung disease"
+  },
+  {
+   "flag": "renal_crcl",
+   "lt": 50,
+   "effect": "caution",
+   "reason": "Bleomycin label: renal dose reduction"
+  }
+ ],
+ "etoposide": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "Etoposide label §2: withhold for platelets <50,000 or ANC <500; baseline marrow reserve"
+  }
+ ],
+ "nab_paclitaxel": [
+  {
+   "flag": "cytopenia_baseline",
+   "effect": "exclude",
+   "reason": "ABRAXANE §2: day 1 ANC <1,500 → withhold"
+  },
+  {
+   "flag": "hepatic_impairment",
+   "in": [
+    "moderate",
+    "severe"
+   ],
+   "effect": "caution",
+   "reason": "ABRAXANE Table 1: AST >10×ULN or bilirubin >5×ULN not recommended"
+  },
+  {
+   "flag": "neuropathy_grade",
+   "gte": 2,
+   "effect": "caution",
+   "reason": "ABRAXANE §2: G3 neuropathy → withhold until ≤G1, reduce"
+  }
+ ],
+ "cadonilimab": [
+  {
+   "flag": "active_autoimmune_disease",
+   "effect": "caution",
+   "reason": "PD-1/CTLA-4 bispecific: COMPASSION-16 excluded active autoimmune disease; no FDA label"
+  },
+  {
+   "flag": "ild_or_pneumonitis",
+   "effect": "caution",
+   "reason": "Checkpoint-inhibitor class pneumonitis; no FDA label to cite"
+  }
+ ],
+ "balstilimab": [
+  {
+   "flag": "active_autoimmune_disease",
+   "effect": "caution",
+   "reason": "Investigational anti-PD-1; trial exclusion"
+  }
+ ],
+ "zalifrelimab": [
+  {
+   "flag": "active_autoimmune_disease",
+   "effect": "caution",
+   "reason": "Investigational anti-CTLA-4; trial exclusion"
+  }
+ ]
+}

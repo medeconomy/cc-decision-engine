@@ -1,0 +1,1255 @@
+{
+ "_meta": {
+  "histology": "adc",
+  "label": "Adenocarcinoma",
+  "source_note": "CXCA_AdenoCa_Algorithm_v1.1",
+  "built": "2026-10-06",
+  "settings": [
+   {
+    "key": "adjuvant",
+    "label": "Adjuvant after radical hysterectomy (FIGO 2009 IA2–IIA): intermediate risk (Sedlis) or high risk (Peters)"
+   },
+   {
+    "key": "definitive",
+    "label": "Definitive chemoradiation for locally advanced disease (FIGO 2009 IB2–IVA / 2018 IB3–IVA), including induction and immunotherapy"
+   },
+   {
+    "key": "first_line",
+    "label": "First-line systemic therapy for recurrent, persistent or metastatic disease (radiosensitising cisplatin allowed)"
+   },
+   {
+    "key": "second_line",
+    "label": "Second line and beyond (after platinum ± bevacizumab ± PD-(L)1)"
+   },
+   {
+    "key": "neoadjuvant",
+    "label": "Neoadjuvant chemotherapy before surgery (bulky IB–IIB) vs chemoradiation"
+   }
+  ],
+  "tiers": {
+   "1": "OS benefit, replicated (≥2 randomised trials or a class effect confirmed by meta-analysis / non-inferiority)",
+   "2": "OS benefit, single phase 3 (CI excludes 1 as printed), or non-inferior to a regimen that has one",
+   "3": "OS benefit borderline: disease-specific survival only, interim, randomised phase II, or printed without HR / CI",
+   "4": "PFS / DFS / recurrence benefit only; no OS benefit shown",
+   "5": "No efficacy difference vs the comparator, or the comparator that lost: chosen on toxicity, or when the better option cannot be given",
+   "6": "No phase 3: single-arm, non-randomised comparison, retrospective, design-only or extrapolated",
+   "7": "Do not use: OS or PFS/DFS significantly worse than the alternative, negative trial, or histotype excluded from the trial"
+  },
+  "tier_reading": "Adenocarcinoma is 6–32% of the all-histology trials; by Jay's decision the trial-wide result sets the tier and the non-squamous subgroups are printed as qualifiers, fits or cautions. Trials that enrolled SCC only are tier 7 here. HPV-independent (gastric-type, clear cell, mesonephric) adenocarcinoma has no prospective systemic data at any line and carries cautions: chemoresistance (SGSG005 response 46% vs 85%, never downstaged), CCRT no better than RT in the adjuvant retrospective series, no ADC responses in a 4-patient series, PD-L1 CPS ≥1 in only 32%.",
+  "scope": "Efficacy figures copied from data/trials_*.json (vault notes v1.1, full-text checked 2026-09-25); toxicity resolved from data/tox.json via tox_ref {trial, arm}; label rules from data/labels.json and data/drug_rules.json. 'base' inherits every field the record does not set from the named SCC record."
+ },
+ "regimens": [
+  {
+   "base": "adj_obs",
+   "id": "adc_adj_obs",
+   "trials": [
+    "GOG-92"
+   ],
+   "risk_rules": [
+    {
+     "flag": "risk_group",
+     "in": [
+      "intermediate"
+     ],
+     "effect": "caution",
+     "reason": "GOG-92 adeno/adenosquamous: recurrence 44.0% without RT vs 8.8% with (interaction HR 0.23, 90% CI 0.07–0.74) — the RT benefit was concentrated in non-squamous tumours"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "adj_rt",
+   "id": "adc_adj_rt",
+   "trials": [
+    "GOG-92",
+    "GOG-109 / SWOG 8797 / RTOG 91-12",
+    "STARS",
+    "KROG 13-10"
+   ],
+   "qualifiers": [
+    "GOG-92 adeno/adenosquamous (n = 59): recurrence 8.8% (3/34) vs 44.0% (11/25); adenocarcinoma 0/16 vs 4/11; RT-by-histology interaction HR 0.23 (90% CI 0.07–0.74) — authors: RT 'particularly beneficial' in adenocarcinoma / adenosquamous",
+    "GOG-109: on RT alone non-squamous tumours had worse PFS than SCC; the difference disappeared with chemotherapy",
+    "KROG 13-10 (retrospective): adenocarcinoma 5-yr RFS 66.5% vs 83.7% after adjuvant RT ± chemo; recurrence 33.0%"
+   ],
+   "prefer_when": [
+    {
+     "flag": "risk_group",
+     "in": [
+      "intermediate"
+     ],
+     "reason": "GOG-92 adeno/adenosquamous subgroup: recurrence 8.8% vs 44.0% with vs without RT (interaction HR 0.23)"
+    }
+   ],
+   "tier_rules": [
+    {
+     "when": {
+      "risk_group": [
+       "high"
+      ]
+     },
+     "tier": 5,
+     "reason": "High risk: RT alone lost to cisplatin–5-FU chemoradiation (GOG-109), and non-squamous tumours did worst on RT alone — for patients who cannot receive cisplatin"
+    },
+    {
+     "when": {
+      "risk_group": [
+       "low"
+      ]
+     },
+     "tier": 6,
+     "reason": "Low risk: outside GOG-92"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "adj_ccrt_weekly",
+   "id": "adc_adj_ccrt_weekly",
+   "trials": [
+    "NRG/GOG-263 / KGOG 1008",
+    "STARS",
+    "NOGGO-AGO",
+    "Gastric-type adjuvant therapy"
+   ],
+   "qualifiers": [
+    "GOG-263: non-squamous imbalance (20.3% RT vs 34.8% CRT) favoured the RT arm; no histology subgroup",
+    "STARS adeno/adenosquamous (n = 140): CCRT vs RT recurrence HR 0.360 (0.151–0.859) — unlike SCC, concurrent cisplatin did help here",
+    "Gastric-type (Nishio 2022, retrospective, 102): high risk CCRT vs RT PFS HR 2.514 (0.873–7.237), OS 1.277 (0.358–4.558) — non-significant trends against CCRT"
+   ],
+   "risk_rules": [
+    {
+     "flag": "iecc",
+     "in": [
+      "gastric",
+      "clear_cell",
+      "mesonephric"
+     ],
+     "effect": "caution",
+     "reason": "Gastric-type: postoperative CCRT or chemotherapy did not improve on RT alone in 102 gastric-type cases (PFS HR 2.51 and 2.06 vs RT, NS; Nishio 2022)"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "adj_ccrt_cis5fu",
+   "id": "adc_adj_ccrt_cis5fu",
+   "trials": [
+    "GOG-109 / SWOG 8797 / RTOG 91-12",
+    "↳ GOG-109 clinical–pathological reanalysis"
+   ],
+   "qualifiers": [
+    "GOG-109 adeno/adenosquamous 30 (CT + RT) vs 20 (RT): worse PFS on RT alone, difference disappeared with chemotherapy (interaction P = .12 PFS, .19 OS); Monk 2005 non-squamous 5-yr survival 55% vs 82% — no HR printed",
+    "CIs were not printed (P = .007)"
+   ],
+   "prefer_when": [
+    {
+     "flag": "risk_group",
+     "in": [
+      "high"
+     ],
+     "reason": "GOG-109: the non-squamous deficit on RT alone closed with cisplatin–5-FU (5-yr survival 55% → 82%, Monk 2005)"
+    }
+   ],
+   "risk_rules": [
+    {
+     "flag": "iecc",
+     "in": [
+      "gastric",
+      "clear_cell",
+      "mesonephric"
+     ],
+     "effect": "caution",
+     "reason": "Gastric-type: no chemoradiation data; Nishio 2022 trends against CCRT"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "adj_scrt",
+   "id": "adc_adj_scrt",
+   "trials": [
+    "STARS"
+   ],
+   "qualifiers": [
+    "STARS adeno/adenosquamous (n = 140): SCRT vs RT recurrence HR 0.294 (0.119–0.724), CCRT vs RT 0.360 (0.151–0.859) — benefit at least as large as in SCC",
+    "Tier 3: cancer-death HR 0.58 (0.35–0.95) trial-wide; OS HR not printed; single-country trial mixing risk groups"
+   ],
+   "prefer_when": [
+    {
+     "flag": "risk_group",
+     "in": [
+      "intermediate",
+      "high"
+     ],
+     "reason": "STARS non-squamous recurrence HR 0.294 (0.119–0.724) vs RT alone"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "adj_tc_seq",
+   "id": "adc_adj_tc_seq",
+   "trials": [
+    "NOGGO-AGO"
+   ],
+   "qualifiers": [
+    "Adenocarcinoma 26.5% vs 17.6% between arms (P = 0.213); histology subgroup not reported"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "adj_chemo_only",
+   "id": "adc_adj_chemo_only",
+   "trials": [
+    "JGOG1082"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_ccrt_weekly",
+   "id": "adc_def_ccrt_weekly",
+   "trials": [
+    "GOG-120",
+    "GOG-123",
+    "TACO, (Ryu 2026)",
+    "GOG chemoradiation trials pooled by histology",
+    "Vajira matched cohort",
+    "PUMCH IMRT + brachytherapy"
+   ],
+   "qualifiers": [
+    "No positive backbone trial prints an adenocarcinoma HR (GOG-120 non-squamous 9.1%, GOG-123 13%): the cisplatin benefit is extrapolated",
+    "Rose 2014 (GOG pooled, retrospective): with cisplatin CRT adeno/adenosquamous OS similar to SCC (HR 1.12, P = 0.459); without cisplatin worse (P = 0.0499). PUMCH (propensity-matched): adenocarcinoma worse regardless of CCRT (OS 2.21, 1.31–3.74)",
+    "Vajira: adenocarcinoma responds more slowly (CR 86.5% vs 94.7%, median 2 vs 1 months) — incomplete response at 1–2 months is not failure"
+   ],
+   "risk_rules": [
+    {
+     "flag": "renal_crcl",
+     "lt": 60,
+     "effect": "caution",
+     "reason": "Cisplatin label: impaired creatinine clearance → consider alternative; carboplatin substitution has no randomised support (Nam 2013)"
+    },
+    {
+     "flag": "iecc",
+     "in": [
+      "gastric",
+      "clear_cell",
+      "mesonephric"
+     ],
+     "effect": "caution",
+     "reason": "Gastric-type: no chemoradiation data at any stage (Nishio 2022, SGSG005)"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_ccrt_triweekly",
+   "id": "adc_def_ccrt_triweekly",
+   "trials": [
+    "TACO, (Ryu 2026)",
+    "Weekly vs triweekly cisplatin"
+   ],
+   "qualifiers": [
+    "TACO non-squamous 18.6% (triweekly) vs 9.9%: imbalance against the triweekly arm; no histology subgroup"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_ccrt_cis5fu",
+   "id": "adc_def_ccrt_cis5fu",
+   "trials": [
+    "RTOG 90-01",
+    "GOG-85 / SWOG"
+   ],
+   "qualifiers": [
+    "RTOG 90-01 adeno/adenosquamous 19 vs 19 (~10%); GOG-85 non-squamous 12% vs 6.2%; no histology subgroup in either"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_induction_tc",
+   "id": "adc_def_induction_tc",
+   "trials": [
+    "GCIG INTERLACE"
+   ],
+   "qualifiers": [
+    "Non-squamous 44 vs 45 (17.8%), a stratification factor, but no histology-subgroup HR printed — induction benefit extrapolated"
+   ],
+   "risk_rules": [
+    {
+     "flag": "all",
+     "all": [
+      {
+       "flag": "stage",
+       "in": [
+        "IB1"
+       ]
+      },
+      {
+       "flag": "nodes",
+       "in": [
+        "negative",
+        "unknown"
+       ]
+      }
+     ],
+     "effect": "exclude",
+     "reason": "INTERLACE admitted IB1 only if node-positive"
+    },
+    {
+     "flag": "iecc",
+     "in": [
+      "gastric",
+      "clear_cell",
+      "mesonephric"
+     ],
+     "effect": "caution",
+     "reason": "Gastric-type: neoadjuvant response 46.2% vs 85.0% in usual-type (SGSG005); induction before CCRT untested in this type"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "settings": [
+    "definitive"
+   ],
+   "id": "adc_def_tang2012",
+   "name": "Weekly cisplatin CCRT + one neoadjuvant cycle paclitaxel 135 + cisplatin 75 before RT and two consolidation cycles after (q3w)",
+   "short": "CCRT + neoadjuvant/consolidation PC (Tang 2012, adenocarcinoma-only)",
+   "drugs": [
+    "cisplatin",
+    "paclitaxel"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum",
+    "taxane"
+   ],
+   "gate": {
+    "stage": [
+     "IIB",
+     "IIIA",
+     "IIIB",
+     "IVA"
+    ]
+   },
+   "trials": [
+    "Tang 2012, Hunan"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "positive_no_hr",
+    "median": "Deaths from recurrent disease 113 vs 175 (of 440 vs 440); cumulative survival longer with added chemotherapy (P < .05); discussion quotes 5-yr OS 74.3% — no HR printed",
+    "evidence_strength": "single_rct_no_hr",
+    "trial": "Tang 2012, Hunan"
+   },
+   "pfs": {
+    "text": "Recurrence 126 (28.6%) vs 214; PFS log-rank P = .004; distant failure 63 vs 104"
+   },
+   "tier": 3,
+   "evidence_basis": "histotype_rct",
+   "caution_default": {
+    "reason": "The only randomised adenocarcinoma-only trial: single institution (880 adenocarcinomas in 10 years), no HRs, internal inconsistencies as printed — hypothesis-generating"
+   },
+   "risk_rules": [
+    {
+     "flag": "iecc",
+     "in": [
+      "gastric",
+      "clear_cell",
+      "mesonephric"
+     ],
+     "effect": "caution",
+     "reason": "Gastric-type: Tang 2012 did not report IECC type (adenosquamous 10 of 880); no gastric-type chemoradiation data"
+    }
+   ],
+   "qualifiers": [
+    "Grade 3–4 leukopenia and thrombocytopenia higher with added chemotherapy; transfusion 215 vs 146; late toxicity 15.0% vs 13.6%, no fistula",
+    "No NTUH template for this schedule; nearest CC Paclitaxel and Cisplatin",
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_pembro_ccrt",
+   "id": "adc_def_pembro_ccrt",
+   "trials": [
+    "KEYNOTE-A18 / ENGOT-cx11 / GOG-3047"
+   ],
+   "qualifiers": [
+    "Non-squamous 96 vs 80 (16.5%); histology absent from both subgroup forest plots — no non-squamous HR exists. Nearest signal: KEYNOTE-826 non-squamous OS 0.76 (0.47–1.23)"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_durva_ccrt",
+   "id": "adc_def_durva_ccrt",
+   "trials": [
+    "CALLA"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_cis_gem",
+   "id": "adc_def_cis_gem",
+   "trials": [
+    "Dueñas-González 2011"
+   ],
+   "qualifiers": [
+    "Adenocarcinoma 17 vs 15 (6.2%); no histology subgroup"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_outback",
+   "id": "adc_def_outback",
+   "trials": [
+    "OUTBACK"
+   ],
+   "qualifiers": [
+    "Adenocarcinoma (n = 147) post hoc: OS 0.87 (0.46–1.64), PFS 0.90 (0.55–1.48), interaction P = 0.98 — no differential effect"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_carbo_ccrt",
+   "id": "adc_def_carbo_ccrt",
+   "trials": [
+    "Carboplatin CCRT"
+   ],
+   "qualifiers": [
+    "Adenocarcinoma 3 of 51 (5.9%)"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_rt_alone",
+   "id": "adc_def_rt_alone",
+   "trials": [
+    "GOG-123",
+    "RTOG 90-01",
+    "MD Anderson adenocarcinoma series"
+   ],
+   "qualifiers": [
+    "MD Anderson adenocarcinoma, RT alone (1965–1985): stage I 5-yr survival 70% (<3 cm 88%, ≥6 cm 45%); stage II RFS 32%, 73% of relapses distant — the baseline cisplatin CCRT improved on",
+    "Rose 2014: without cisplatin, adeno/adenosquamous OS worse than SCC (P = 0.0499)"
+   ],
+   "histology": "adc"
+  },
+  {
+   "id": "adc_def_ncic",
+   "settings": [
+    "definitive"
+   ],
+   "name": "Weekly cisplatin CCRT per NCIC CTG (SCC-only trial)",
+   "short": "NCIC CTG (SCC-only)",
+   "drugs": [
+    "cisplatin"
+   ],
+   "drug_classes": [
+    "radiotherapy",
+    "platinum"
+   ],
+   "gate": {},
+   "trials": [
+    "NCIC CTG"
+   ],
+   "tox_ref": {
+    "trial": "NCIC CTG"
+   },
+   "os": {
+    "benefit": "excluded",
+    "median": "The one negative cisplatin trial enrolled no adenocarcinoma (OS 1.10, 0.75–1.62, NS)",
+    "evidence_strength": "excluded_from_trial",
+    "trial": "NCIC CTG"
+   },
+   "pfs": {
+    "text": "—"
+   },
+   "tier": 7,
+   "evidence_basis": "excluded_from_trial",
+   "exclude_default": {
+    "reason": "Adenocarcinoma excluded: NCIC CTG (Pearcey 2002) enrolled squamous cell carcinoma only"
+   },
+   "qualifiers": [
+    "Shown so the SCC-only negative trial is not read into adenocarcinoma; weekly cisplatin CCRT itself is the tier 1 record above"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "def_ipi_after_ccrt",
+   "id": "adc_def_ipi_after_ccrt",
+   "trials": [],
+   "tier": 7,
+   "caution_default": null,
+   "gate": {},
+   "exclude_default": {
+    "reason": "GOG-9929 appears only in the SCC note (SCC 88%); not carried into the adenocarcinoma pool"
+   },
+   "histology": "adc"
+  },
+  {
+   "base": "fl_pembro_chemo",
+   "id": "adc_fl_pembro_chemo",
+   "trials": [
+    "KEYNOTE-826"
+   ],
+   "qualifiers": [
+    "Non-squamous (169/617, 27.4%, imbalanced against placebo): ITT OS 0.76 (0.47–1.23); CPS ≥1 OS 0.70 (0.41–1.20), PFS 0.59 (0.37–0.93); 5-yr update non-squamous OS 0.75 (0.51–1.11), PFS 0.64 (0.43–0.94) — consistent direction, CIs cross 1",
+    "Usual-type adenocarcinoma is CPS ≥1 in 60% (HPV-independent 31.8%): CPS <1 is common here",
+    "Non-squamous CPS <1 = 31 patients in KEYNOTE-826"
+   ],
+   "risk_rules": [
+    {
+     "flag": "pdl1_cps_known_lt1",
+     "effect": "caution",
+     "reason": "CPS <1: outside the label indication; common in adenocarcinoma (40% of usual-type, 68% of HPV-independent)"
+    },
+    {
+     "flag": "pdl1_cps_unknown",
+     "effect": "caution",
+     "reason": "Record PD-L1 CPS: CPS <1 is expected in a sizeable share of adenocarcinomas"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_cadonilimab_chemo",
+   "id": "adc_fl_cadonilimab_chemo",
+   "trials": [
+    "COMPASSION-16"
+   ],
+   "qualifiers": [
+    "Non-squamous 40 vs 35 (16.9%): PFS 0.94 (0.52–1.69) vs squamous 0.58; OS 0.63 (0.33–1.22) — the PFS signal did not reach non-squamous tumours"
+   ],
+   "risk_rules": [
+    {
+     "flag": "histology",
+     "in": [
+      "adc"
+     ],
+     "effect": "caution",
+     "reason": "COMPASSION-16 non-squamous PFS 0.94 (0.52–1.69): no PFS signal in adenocarcinoma, OS point estimate consistent (0.63, 0.33–1.22)"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_atezo_chemo_bev",
+   "id": "adc_fl_atezo_chemo_bev",
+   "trials": [
+    "BEATcc / ENGOT-Cx10"
+   ],
+   "qualifiers": [
+    "Adeno/adenosquamous 89/410 (22%, capped at 20% by protocol, a stratification factor): PFS 0.59 (0.45–0.76), OS 0.62 (0.36–1.06) — figure 3A CI widths look transposed between histologies; the Discussion repeats these as the adenocarcinoma values",
+    "Interim OS (tier 3 pending final); bevacizumab in both arms"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_bev_chemo",
+   "id": "adc_fl_bev_chemo",
+   "trials": [
+    "GOG-240"
+   ],
+   "qualifiers": [
+    "Non-squamous 32.4% vs 30.4%: histology had the smallest interaction P (0.07) in the OS forest plot, the non-squamous CI truncated at 2.5 (true upper bound 7.07) and the point estimate not printed — the bevacizumab benefit is least certain in adenocarcinoma"
+   ],
+   "risk_rules": [
+    {
+     "flag": "histology",
+     "in": [
+      "adc"
+     ],
+     "effect": "caution",
+     "reason": "GOG-240: bevacizumab benefit least certain in non-squamous tumours (interaction P = 0.07; non-squamous HR CI extends to 7.07)"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_cis_pac",
+   "id": "adc_fl_cis_pac",
+   "trials": [
+    "GOG-204",
+    "↳ GOG-240 backbone, final"
+   ],
+   "qualifiers": [
+    "GOG-169, the trial that made cisplatin–paclitaxel the reference doublet, excluded adenocarcinoma; support here is GOG-204's non-squamous minority (22.8%) and paclitaxel ORR 31% in the GOG non-squamous programme",
+    "GOG-240 backbone: adenocarcinoma alone OS 13.7 (topotecan–paclitaxel) vs 23.2 mo (cisplatin–paclitaxel), HR 1.58 (0.97–2.57) — keep the platinum doublet",
+    "Trial dose cisplatin 50 mg/m² (NTUH templates 75)"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_carbo_pac",
+   "id": "adc_fl_carbo_pac",
+   "trials": [
+    "JCOG0505"
+   ],
+   "qualifiers": [
+    "JCOG0505 non-SCC (21 vs 21): OS HR 1.28 (0.66–2.48) vs SCC 0.96 — non-inferiority not shown in non-squamous tumours; cisplatin preferred, especially after surgery alone (cisplatin-naive relapse is commoner in adenocarcinoma)"
+   ],
+   "risk_rules": [
+    {
+     "flag": "prior_cisplatin",
+     "in": [
+      "no"
+     ],
+     "effect": "exclude",
+     "reason": "JCOG0505 cisplatin-naive subgroup: OS 13.0 vs 23.2 mo, HR 1.571 (1.062–2.324) — carboplatin worse; prefer cisplatin when cisplatin-naive"
+    },
+    {
+     "flag": "prior_cisplatin",
+     "in": [
+      "unknown"
+     ],
+     "effect": "caution",
+     "reason": "Record prior radiosensitising cisplatin: carboplatin was inferior in cisplatin-naive patients (JCOG0505 OS 1.571)"
+    },
+    {
+     "flag": "histology",
+     "in": [
+      "adc"
+     ],
+     "effect": "caution",
+     "reason": "JCOG0505 non-SCC stratum OS 1.28 (0.66–2.48): carboplatin's non-inferiority was not shown in non-squamous tumours"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_topo_cis",
+   "id": "adc_fl_topo_cis",
+   "trials": [
+    "GOG-179",
+    "Topotecan–cisplatin, squamous and non-squamous"
+   ],
+   "qualifiers": [
+    "GOG-179 non-squamous 17% vs 13%, no subgroup; Fiorica 2002: 3 of 11 non-squamous responded (1 CR, 2 PR)"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_cis_other",
+   "id": "adc_fl_cis_other",
+   "trials": [
+    "GOG-204"
+   ],
+   "qualifiers": [
+    "GOG-204 non-squamous 22.8%; no histology subgroup"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_topo_pac",
+   "id": "adc_fl_topo_pac",
+   "trials": [
+    "↳ GOG-240 backbone, final"
+   ],
+   "exclude_default": {
+    "reason": "PFS worse than cisplatin–paclitaxel (1.24) trial-wide and numerically worst in adenocarcinoma: OS 13.7 vs 23.2 mo, HR 1.58 (0.97–2.57)"
+   },
+   "histology": "adc"
+  },
+  {
+   "id": "adc_fl_doc_carbo",
+   "setting": "first_line",
+   "name": "Docetaxel 60 mg/m² + carboplatin AUC6 q21d until progression",
+   "short": "Docetaxel–carboplatin (Shimada 2021, non-squamous)",
+   "drugs": [
+    "docetaxel",
+    "carboplatin"
+   ],
+   "drug_classes": [
+    "taxane",
+    "platinum"
+   ],
+   "gate": {},
+   "trials": [
+    "Docetaxel–carboplatin, non-squamous"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "single_arm",
+    "median": "15.8 mo (printed 95% CI 18.2–28.3 does not contain the median — an error in the paper); IVB 15.0 vs recurrent 19.8 mo",
+    "evidence_strength": "phase2",
+    "trial": "Docetaxel–carboplatin, non-squamous"
+   },
+   "pfs": {
+    "text": "6.1 mo (5.5–8.6); ORR 47.9% (23/48: 5 CR, 18 PR); disease control 77.1%"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "caution_default": {
+    "reason": "Grade 4 neutropenia 38/47 (81%), febrile neutropenia 8; 48 patients, median follow-up 368 days"
+   },
+   "qualifiers": [
+    "The only first-line doublet result confined to non-squamous histology (mucinous 18, adenocarcinoma 9, endometrioid 5, adenosquamous 5…)",
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "fl_cis_mono",
+   "id": "adc_fl_cis_mono",
+   "trials": [
+    "GOG-179",
+    "GOG-169",
+    "GOG cisplatin schedules"
+   ],
+   "exclude_default": {
+    "reason": "OS worse than topotecan–cisplatin (GOG-179); GOG-169 and the Bonomi dose trial that set cisplatin 50 mg/m² enrolled SCC only"
+   },
+   "histology": "adc"
+  },
+  {
+   "base": "fl_topotecan_mono",
+   "id": "adc_fl_topotecan_mono",
+   "trials": [
+    "GOG 76-U topotecan"
+   ],
+   "tier": 7,
+   "exclude_default": {
+    "reason": "Adenocarcinoma excluded: GOG 76-U enrolled squamous cell carcinoma only"
+   },
+   "caution_default": null,
+   "histology": "adc"
+  },
+  {
+   "base": "sl_cemiplimab",
+   "id": "adc_sl_cemiplimab",
+   "trials": [
+    "EMPOWER-Cervical 1 / GOG-3016 / ENGOT-cx9"
+   ],
+   "qualifiers": [
+    "Adeno/adenosquamous (prespecified stratum, 135/608): final OS 13.5 vs 7.0 mo, HR 0.55 (0.37–0.82) vs SCC 0.70 — benefit numerically larger in non-squamous; PFS 0.91 (0.62–1.34); ORR 12% vs 4%",
+    "PD-L1 not required; CPS <1 is common in adenocarcinoma and cemiplimab's OS benefit held with PD-L1 <1%"
+   ],
+   "prefer_when": [
+    {
+     "flag": "histology",
+     "in": [
+      "adc"
+     ],
+     "reason": "EMPOWER-Cervical 1 adeno/adenosquamous stratum: OS 0.55 (0.37–0.82), 13.5 vs 7.0 mo"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "sl_tisotumab",
+   "id": "adc_sl_tisotumab",
+   "trials": [
+    "innovaTV 301 / ENGOT-cx12 / GOG-3057",
+    "innovaTV 204 / GOG-3023 / ENGOT-cx6",
+    "ADCs in gastric-type"
+   ],
+   "qualifiers": [
+    "Adeno/adenosquamous 93 vs 92 (forest plot): OS 0.70 (0.45–1.10), PFS 0.63 (0.44–0.89); innovaTV 204 non-squamous ORR 25% (8/32)",
+    "Gastric-type: 1 of 4 ADC-treated patients (Ang 2025) received tisotumab vedotin — PD; no objective response in the series"
+   ],
+   "risk_rules": [
+    {
+     "flag": "iecc",
+     "in": [
+      "gastric",
+      "clear_cell",
+      "mesonephric"
+     ],
+     "effect": "caution",
+     "reason": "Gastric-type: no response to T-DXd or tisotumab vedotin in a 4-patient series (Ang 2025); all four had died by data cut-off"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "sl_chemo_ic",
+   "id": "adc_sl_chemo_ic",
+   "trials": [
+    "EMPOWER-Cervical 1 / GOG-3016 / ENGOT-cx9",
+    "innovaTV 301 / ENGOT-cx12 / GOG-3057",
+    "Pemetrexed, GOG",
+    "Pemetrexed, MITO CERVIX 1",
+    "Gemcitabine, GOG non-squamous"
+   ],
+   "qualifiers": [
+    "Non-squamous single agents (GOG programme): paclitaxel 31%, ifosfamide 15%, gallium nitrate 11.5%, gemcitabine 4.5% (closed for lack of activity); pemetrexed not broken out by histology"
+   ],
+   "histology": "adc"
+  },
+  {
+   "id": "adc_sl_paclitaxel",
+   "setting": "second_line",
+   "name": "Paclitaxel 170 mg/m² (135 if prior pelvic RT) 24-h infusion q3w",
+   "short": "Paclitaxel (GOG non-squamous)",
+   "drugs": [
+    "paclitaxel"
+   ],
+   "drug_classes": [
+    "taxane"
+   ],
+   "gate": {},
+   "trials": [
+    "Paclitaxel, GOG non-squamous"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "single_arm",
+    "median": "Not reported",
+    "evidence_strength": "phase2",
+    "trial": "Paclitaxel, GOG non-squamous"
+   },
+   "pfs": {
+    "text": "ORR 31% (4 CR, 9 PR; 95% CI 18.1–48.1%); median response 4.8 mo; 12 of 13 responders had prior RT alone"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "qualifiers": [
+    "The most active single agent in the GOG non-squamous programme (adenocarcinoma 21, adenosquamous 15; clear cell excluded); neutropenia grade 4 in 26/42",
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ],
+   "prefer_when": [
+    {
+     "flag": "ledger_no_taxane",
+     "reason": "Taxane-naive relapse: ORR 31% in the GOG non-squamous trial"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "id": "adc_sl_ifosfamide",
+   "setting": "second_line",
+   "name": "Ifosfamide 1.5 g/m² D1–5 (1.2 if prior RT or chemotherapy) + mesna",
+   "short": "Ifosfamide (GOG non-squamous)",
+   "drugs": [
+    "ifosfamide"
+   ],
+   "drug_classes": [
+    "alkylator"
+   ],
+   "gate": {},
+   "trials": [
+    "Ifosfamide, GOG non-squamous"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "single_arm",
+    "median": "Not reported",
+    "evidence_strength": "phase2",
+    "trial": "Ifosfamide, GOG non-squamous"
+   },
+   "pfs": {
+    "text": "ORR 15.0% (1 CR, 5 PR); median duration 4.2 mo"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "caution_default": {
+    "reason": "Grade 3–4 granulocytopenia 37.5%; ORR 15%"
+   },
+   "histology": "adc",
+   "qualifiers": [
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ]
+  },
+  {
+   "id": "adc_sl_etoposide",
+   "setting": "second_line",
+   "name": "Oral etoposide 50 mg/m²/day (40 if prior RT) ×21 days q28d",
+   "short": "Oral etoposide (GOG non-squamous)",
+   "drugs": [
+    "etoposide"
+   ],
+   "drug_classes": [
+    "topoisomerase_ii"
+   ],
+   "gate": {},
+   "trials": [
+    "Oral etoposide, GOG non-squamous"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "single_arm",
+    "median": "9.1 mo (10.4 mo chemotherapy-naive)",
+    "evidence_strength": "phase2",
+    "trial": "Oral etoposide, GOG non-squamous"
+   },
+   "pfs": {
+    "text": "3.1 mo; ORR 11.9% — all 5 responses in chemotherapy-naive patients (5/27 = 18.5%)"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "risk_rules": [
+    {
+     "flag": "prior_lines",
+     "gte": 1,
+     "effect": "caution",
+     "reason": "No responses in previously chemotherapy-treated patients (0/15)"
+    }
+   ],
+   "histology": "adc",
+   "qualifiers": [
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ]
+  },
+  {
+   "id": "adc_sl_gallium",
+   "setting": "second_line",
+   "name": "Gallium nitrate 750 mg/m² q3w",
+   "short": "Gallium nitrate (GOG non-squamous)",
+   "drugs": [
+    "gallium_nitrate"
+   ],
+   "drug_classes": [
+    "other"
+   ],
+   "gate": {},
+   "trials": [
+    "Gallium nitrate, GOG non-squamous"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "single_arm",
+    "median": "Not reported",
+    "evidence_strength": "phase2",
+    "trial": "Gallium nitrate, GOG non-squamous"
+   },
+   "pfs": {
+    "text": "ORR 11.5% (2 CR, 1 PR; 2.4–30.2%)"
+   },
+   "tier": 7,
+   "evidence_basis": "histotype_single_arm",
+   "exclude_default": {
+    "reason": "GANITE is no longer marketed (no current FDA label); ORR 11.5% in 26 patients"
+   },
+   "histology": "adc",
+   "qualifiers": [
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ]
+  },
+  {
+   "id": "adc_sl_gem_nonsq",
+   "setting": "second_line",
+   "name": "Gemcitabine 800 mg/m² D1, 8, 15 q28d",
+   "short": "Gemcitabine (GOG non-squamous)",
+   "drugs": [
+    "gemcitabine"
+   ],
+   "drug_classes": [
+    "antimetabolite"
+   ],
+   "gate": {},
+   "trials": [
+    "Gemcitabine, GOG non-squamous"
+   ],
+   "tox_ref": {
+    "trial": "Gemcitabine, GOG non-squamous"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "6.5 mo",
+    "evidence_strength": "phase2",
+    "trial": "Gemcitabine, GOG non-squamous"
+   },
+   "pfs": {
+    "text": "2.1 mo; ORR 4.5% (1 PR); closed at the first stage"
+   },
+   "tier": 7,
+   "evidence_basis": "histotype_single_arm",
+   "exclude_default": {
+    "reason": "Closed for lack of activity (ORR 4.5%); the same regimen gave 8.4% in SCC"
+   },
+   "histology": "adc"
+  },
+  {
+   "base": "sl_tdxd",
+   "id": "adc_sl_tdxd",
+   "trials": [
+    "DESTINY-PanTumor02, cervical cohort",
+    "ADCs in gastric-type"
+   ],
+   "qualifiers": [
+    "HER2 overexpression 5.7% of cervical cancer (all histologies); gastric-type 1/13 amplified, 6/13 equivocal",
+    "Gastric-type (Ang 2025, 3 T-DXd patients): SD 1, PD 2 — the HER2 3+ tumour was primary refractory; no ILD"
+   ],
+   "risk_rules": [
+    {
+     "flag": "iecc",
+     "in": [
+      "gastric",
+      "clear_cell",
+      "mesonephric"
+     ],
+     "effect": "caution",
+     "reason": "Gastric-type: T-DXd gave no objective response in 3 HER2 2+/3+ gastric-type cases (Ang 2025); the DESTINY-PanTumor02 HER2–response gradient was not reproduced"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "sl_pembro_mono",
+   "id": "adc_sl_pembro_mono",
+   "trials": [
+    "KEYNOTE-158, cervical cohort"
+   ],
+   "qualifiers": [
+    "Adenocarcinoma 5 (5.1%), adenosquamous 1, all PD-L1-positive; responses not reported by histology — CPS ≥1 selection derived almost entirely in SCC"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "sl_nivo_ipi",
+   "id": "adc_sl_nivo_ipi",
+   "trials": [
+    "CheckMate 358, cervical cohort"
+   ],
+   "tier": 7,
+   "gate": {},
+   "exclude_default": {
+    "reason": "Adenocarcinoma excluded: CheckMate 358 (known HPV-negative tumours also ineligible) enrolled squamous cell carcinoma only"
+   },
+   "ledger_rules": [],
+   "histology": "adc"
+  },
+  {
+   "base": "sl_balsti",
+   "id": "adc_sl_balsti",
+   "trials": [
+    "Balstilimab",
+    "Balstilimab + zalifrelimab"
+   ],
+   "qualifiers": [
+    "Adenocarcinoma ORR 12.5% (6/48) with balstilimab and 8.8% (3/34) with the combination vs SCC 17.6% / 32.6% — the CTLA-4 add-on did not help adenocarcinoma"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "sl_bev_mono",
+   "id": "adc_sl_bev_mono",
+   "trials": [
+    "GOG-227C bevacizumab"
+   ],
+   "tier": 7,
+   "exclude_default": {
+    "reason": "Adenocarcinoma excluded: GOG-227C (SCC 43, adenosquamous 3) enrolled squamous cell carcinoma only"
+   },
+   "caution_default": null,
+   "histology": "adc"
+  },
+  {
+   "base": "sl_docetaxel",
+   "id": "adc_sl_docetaxel",
+   "trials": [
+    "Docetaxel, GOG"
+   ],
+   "tier": 7,
+   "exclude_default": {
+    "reason": "Adenocarcinoma excluded: the GOG docetaxel trial (Garcia 2007) enrolled squamous cell carcinoma only"
+   },
+   "caution_default": null,
+   "histology": "adc"
+  },
+  {
+   "id": "adc_sl_irinotecan",
+   "setting": "second_line",
+   "name": "Irinotecan 125 mg/m² weekly ×4",
+   "short": "Irinotecan (SCC-only)",
+   "drugs": [
+    "irinotecan"
+   ],
+   "drug_classes": [
+    "topoisomerase_i"
+   ],
+   "gate": {},
+   "trials": [
+    "Irinotecan"
+   ],
+   "tox_ref": {
+    "trial": "Irinotecan ("
+   },
+   "os": {
+    "benefit": "excluded",
+    "median": "SCC-only trial (ORR 21%)",
+    "evidence_strength": "excluded_from_trial",
+    "trial": "Irinotecan"
+   },
+   "pfs": {
+    "text": "—"
+   },
+   "tier": 7,
+   "evidence_basis": "excluded_from_trial",
+   "exclude_default": {
+    "reason": "Adenocarcinoma excluded: the irinotecan trial (Verschraegen 1997) enrolled squamous cell carcinoma only"
+   },
+   "histology": "adc"
+  },
+  {
+   "id": "adc_sl_pemetrexed",
+   "setting": "second_line",
+   "name": "Pemetrexed 500–900 mg/m² q21d",
+   "short": "Pemetrexed (GOG / MITO CERVIX 1)",
+   "drugs": [
+    "pemetrexed"
+   ],
+   "drug_classes": [
+    "antimetabolite"
+   ],
+   "gate": {},
+   "trials": [
+    "Pemetrexed, GOG",
+    "Pemetrexed, MITO CERVIX 1"
+   ],
+   "tox_ref": {
+    "trial": "Pemetrexed, GOG"
+   },
+   "os": {
+    "benefit": "single_arm",
+    "median": "GOG 7.4 mo; MITO CERVIX 1 35 weeks",
+    "evidence_strength": "phase2",
+    "trial": "Pemetrexed, GOG"
+   },
+   "pfs": {
+    "text": "ORR 15% (GOG; non-irradiated sites 25% vs irradiated 7%) and 13.9% (MITO); adenocarcinoma 6 and 11 patients, responses not broken out"
+   },
+   "tier": 6,
+   "evidence_basis": "single_arm",
+   "caution_default": {
+    "reason": "Grade 3–4 anaemia 41%, leukopenia 30% (GOG 900 mg/m²); adenocarcinoma responses not reported"
+   },
+   "histology": "adc"
+  },
+  {
+   "id": "adc_sl_nabpac",
+   "setting": "second_line",
+   "name": "Nab-paclitaxel 125 mg/m² D1, 8, 15 q28d",
+   "short": "Nab-paclitaxel (GOG)",
+   "drugs": [
+    "nab_paclitaxel"
+   ],
+   "drug_classes": [
+    "taxane"
+   ],
+   "gate": {},
+   "trials": [
+    "Nab-paclitaxel, GOG"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "single_arm",
+    "median": "9.4 mo",
+    "evidence_strength": "phase2",
+    "trial": "Nab-paclitaxel, GOG"
+   },
+   "pfs": {
+    "text": "5.0 mo; ORR 28.6% (10 PR; 14.6–46.3); adenocarcinoma 9 of 35, not broken out"
+   },
+   "tier": 6,
+   "evidence_basis": "single_arm",
+   "qualifiers": [
+    "Grade 4 neutropenia 5.7%, the only grade 4 event; prior cisplatin CCRT 27/35",
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "nact_surgery",
+   "id": "adc_nact_surgery",
+   "trials": [
+    "EORTC 55994"
+   ],
+   "qualifiers": [
+    "Non-squamous 93/626 (14.9%), stratified but no histology subgroup; Gupta 2018 was SCC-only"
+   ],
+   "exclude_default": {
+    "reason": "PFS significantly worse than chemoradiation (EORTC 55994 PFS 0.72 favouring CCRT); no adenocarcinoma result reported; 48% still needed RT"
+   },
+   "histology": "adc"
+  },
+  {
+   "base": "nact_bomp",
+   "id": "adc_nact_bomp",
+   "trials": [
+    "JCOG 0102"
+   ],
+   "exclude_default": {
+    "reason": "Adenocarcinoma excluded: JCOG 0102 enrolled squamous cell carcinoma only"
+   },
+   "histology": "adc"
+  },
+  {
+   "base": "nact_pvb_surgery",
+   "id": "adc_nact_pvb_surgery",
+   "trials": [
+    "Chang 2000"
+   ],
+   "qualifiers": [
+    "Non-squamous 12 of 120 (10%); histology subgroup not reported"
+   ],
+   "histology": "adc"
+  },
+  {
+   "id": "adc_nact_sgsg005",
+   "setting": "neoadjuvant",
+   "name": "Docetaxel 60 mg/m² + carboplatin AUC6 q21d ×1–3 → radical hysterectomy",
+   "short": "Docetaxel–carboplatin → surgery (SGSG005, non-squamous)",
+   "drugs": [
+    "docetaxel",
+    "carboplatin"
+   ],
+   "drug_classes": [
+    "taxane",
+    "platinum"
+   ],
+   "gate": {
+    "stage": [
+     "IB2",
+     "IIA2",
+     "IIB"
+    ]
+   },
+   "trials": [
+    "SGSG005, non-squamous"
+   ],
+   "tox_ref": null,
+   "os": {
+    "benefit": "single_arm",
+    "median": "2-yr OS 85.9% (72.7–93.0); 5-yr OS gastric-type 36.9% vs usual-type 90.0% (P < 0.001)",
+    "evidence_strength": "phase2",
+    "trial": "SGSG005, non-squamous"
+   },
+   "pfs": {
+    "text": "2-yr PFS 67.9%; 5-yr PFS gastric-type 38.5% vs usual-type 75.0%; ORR 69% (gastric-type 46.2% vs usual-type 85.0%, P = 0.048); 50 of 52 reached radical hysterectomy"
+   },
+   "tier": 6,
+   "evidence_basis": "histotype_single_arm",
+   "caution_default": {
+    "reason": "Single arm, 52 patients; NACT → surgery lost to chemoradiation in the all-histology randomised trials (EORTC 55994)"
+   },
+   "qualifiers": [
+    "The only prospective evidence separating gastric-type from usual-type: gastric-type never downstaged (0/8) and both inoperable tumours were gastric-type",
+    "Grade 4 neutropenia 43/59",
+    "No structured extract for this trial in GO_summaries (PDF only): toxicity figures are not attached; see the note row"
+   ],
+   "risk_rules": [
+    {
+     "flag": "iecc",
+     "in": [
+      "gastric",
+      "clear_cell",
+      "mesonephric"
+     ],
+     "effect": "exclude",
+     "reason": "Gastric-type: response 46.2%, microscopic downstaging 0/8, 5-yr OS 36.9% — the note says do not plan NACT-surgery"
+    }
+   ],
+   "histology": "adc"
+  },
+  {
+   "base": "nact_csem006",
+   "id": "adc_nact_csem006",
+   "trials": [
+    "CSEM 006"
+   ],
+   "histology": "adc"
+  }
+ ]
+}
