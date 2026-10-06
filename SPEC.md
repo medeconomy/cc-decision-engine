@@ -47,7 +47,7 @@ C3. **Adjuvant risk group is derived from the pathology** entered: high = positi
 
 C4. **Scope v0.1:** SCC and adenocarcinoma, five settings. No fertility-sparing or surgical-approach setting (LACC, SHAPE are context notes).
 
-## Judgement calls made in the build — for Jay's review
+## Judgement calls made in the build — reviewed by Jay 2026-10-06 (C5–C12 accepted as written)
 
 C5. **Adjuvant tiers.** GOG-109 cisplatin–5-FU CCRT tier 2 (the only adjuvant OS benefit; CIs not printed, P = .007), high risk only. STARS sequential chemoRT tier 3 (cancer-death HR 0.58, 0.35–0.95; OS HR not printed; single-country, mixed risk). Pelvic RT alone tier 4 for intermediate risk (GOG-92 recurrence 0.54, OS NS), tier 5 for high risk (lost OS to GOG-109), tier 6 for low risk. Weekly-cisplatin CCRT tier 5 (GOG-263 NS with tripled toxicity; STARS CCRT vs RT NS, SCC 0.931). NOGGO-AGO sequential TC tier 5. Observation tier 5 (fit for low risk; gated out of high risk). JGOG1082 design-only tier 6.
 
